@@ -17,7 +17,7 @@ frontend:
         commands:
           - python3 manage.py runserver
   artifacts:
-    baseDirectory: build
+    baseDirectory: frontend/build
     files:
       - '**/*'
   cache:
