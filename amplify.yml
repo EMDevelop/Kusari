@@ -15,6 +15,7 @@ frontend:
     phases:
       postBuild:
         commands:
+          - python manage.py migrate
           - python3 manage.py runserver
   artifacts:
     baseDirectory: frontend/build
