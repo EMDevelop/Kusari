@@ -3,10 +3,14 @@ frontend:
   phases:
     preBuild:
       commands:
+        - python3 -m venv env
+        - source env/bin/activate
+        - pip3 install -r requirements.txt
         - npm install
     build:
       commands:
         - npm run build
+        - python3 manage.py runserver
   artifacts:
     baseDirectory: build
     files:
