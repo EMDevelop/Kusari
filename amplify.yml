@@ -13,6 +13,8 @@ frontend:
         - npm run build
         - cd ..
         - cd backend
+    postBuild:
+      commands:
         - python3 manage.py runserver
   artifacts:
     baseDirectory: build
