@@ -11,11 +11,11 @@ frontend:
     build:
       commands:
         - npm run build
-        - cd ..
-        - cd backend
-    postBuild:
-      commands:
-        - python3 manage.py runserver
+  backend:
+    phases:
+      postBuild:
+        commands:
+          - python3 manage.py runserver
   artifacts:
     baseDirectory: build
     files:
