@@ -3,8 +3,11 @@
 ## To Run
 
 - Clone the Repo: `Git Clone https://github.com/EMDevelop/investment-tracker.git`
-- Install Dependencies: `pipenv install`
+- Globally install pipenv `sudo -H pip3 install -U pipenv`
+- Install Dependencies: `pipenv install django djangorestframework`
 - Start Virtual Envirnment: `pipenv shell`
+- Navigate into the frontend directory and install packages`cd frontend && npm install`
+- Navigate back into the route directory `cd ..`
 - Open 2 terminal windows:
   - 1st terminal, start react: `npm run client`
   - 2nd terminal, start django: `npm run server`
