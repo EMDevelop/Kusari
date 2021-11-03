@@ -3,7 +3,6 @@ frontend:
   phases:
     preBuild:
       commands:
-        - pipenv --python 3.9 install --dev
         - pip3 install -U pipenv
         - pipenv shell
         - cd frontend
