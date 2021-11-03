@@ -2,7 +2,7 @@ import React from 'react';
 
 // Credit to: https://codepen.io/JFarrow/pen/fFrpg for the navbar
 
-export default function Nav() {
+export default function Navbar() {
   return (
     <nav className="main-menu">
       <ul>
