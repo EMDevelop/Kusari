@@ -3,20 +3,17 @@ frontend:
   phases:
     preBuild:
       commands:
-        - python3 -m venv env
-        - source env/bin/activate
-        - pip3 install -r requirements.txt
-        - cd frontend
-        - npm install
+        - pipenv install
+        - pipenv shell
     build:
       commands:
-        - npm run build
+        - npm run client
+        - npm run server
   backend:
     phases:
       postBuild:
         commands:
           - python manage.py migrate
-          - python3 manage.py runserver
   artifacts:
     baseDirectory: frontend/build
     files:
