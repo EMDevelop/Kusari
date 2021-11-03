@@ -1,8 +1,3 @@
-# ENV IGNORE
-env/
-
-
-
 # PYTHON GIT IGNORE
 __pycache__/
 *.py[cod]
