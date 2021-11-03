@@ -4,6 +4,7 @@ frontend:
     preBuild:
       commands:
         - pip3 install -U pipenv
+        - pipenv install django djangorestframework
         - pipenv shell
         - cd frontend
         - npm install
