@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - sudo yum -y install python3
+        - pyenv install 3.9.7
         - pip3 install -U pipenv
         - pipenv install django djangorestframework
         - pipenv shell
