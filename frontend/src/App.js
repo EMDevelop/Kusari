@@ -14,7 +14,7 @@ function App() {
   };
   const handleButtonClick = async () => {
     try {
-      const response = await axios.get(`/ethereum/wallet-balance/`);
+      const response = await axios.get(`/ethereum/wallet-balance/${address}/`);
       console.log(response);
     } catch (error) {
       console.log(error);

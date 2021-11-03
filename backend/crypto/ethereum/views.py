@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import requests
 import json
 import os
@@ -7,8 +7,9 @@ import os
 # localhost:8000/ethereum/wallet-balance/0xdB3c617cDd2fBf0bb4309C325F47678e37F096D9
 
 # Create your views here.
-def get_wallet_balance(request):
-    return JsonResponse({'balance': '$100'})
+def get_wallet_balance(request, address):
+    print(address)
+    return HttpResponse(address)
 
 
 class Tokens: 
