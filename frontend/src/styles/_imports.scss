@@ -1,6 +1,8 @@
 // Setup - Keep these at the top
 @import './variables';
 @import './functions';
+@import './fonts';
 
 // Components
 @import '../components/Navbar/navbar';
+@import '../components/cards/cryptoTokenBalance/cryptoTokenBalance';

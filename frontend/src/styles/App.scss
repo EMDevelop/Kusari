@@ -1,23 +1,13 @@
 @import 'imports';
 
-// Fonts and External Imports
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
-
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Titillium WebLight'), local('TitilliumWeb-Light'),
-    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
-      format('woff');
-}
+//  Global Settings
 
 html,
 body {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  font-family: 'MyFont';
 }
 
 .app {
@@ -25,16 +15,13 @@ body {
   height: 100%;
   overflow: hidden;
   display: flex;
-  background-color: black;
 
   main {
     width: 70%;
     height: 100vh;
-    background-color: yellow;
     margin: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr, 9fr;
+    display: flex;
+    flex-direction: column;
     overflow-y: scroll;
   }
 
@@ -45,14 +32,64 @@ body {
   }
 }
 
+// Need to refactor potentialliy
 .address-input-form {
-  background-color: red;
-  justify-self: center;
-  align-self: center;
+  // background-color: red;
+  height: 20vh;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .token-list {
   width: 100%;
-  background-color: aqua;
-  height: 60vh;
+  height: fit-content;
+  // background-color: aqua;
+  flex: 9;
+}
+
+// Buttons and Inputs
+input[type='text'],
+input[type='input'],
+input[type='password'] {
+  appearance: none;
+  background-color: none;
+  border: 3px solid $background;
+  height: 60px;
+  width: 60%;
+  height: 30px;
+  padding: 10px 15px;
+  border-radius: $radius;
+  letter-spacing: 0.01em;
+}
+
+input[type='text']:focus,
+input[type='input']:focus,
+input[type='password']:focus,
+textarea:focus {
+  // border: none;
+  outline: none;
+}
+
+button {
+  appearance: none;
+  background-color: $background;
+  border: none;
+  height: 50px;
+  width: 100px;
+  border-radius: $radius;
+  color: white;
+  margin-left: $small-margin;
+}
+
+button:hover,
+button:focus {
+  background-color: $white;
+  color: $background;
+  border: 3px solid $background;
+}
+
+button:active {
+  border: 3px solid rgba(25, 216, 25, 0.551);
 }
