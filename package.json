@@ -1,0 +1,20 @@
+{
+  "name": "investment-tracker",
+  "version": "1.0.0",
+  "description": "## To Run",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd backend && python3 manage.py runserver",
+    "client": "cd frontend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EMDevelop/investment-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EMDevelop/investment-tracker/issues"
+  },
+  "homepage": "https://github.com/EMDevelop/investment-tracker#readme"
+}
