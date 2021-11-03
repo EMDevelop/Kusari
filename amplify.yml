@@ -3,9 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - pyenv install 3.9.7
         - pip3 install -U pipenv
-        - pipenv install django djangorestframework
+        - pipenv install
         - pipenv shell
         - cd frontend
         - npm install
