@@ -87,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'investmenttracker',
-        'USER': 'tom',
-        'PASSWORD': 'password',
+        'USER': os.environ['PG_USER'],
+        'PASSWORD': os.environ['PG_PASSWORD'],
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': os.environ['PG_PORT'],
     }
 }
 
