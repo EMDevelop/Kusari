@@ -4,28 +4,27 @@ import axios from 'axios';
 
 // Components
 import Navbar from './components/navbar/Navbar';
-import CryptoTokenBalance from './components/cards/cryptoTokenBalance/CryptoTokenBalance';
 import DataTable from './components/dataTable/DataTable';
-
 
 function App() {
   const [address, setAddress] = useState('');
+  const [balanceByTokenObject, setBalanceByTokenObject] = useState(undefined);
 
+  // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
     setAddress(e);
   };
+
+  // API call to back end using Axios
   const handleButtonClick = async () => {
     try {
       const response = await axios.get(`/ethereum/wallet-balance/${address}/`);
-      console.log(response);
+      setBalanceByTokenObject(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  const array = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
 
   return (
     <div className="app">
@@ -45,12 +44,16 @@ function App() {
             ></i>
           </div>
         </div>
-        {/* <div className="token-list">
-          {array.map(() => {
-            return <CryptoTokenBalance />;
-          })}
-        </div> */}
-        <DataTable />
+        <DataTable
+          headers={[
+            'Symbol',
+            'Token Name',
+            'Quantity',
+            'Price',
+            'Current Value',
+          ]}
+          rowData={balanceByTokenObject}
+        />
       </main>
     </div>
   );
