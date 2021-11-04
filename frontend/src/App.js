@@ -7,6 +7,10 @@ import Navbar from './components/navbar/Navbar';
 import CryptoTokenBalance from './components/cards/cryptoTokenBalance/CryptoTokenBalance';
 import DataTable from './components/dataTable/DataTable';
 
+
+function App() {
+
+
 function App() {
   const [address, setAddress] = useState('');
 
