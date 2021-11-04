@@ -4,8 +4,8 @@
 
 - Clone the Repo: `Git Clone https://github.com/EMDevelop/investment-tracker.git`
 - Globally install pipenv `sudo -H pip3 install -U pipenv`
-- Install Dependencies: `pipenv install django djangorestframework`
-- Start Virtual Envirnment: `pipenv shell`
+- Install Dependencies: `pipenv install django djangorestframework django-cors-headers requests django-dotenv pytest`
+- Start Virtual Environment: `pipenv shell`
 - Navigate into the frontend directory and install packages`cd frontend && npm install`
 - Navigate back into the route directory `cd ..`
 - Open 2 terminal windows:

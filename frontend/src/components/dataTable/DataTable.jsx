@@ -7,7 +7,7 @@ export default function DataTable(props) {
     <div>
       <h1>My Balance</h1>
       <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
+        <table cellPadding="0" cellSpacing="0" border="0">
           <thead>
             <tr>
               <th>Code</th>
@@ -20,7 +20,7 @@ export default function DataTable(props) {
         </table>
       </div>
       <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
+        <table cellPadding="0" cellSpacing="0" border="0">
           <tbody>
             <tr>
               <td>AAC</td>
