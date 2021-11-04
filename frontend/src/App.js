@@ -5,6 +5,7 @@ import axios from 'axios';
 // Components
 import Navbar from './components/navbar/Navbar';
 import CryptoTokenBalance from './components/cards/cryptoTokenBalance/CryptoTokenBalance';
+import DataTable from './components/dataTable/DataTable';
 
 function App() {
   const [address, setAddress] = useState('');
@@ -35,13 +36,20 @@ function App() {
             placeholder="address"
             onChange={(e) => handleInputChange(e.target.value)}
           />
-          <button onClick={() => handleButtonClick()}> balance </button>
+          <div>
+            <i
+              class="fa fa-search"
+              aria-hidden="true"
+              onClick={() => handleButtonClick()}
+            ></i>
+          </div>
         </div>
-        <div className="token-list">
+        {/* <div className="token-list">
           {array.map(() => {
             return <CryptoTokenBalance />;
           })}
-        </div>
+        </div> */}
+        <DataTable />
       </main>
     </div>
   );

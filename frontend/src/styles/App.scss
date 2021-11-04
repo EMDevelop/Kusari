@@ -55,7 +55,6 @@ input[type='input'],
 input[type='password'] {
   appearance: none;
   background-color: none;
-  border: 3px solid $background;
   height: 60px;
   width: 60%;
   height: 30px;
@@ -70,26 +69,4 @@ input[type='password']:focus,
 textarea:focus {
   // border: none;
   outline: none;
-}
-
-button {
-  appearance: none;
-  background-color: $background;
-  border: none;
-  height: 50px;
-  width: 100px;
-  border-radius: $radius;
-  color: white;
-  margin-left: $small-margin;
-}
-
-button:hover,
-button:focus {
-  background-color: $white;
-  color: $background;
-  border: 3px solid $background;
-}
-
-button:active {
-  border: 3px solid rgba(25, 216, 25, 0.551);
 }
