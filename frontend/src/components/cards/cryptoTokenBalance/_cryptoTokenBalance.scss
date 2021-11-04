@@ -1,0 +1,11 @@
+.crypto-token-balance-card {
+  width: 80%;
+  border-radius: $radius;
+  margin: auto;
+  margin-top: $small-margin;
+  background-color: $background-transparent;
+  color: $white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding-left: $small-margin;
+}

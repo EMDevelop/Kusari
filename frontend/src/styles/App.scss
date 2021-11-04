@@ -1,14 +1,72 @@
 @import 'imports';
 
-// Fonts and External Imports
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+//  Global Settings
 
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Titillium WebLight'), local('TitilliumWeb-Light'),
-    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
-      format('woff');
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'MyFont';
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+
+  main {
+    width: 70%;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  main::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+// Need to refactor potentialliy
+.address-input-form {
+  // background-color: red;
+  height: 20vh;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.token-list {
+  width: 100%;
+  height: fit-content;
+  // background-color: aqua;
+  flex: 9;
+}
+
+// Buttons and Inputs
+input[type='text'],
+input[type='input'],
+input[type='password'] {
+  appearance: none;
+  background-color: none;
+  height: 60px;
+  width: 60%;
+  height: 30px;
+  padding: 10px 15px;
+  border-radius: $radius;
+  letter-spacing: 0.01em;
+}
+
+input[type='text']:focus,
+input[type='input']:focus,
+input[type='password']:focus,
+textarea:focus {
+  // border: none;
+  outline: none;
 }
