@@ -9,9 +9,6 @@ import DataTable from './components/dataTable/DataTable';
 
 
 function App() {
-
-
-function App() {
   const [address, setAddress] = useState('');
 
   const handleInputChange = (e) => {

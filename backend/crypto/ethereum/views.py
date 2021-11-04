@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpResponse
 import requests
 import json
 import os
+# from dotenv import load_dotenv
 
 # localhost:8000/ethereum/wallet-balance/0xdB3c617cDd2fBf0bb4309C325F47678e37F096D9
 
