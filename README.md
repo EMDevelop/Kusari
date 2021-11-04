@@ -8,6 +8,7 @@
 - Start Virtual Environment: `pipenv shell`
 - Navigate into the frontend directory and install packages`cd frontend && npm install`
 - Navigate back into the route directory `cd ..`
+- `pip install psycopg2`
 - Migrate DB with `python manage.py migrate`
 - Open 2 terminal windows:
   - 1st terminal, start react: `npm run client`
