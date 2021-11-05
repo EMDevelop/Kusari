@@ -5,7 +5,7 @@ import React from 'react';
 export default function DataTable(props) {
   return (
     <div>
-      <h1>My Balance</h1>
+      <h1>Wallet Breakdown</h1>
       <div className="tbl-header">
         <table cellPadding="0" cellSpacing="0" border="0">
           <thead>
@@ -21,27 +21,12 @@ export default function DataTable(props) {
         {props.rowData && (
           <table cellPadding="0" cellSpacing="0" border="0">
             <tbody>
-              {/* [
-    {
-        "token": "BONDLY",
-        "balance": 993.3971165225804,
-        "name": "Bondly Token",
-        "USDperUnit": 0.06291,
-        "BalanceInUSD": 62.494612600435524
-    },
-    {
-        "token": "BSJ",
-        "balance": 50,
-        "name": "BASENJI",
-        "USDperUnit": "N/A",
-        "BalanceInUSD": "N/A"
-    }
-] */}
+              {/* Loop through all rows returned from SearchWalletBalance get request */}
               {props.rowData.map((row) => {
                 console.log(row);
-                // row = {token: 'BSJ', balance: 50, name: 'BASENJI', USDperUnit: 'N/A', BalanceInUSD: 'N/A'}
                 return (
                   <tr>
+                    {/* Add data into column for current row */}
                     {Object.keys(row).map((key) => {
                       return <td>{row[key]}</td>;
                     })}

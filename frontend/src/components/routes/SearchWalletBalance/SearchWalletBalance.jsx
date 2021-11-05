@@ -4,7 +4,7 @@ import DataTable from '../../../components/dataTable/DataTable';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);
-  const [balanceByTokenObject, setBalanceByTokenObject] = useState(undefined);
+  const [walletDetails, setWalletDetails] = useState(undefined);
 
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
@@ -14,8 +14,7 @@ export default function SearchWalletBalance() {
   // API call to back end using Axios
   const handleButtonClick = async () => {
     try {
-      const response = await getWalletDetails(address);
-      setBalanceByTokenObject(response.data);
+      await getWalletDetails(address);
       getPricesEveryThirtySecondInterval();
     } catch (error) {
       console.log(error);
@@ -23,14 +22,14 @@ export default function SearchWalletBalance() {
   };
 
   const getWalletDetails = async (address) => {
-    return await axios.get(`/ethereum/wallet-balance/${address}/`);
+    const response = await axios.get(`/ethereum/wallet-balance/${address}/`);
+    setWalletDetails(response.data);
   };
 
   const getPricesEveryThirtySecondInterval = async () => {
     console.log(`I just ran: ${new Date()}`);
-    let response = await getWalletDetails(address);
-    setBalanceByTokenObject(response.data);
-    setTimeout(getPricesEveryThirtySecondInterval, 30000);
+    await getWalletDetails(address);
+    setTimeout(getPricesEveryThirtySecondInterval, 10000);
   };
 
   // If on search individual address page
@@ -57,7 +56,7 @@ export default function SearchWalletBalance() {
       </div>
       <DataTable
         headers={['Symbol', 'Token Name', 'Quantity', 'Price', 'Current Value']}
-        rowData={balanceByTokenObject}
+        rowData={walletDetails}
       />
     </>
   );
