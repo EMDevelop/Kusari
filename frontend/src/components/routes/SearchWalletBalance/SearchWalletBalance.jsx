@@ -33,7 +33,7 @@ export default function SearchWalletBalance() {
         />
         <div>
           <i
-            class="fa fa-search"
+            className="fa fa-search"
             aria-hidden="true"
             onClick={() => handleButtonClick()}
           ></i>
