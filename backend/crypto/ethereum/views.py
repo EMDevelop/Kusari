@@ -42,7 +42,7 @@ def get_list_of_symbols(array_of_token_dictionaries):
     return separator.join(array_of_symbols)
 
 def get_cryptocompare_token_price_by_id(token_data):
-    url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=" + get_list_of_symbols(token_data) + "&tsyms=USD"
+    url = f"https://min-api.cryptocompare.com/data/pricemulti?fsyms={get_list_of_symbols(token_data)}&tsyms=USD"
     response = requests.request("GET", url)
     token_prices = json.loads(response.text)
     for token in token_data:
@@ -50,7 +50,6 @@ def get_cryptocompare_token_price_by_id(token_data):
             token['USDperUnit'] = token_prices[token['token']]['USD']
         except:
             token['USDperUnit'] = "N/A"
-    print(token_data)
     return token_data
 
 def get_token_current_value_in_USD(token_list):
