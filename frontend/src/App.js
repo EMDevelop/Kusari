@@ -7,6 +7,8 @@ import Navbar from './components/navbar/Navbar';
 
 // Routes
 import SearchWalletBalance from './components/routes/SearchWalletBalance/SearchWalletBalance';
+import Login from './components/routes/Login/Login';
+import Profile from './components/routes/Profile/Profile';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<SearchWalletBalance />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </Router>
       </main>
