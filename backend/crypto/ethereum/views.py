@@ -7,6 +7,7 @@ from helper.add_decimals_to_number import *
 # from helper.get_symbols_from_dictionary import *
 from helper.get_crypto_prices import *
 from helper.get_token_current_value import *
+from datetime import datetime
 
 
 def get_moralis_erc20(address):
@@ -37,7 +38,19 @@ def get_moralis_erc20(address):
 
 
 def get_ethereum_and_erc20_wallet_balance(request, address):
-    tokens = get_moralis_erc20(address) #refactor into next line
-    tokens = get_cryptocompare_token_price_by_id(tokens)
-    tokens = get_token_current_value_in_USD(tokens)
+    # fetch_new_prices? 
+    # if True
+    #     get_crypto_prices()
+    #     update_storage()
+    #     get_prices_for_tokens()
+    # else if user already has data
+    #     do nothing
+    # else
+    #     get_prices_for_tokens()
+    print('I Am the server and I ran')
+    print(datetime.now())
+    tokens = [{'hello': 'world'},{'hello': 'world'}]
+    # tokens = get_moralis_erc20(address) #refactor into next line
+    # tokens = get_cryptocompare_token_price_by_id(tokens)
+    # tokens = get_token_current_value_in_USD(tokens)
     return JsonResponse(tokens, safe=False)

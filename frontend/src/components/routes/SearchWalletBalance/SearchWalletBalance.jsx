@@ -14,13 +14,28 @@ export default function SearchWalletBalance() {
   // API call to back end using Axios
   const handleButtonClick = async () => {
     try {
-      const response = await axios.get(`/ethereum/wallet-balance/${address}/`);
+      const response = await getWalletDetails(address);
       setBalanceByTokenObject(response.data);
-      console.log(response.data);
+      getPricesEveryThirtySecondInterval();
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getWalletDetails = async (address) => {
+    return await axios.get(`/ethereum/wallet-balance/${address}/`);
+  };
+
+  const getPricesEveryThirtySecondInterval = async () => {
+    console.log(`I just ran: ${new Date()}`);
+    let response = await getWalletDetails(address);
+    setTimeout(getPricesEveryThirtySecondInterval, 30000);
+  };
+
+  // If on search individual address page
+  // start the loop when they click the button
+  // If on profile wallet page
+  // start the loop when the page loads (or component render)
 
   return (
     <>
