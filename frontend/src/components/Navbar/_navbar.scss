@@ -1,13 +1,27 @@
-.fa-2x {
+.fa-2x,
+fa-home {
   font-size: 2em;
 }
-.fa {
-  display: table-cell;
+.fa,
+.fa-home {
+  // display: table-cell;
+  display: flex;
   width: 60px;
   height: 36px;
   text-align: center;
   vertical-align: middle;
   font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
+svg {
+  align-self: center;
+  justify-self: center;
+}
+
+.fa-home::before {
+  display: none;
+  appearance: none;
 }
 
 .nav-text {
@@ -22,7 +36,7 @@ nav.main-menu.expanded {
 }
 
 .main-menu {
-  background-color: $background;
+  // background-color: $background;
   top: 0;
   bottom: 0;
   height: 100vh;
