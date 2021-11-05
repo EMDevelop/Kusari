@@ -19,13 +19,12 @@ def get_moralis_erc20(address):
     url = f"https://deep-index.moralis.io/api/v2/{address}/erc20?chain=eth"
         
     headers = {
-    'x-api-key': os.environ['MORALIS_API_KEY']
+        'x-api-key': os.environ['MORALIS_API_KEY']
     }
 
-    response = requests.request("GET", url, headers=headers)        
+    response = requests.request("GET", url, headers=headers) 
     tokens = json.loads(response.text)
     token_list = []
-
     for token in tokens:
         token_dict = {}
         token_dict['token'] = token['symbol']
