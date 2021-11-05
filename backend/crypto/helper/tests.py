@@ -9,7 +9,8 @@ class Get_Cryptocompare_Token_Price_By_Id_Test(TestCase):
 	def test_cryptocompare_USD_is_NA(self, mock_get):
 		array_of_tokens = get_cryptocompare_token_price_by_id([{"token": "TEST", "quantity": 1, "name": "TestCoin"}])
 		self.assertEqual(array_of_tokens, [{"USDperUnit": "N/A", "token": "TEST", "quantity": 1, "name": "TestCoin"}])
-    # def test_cryptocompare_USD_is_(self, mock_get):
+
+  # def test_cryptocompare_USD_is_int(self, mock_get):
 	# 	array_of_tokens = get_cryptocompare_token_price_by_id([{"token": "TEST", "quantity": 1, "name": "TestCoin"}])
 	# 	self.assertEqual(array_of_tokens, [{"USDperUnit": "N/A", "token": "TEST", "quantity": 1, "name": "TestCoin"}])
 
