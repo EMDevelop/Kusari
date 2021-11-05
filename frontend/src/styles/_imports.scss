@@ -7,3 +7,8 @@
 @import '../components/Navbar/navbar';
 @import '../components/dataTable/dataTable';
 @import '../components/cards/cryptoTokenBalance/cryptoTokenBalance';
+
+// Routes
+@import '../components/routes/SearchWalletBalance/searchWalletBalance';
+@import '../components/routes/Login/login';
+@import '../components/routes/Profile/profile';
