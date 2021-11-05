@@ -47,10 +47,10 @@ def get_ethereum_and_erc20_wallet_balance(request, address):
     #     do nothing
     # else
     #     get_prices_for_tokens()
-    print('I Am the server and I ran')
-    print(datetime.now())
-    tokens = [{'hello': 'world'},{'hello': 'world'}]
-    # tokens = get_moralis_erc20(address) #refactor into next line
-    # tokens = get_cryptocompare_token_price_by_id(tokens)
-    # tokens = get_token_current_value_in_USD(tokens)
+    # print('I Am the server and I ran')
+    # print(datetime.now())
+    # tokens = [{'hello': 'world'},{'hello': 'world'}]
+    tokens = get_moralis_erc20(address) #refactor into next line
+    tokens = get_cryptocompare_token_price_by_id(tokens)
+    tokens = get_token_current_value_in_USD(tokens)
     return JsonResponse(tokens, safe=False)

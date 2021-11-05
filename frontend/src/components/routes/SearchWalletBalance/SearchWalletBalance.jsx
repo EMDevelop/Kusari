@@ -3,7 +3,7 @@ import axios from 'axios';
 import DataTable from '../../../components/dataTable/DataTable';
 
 export default function SearchWalletBalance() {
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState(undefined);
   const [balanceByTokenObject, setBalanceByTokenObject] = useState(undefined);
 
   // Every time someone types in the input, the `address` state is updated
@@ -29,6 +29,7 @@ export default function SearchWalletBalance() {
   const getPricesEveryThirtySecondInterval = async () => {
     console.log(`I just ran: ${new Date()}`);
     let response = await getWalletDetails(address);
+    setBalanceByTokenObject(response.data);
     setTimeout(getPricesEveryThirtySecondInterval, 30000);
   };
 
