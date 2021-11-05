@@ -4,7 +4,9 @@ import requests
 import json
 import os
 from helper.add_decimals_to_number import *
-from helper.get_symbols_from_dictionary import *
+# from helper.get_symbols_from_dictionary import *
+from helper.get_crypto_prices import *
+from helper.get_token_current_value import *
 
 
 def get_moralis_erc20(address):
@@ -33,24 +35,6 @@ def get_moralis_erc20(address):
     # Example Data, token_list: [{'token': 'BONDLY', 'name': 'Bondly Token', 'quantity': 993.3971165225804}, {'token': 'BSJ', 'name': 'BASENJI', 'quantity': 50.0}]
     return token_list
 
-def get_cryptocompare_token_price_by_id(token_data):
-    url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=" + get_list_of_symbols(token_data) + "&tsyms=USD"
-    response = requests.request("GET", url)
-    token_prices = json.loads(response.text)
-    for token in token_data:
-        try: 
-            token['USDperUnit'] = token_prices[token['token']]['USD']
-        except:
-            token['USDperUnit'] = "N/A"
-    return token_data
-
-def get_token_current_value_in_USD(token_list):
-    for token in token_list:
-        try:
-            token['BalanceInUSD'] = token['quantity'] * token['USDperUnit']
-        except:
-            token['BalanceInUSD'] = "N/A"
-    return token_list
 
 def get_ethereum_and_erc20_wallet_balance(request, address):
     tokens = get_moralis_erc20(address) #refactor into next line
