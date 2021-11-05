@@ -24,7 +24,7 @@ def mocked_requests_get(*args, **kwargs):
     ]
 
     if args[1] in array_of_test_urls:
-        return MockResponse('[{"symbol": "TEST", "balance": "10", "name": "TestCoin", "decimals": "1"}]', 200)
+        return MockResponse('[{"symbol": "TEST", "balance": "10", "name": "TestCoin", "decimals": "1", "USD": "5"}]', 200)
 
     return MockResponse(None, 404)
 
@@ -36,10 +36,18 @@ class Get_Moralis_Test(TestCase):
 
 class Get_Cryptocompare_Token_Price_By_Id_Test(TestCase):
 	@mock.patch('requests.request', side_effect=mocked_requests_get)
-	def test_moralis(self, mock_get):
+	def test_cryptocompare_USD_is_NA(self, mock_get):
 		array_of_tokens = get_cryptocompare_token_price_by_id([{"token": "TEST", "quantity": 1, "name": "TestCoin"}])
 		self.assertEqual(array_of_tokens, [{"USDperUnit": "N/A", "token": "TEST", "quantity": 1, "name": "TestCoin"}])
+    # def test_cryptocompare_USD_is_(self, mock_get):
+	# 	array_of_tokens = get_cryptocompare_token_price_by_id([{"token": "TEST", "quantity": 1, "name": "TestCoin"}])
+	# 	self.assertEqual(array_of_tokens, [{"USDperUnit": "N/A", "token": "TEST", "quantity": 1, "name": "TestCoin"}])
 
+class Get_Token_Current_Value_In_USD_Test(TestCase):
+	@mock.patch('requests.request', side_effect=mocked_requests_get)
+	def test_USD_calculation(self, mock_get):
+		array_of_tokens = get_token_current_value_in_USD([{"USDperUnit": "N/A", "token": "TEST", "quantity": 1, "name": "TestCoin"}])
+		self.assertEqual(array_of_tokens, [{"BalanceInUSD": "N/A", "USDperUnit": "N/A", "token": "TEST", "quantity": 1, "name": "TestCoin"}])
 
 if __name__ == '__main__':
     unittest.main()
