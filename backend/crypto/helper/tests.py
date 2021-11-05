@@ -1,8 +1,8 @@
 from django.test import TestCase
 from crypto.helper.mock_creator import mocked_requests_get
 from unittest import mock
-from get_crypto_prices import get_cryptocompare_token_price_by_id
-from get_token_current_value import get_token_current_value_in_USD
+from crypto.helper.get_crypto_prices import get_cryptocompare_token_price_by_id
+from crypto.helper.get_token_current_value import get_token_current_value_in_USD
 
 class Get_Cryptocompare_Token_Price_By_Id_Test(TestCase):
 	@mock.patch('requests.request', side_effect=mocked_requests_get)
