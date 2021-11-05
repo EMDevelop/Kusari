@@ -29,7 +29,7 @@ export default function SearchWalletBalance() {
   const getPricesEveryThirtySecondInterval = async () => {
     console.log(`I just ran: ${new Date()}`);
     await getWalletDetails(address);
-    setTimeout(getPricesEveryThirtySecondInterval, 10000);
+    setTimeout(getPricesEveryThirtySecondInterval, 30000);
   };
 
   // If on search individual address page

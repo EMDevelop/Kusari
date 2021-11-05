@@ -38,19 +38,23 @@ def get_moralis_erc20(address):
 
 
 def get_ethereum_and_erc20_wallet_balance(request, address):
-    # fetch_new_prices? 
-    # if True
-    #     get_crypto_prices()
-    #     update_storage()
-    #     get_prices_for_tokens()
-    # else if user already has data
-    #     do nothing
-    # else
-    #     get_prices_for_tokens()
-    # print('I Am the server and I ran')
-    # print(datetime.now())
-    # tokens = [{'hello': 'world'},{'hello': 'world'}]
-    tokens = get_moralis_erc20(address) #refactor into next line
-    tokens = get_cryptocompare_token_price_by_id(tokens)
-    tokens = get_token_current_value_in_USD(tokens)
-    return JsonResponse(tokens, safe=False)
+    print('Previous Storage Value:')
+    if 'price_list' in request.session:
+        print(request.session['price_list'])
+    else:
+        print('no session here mate')
+    # token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
+    # token_symbol_name_quantity_price = get_cryptocompare_token_price_by_id(token_symbol_name_quantity)
+    # token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price) 
+    token_symbol_name_quantity_price_balance = [{'hello': 'world'}, {'hello': 'world'}]
+    print('setting new storage valye...')
+    request.session['price_list'] = {
+        "last_updated": "", 
+        "tokens": {
+            'eth': {
+                'name': 'ethereum', 
+                'image': 'image...'
+            }
+        }
+    }
+    return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
