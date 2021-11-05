@@ -46,3 +46,7 @@ You will need to:
   - 1 App per chain
 - Traditional - This is where we will store our APIs for traditional services
   - Unsure on how to structure this - David?
+
+#### Testing 
+To run Django tests:
+- Navigate to the backend and run `./manage.py test crypto`

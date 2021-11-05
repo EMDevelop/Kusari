@@ -4,7 +4,7 @@ import requests
 import json
 import os
 from helper.add_decimals_to_number import *
-# from helper.get_symbols_from_dictionary import *
+from helper.get_symbols_from_dictionary import *
 from helper.get_crypto_prices import *
 from helper.get_token_current_value import *
 
@@ -24,7 +24,6 @@ def get_moralis_erc20(address):
     response = requests.request("GET", url, headers=headers)        
     tokens = json.loads(response.text) #Example Data, tokens: [{'token_address': '0xd2dda223b2617cb616c1580db421e4cfae6a8a85', 'name': 'Bondly Token', 'symbol': 'BONDLY', 'logo': 'https://cdn.moralis.io/eth/0xd2dda223b2617cb616c1580db421e4cfae6a8a85.png', 'thumbnail': 'https://cdn.moralis.io/eth/0xd2dda223b2617cb616c1580db421e4cfae6a8a85_thumb.png', 'decimals': '18', 'balance': '993397116522580432404'}, {'token_address': '0x43901e05f08f48546fff8d6f8df108f60570498b', 'name': 'BASENJI', 'symbol': 'BSJ', 'logo': None, 'thumbnail': None, 'decimals': '18', 'balance': '50000000000000000000'}]
     token_list = []
-
     for token in tokens:
         token_dict = {}
         token_dict['token'] = token['symbol']

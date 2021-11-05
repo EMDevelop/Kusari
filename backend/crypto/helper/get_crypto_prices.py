@@ -1,4 +1,4 @@
-from .get_symbols_from_dictionary import *
+from crypto.helper.get_symbols_from_dictionary import *
 import requests
 import json
 
