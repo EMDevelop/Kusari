@@ -4,6 +4,7 @@
   "description": "## To Run",
   "main": "index.js",
   "scripts": {
+    "bob": "npm run client & npm run server",
     "server": "cd backend && python3 manage.py runserver",
     "client": "cd frontend && npm start"
   },
