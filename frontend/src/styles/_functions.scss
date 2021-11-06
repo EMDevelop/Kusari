@@ -6,34 +6,3 @@
   );
   background: linear-gradient(to right, $gradient-one-one, $gradient-one-two);
 }
-
-@mixin gradient-two {
-  background: -webkit-linear-gradient(
-    left,
-    $gradient-two-one,
-    $gradient-two-two
-  );
-  background: linear-gradient(to right, $gradient-two-one, $gradient-two-two);
-}
-
-@mixin gradient-three {
-  background: -webkit-linear-gradient(
-    left,
-    $gradient-three-one,
-    $gradient-three-two
-  );
-  background: linear-gradient(
-    to right,
-    $gradient-three-one,
-    $gradient-three-two
-  );
-}
-
-@mixin gradient-four {
-  background: -webkit-linear-gradient(
-    left,
-    $gradient-four-one,
-    $gradient-four-two
-  );
-  background: linear-gradient(to right, $gradient-four-one, $gradient-four-two);
-}

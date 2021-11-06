@@ -41,3 +41,21 @@ td {
 ::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px $c-green;
 }
+
+// Filters
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-text {
+  color: $c-light-one;
+}

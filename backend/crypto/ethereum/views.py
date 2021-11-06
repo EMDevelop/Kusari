@@ -37,14 +37,23 @@ def get_moralis_erc20(address):
 
 
 def get_ethereum_and_erc20_wallet_balance(request, address):
+
+    # commented out no, this is storage:
+    # set_storage_value()
+
+    token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
+    token_symbol_name_quantity_price = get_cryptocompare_token_price_by_id(token_symbol_name_quantity)
+    token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price) 
+    return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
+
+
+
+def set_storage_value():
     print('Previous Storage Value:')
     if 'price_list' in request.session:
         print(request.session['price_list'])
     else:
         print('no session here mate')
-    # token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
-    # token_symbol_name_quantity_price = get_cryptocompare_token_price_by_id(token_symbol_name_quantity)
-    # token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price) 
     token_symbol_name_quantity_price_balance = [{'hello': 'world'}, {'hello': 'world'}]
     print('setting new storage valye...')
     request.session['price_list'] = {
@@ -56,4 +65,3 @@ def get_ethereum_and_erc20_wallet_balance(request, address):
             }
         }
     }
-    return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
