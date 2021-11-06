@@ -40,7 +40,7 @@ export default function SearchWalletBalance() {
   };
 
   return (
-    <>
+    <div className="lookup-wallet-container">
       <h1>Lookup Wallet</h1>
       <div className="address-input-form">
         <Dropdown
@@ -66,6 +66,6 @@ export default function SearchWalletBalance() {
         headers={['Symbol', 'Token Name', 'Quantity', 'Price', 'Current Value']}
         rowData={walletDetails}
       />
-    </>
+    </div>
   );
 }

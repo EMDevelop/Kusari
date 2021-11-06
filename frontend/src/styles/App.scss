@@ -9,7 +9,7 @@ body {
   overflow: hidden;
   font-family: 'MyFont';
   // @include gradient-two;
-  background-color: $c-one;
+  background-color: $c-dark;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -23,8 +23,8 @@ body {
     width: 70%;
     height: 100vh;
     margin: auto;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     overflow-y: scroll;
   }
 
@@ -38,7 +38,7 @@ body {
 h1,
 h2,
 h3 {
-  color: $c-pink;
+  color: $c-light-one;
   text-transform: uppercase;
   font-weight: 300;
   text-align: center;

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
+import { faSave, faWallet } from '@fortawesome/free-solid-svg-icons';
 
 import MultipleInputs from '../../multipleInputs/MultipleInputs';
 
@@ -12,12 +12,11 @@ export default function Profile() {
       </div>
       <div className="profile-description-container">
         <p className="profile-description">
-          Add all of your wallets here, we'll keep them safe and secure.
+          Store your wallets, save, and head to your portfolio →
         </p>
-        <p className="profile-description">
-          You can see your balance for these wallets in the "My Portfolio" menu
-          option.
-        </p>
+        <div className="fa-home">
+          <FontAwesomeIcon icon={faWallet} />
+        </div>
       </div>
       <div className="add-wallets-container">
         <div className="profile-save-container">

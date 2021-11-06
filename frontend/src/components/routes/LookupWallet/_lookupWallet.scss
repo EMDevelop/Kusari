@@ -1,4 +1,9 @@
-// Need to refactor potentialliy
+.lookup-wallet-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 1fr 6fr;
+}
+
 .address-input-form {
   // background-color: red;
   height: 70px;
@@ -18,7 +23,7 @@
 .fa-search {
   width: 60px;
   height: 36px;
-  color: $c-two;
+  color: $c-green;
 }
 
 .search-wallet-input-field {

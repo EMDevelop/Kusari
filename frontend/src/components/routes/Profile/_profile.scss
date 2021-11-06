@@ -4,8 +4,8 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 6fr;
-  padding-bottom: 5%;
+  grid-template-rows: 2fr 1fr 6fr;
+  // padding-bottom: 5%;
 }
 
 .page-title {
@@ -17,9 +17,16 @@
 .profile-description-container {
   // background-color: skyblue;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   justify-content: center;
-  color: $c-two;
+}
+.profile-description {
+  color: $c-light-two;
+  justify-self: left;
+}
+
+.fa-home {
+  color: $c-green;
 }
 
 .add-wallets-container {
@@ -35,7 +42,7 @@
 .icon-save-profile {
   width: 100%;
   align-items: right;
-  color: $c-two;
+  color: $c-green;
 }
 
 .add-wallets-container {
