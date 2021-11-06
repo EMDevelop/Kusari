@@ -1,35 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
 export default function DataTable(props) {
-  const [filteredList, setFilteredList] = useState([]);
+  const [itemsToFilter, setItemsToFilter] = useState([]);
+  const [filteredData, setFilteredData] = useState(props.rowData);
+  const [tickZeroBalance, setTickZeroBalance] = useState(false);
+
+  useEffect(() => {
+    // setFilteredData(props.rowData);
+    filterRowData('USDperUnit');
+  }, [props.rowData]);
+
+  useEffect(() => {
+    filterRowData('USDperUnit');
+  }, [tickZeroBalance]);
+
+  // filter props.rowData with array filter keywords
+  const filterRowData = (filterOn) => {
+    // Filter Options: 'token', 'name', 'quantity', 'USDperUnit' and 'BalanceInUSD'
+    if (props.rowData) {
+      setFilteredData(
+        props.rowData.filter(
+          (element) => !itemsToFilter.includes(element[filterOn])
+        )
+      );
+    }
+  };
 
   // Related to the zero balance ticker
-  const [tickZeroBalance, setTickZeroBalance] = useState(false);
   const handleTickZeroBalance = () => {
-    tickZeroBalance === false
-      ? addItemToFilteredList(0)
-      : removeItemFromFilteredList(0);
+    tickZeroBalance === true
+      ? removeItemFromitemsToFilter('N/A')
+      : addItemToitemsToFilter('N/A');
 
     setTickZeroBalance(!tickZeroBalance);
   };
 
   // Reusable function to add item to filtered list
-  const addItemToFilteredList = (item) => {
-    if (!filteredList.includes(item)) {
-      setFilteredList([...filteredList, item]);
+  const addItemToitemsToFilter = (item) => {
+    if (!itemsToFilter.includes(item)) {
+      setItemsToFilter([...itemsToFilter, item]);
     }
   };
 
   // reusable function to remove item from filtered list
-  const removeItemFromFilteredList = (item) => {
-    console.log('hello');
-    const values = [...filteredList];
-    const index = filteredList.indexOf(item);
+  const removeItemFromitemsToFilter = (item) => {
+    const values = [...itemsToFilter];
+    const index = itemsToFilter.indexOf(item);
 
     values.splice(index, 1);
-    setFilteredList(values);
+    setItemsToFilter(values);
   };
 
   return (
@@ -56,11 +77,11 @@ export default function DataTable(props) {
         </table>
       </div>
       <div className="tbl-content">
-        {props.rowData && (
+        {filteredData && (
           <table cellPadding="0" cellSpacing="0" border="0">
             <tbody>
               {/* Loop through all rows returned from SearchWalletBalance get request */}
-              {props.rowData.map((row) => {
+              {filteredData.map((row) => {
                 console.log(row);
                 return (
                   <tr>
