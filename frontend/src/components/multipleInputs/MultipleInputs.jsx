@@ -34,9 +34,9 @@ export default function MultipleInputs() {
   // not working, working on veganswap though? client/src/components/forms/MultiFormAddIngredients.jsx
   const handleRemove = (index) => {
     let values = [...inputFields];
-    console.log(values);
-    // values.splice(1, 1);
-    // setInputFields(values);
+    // console.log(values);
+    values.splice(index, 1);
+    setInputFields(values);
   };
 
   return (

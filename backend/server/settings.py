@@ -154,6 +154,6 @@ STATICFILES_DIRS = [
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': 'backend/crypto/fileCache',
+        'LOCATION': os.environ['TEMP_DIR']
     }
 }

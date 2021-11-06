@@ -8,7 +8,6 @@ export default function DataTable(props) {
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
 
   useEffect(() => {
-    // setFilteredData(props.rowData);
     filterRowData('USDperUnit');
   }, [props.rowData]);
 
@@ -17,8 +16,8 @@ export default function DataTable(props) {
   }, [tickZeroBalance]);
 
   // filter props.rowData with array filter keywords
+  // Filter Options: 'token', 'name', 'quantity', 'USDperUnit' and 'BalanceInUSD'
   const filterRowData = (filterOn) => {
-    // Filter Options: 'token', 'name', 'quantity', 'USDperUnit' and 'BalanceInUSD'
     if (props.rowData) {
       setFilteredData(
         props.rowData.filter(
@@ -27,6 +26,10 @@ export default function DataTable(props) {
       );
     }
   };
+
+  // to add another filter
+  // Add a check to see if any of the checkboxe states are true
+  // if they are, run a filter on them too?
 
   // Related to the zero balance ticker
   const handleTickZeroBalance = () => {
