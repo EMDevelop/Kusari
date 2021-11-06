@@ -1,18 +1,26 @@
+// Main Colours
 $c-dark: #212121;
 $c-green: #c1f665;
 $c-pink: #ea638c;
 $c-cyan: #d9f7fa;
 $c-blue: #0075a2;
+// Main Colours to be used in scss
+$c-one: $c-dark;
+$c-two: $c-green;
+$c-three: $c-pink;
+$c-four: $c-cyan;
+$c-five: $c-blue;
+$white: #fff;
+$frosted: #68666645;
 
 // Navbar colours
-$background: #21212152;
-$background-transparent: #68666645;
+// $background: #21212152;
+// $background-transparent: #68666645;
 $link-grey: #c1f665;
-$white: #c1f665;
+
 $highlight: #0075a2;
 
 // Table colours
-$grey-transparent: #68666645;
 
 // ------ Gradients
 // Usual Suspects
@@ -20,8 +28,8 @@ $gradient-one-one: #28313b;
 $gradient-one-two: #485461;
 
 // Labor Worker
-$gradient-two-one: #2c3e50;
-$gradient-two-two: #000000;
+$gradient-two-two: #2c3e50;
+$gradient-two-one: #000000;
 
 // whale house
 $gradient-three-one: #000000;

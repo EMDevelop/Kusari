@@ -119,8 +119,8 @@ nav.main-menu li.active > a,
 .dropdown-menu > .active > a:focus,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a {
-  color: $white;
-  background-color: $grey-transparent;
+  color: $c-two;
+  background-color: $frosted;
 }
 .area {
   float: left;

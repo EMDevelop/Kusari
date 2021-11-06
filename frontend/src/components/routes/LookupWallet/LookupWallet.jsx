@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
+import Dropdown from '../../dropdown/Dropdown';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);
   const [walletDetails, setWalletDetails] = useState(undefined);
+  const [walletType, setwalletType] = useState(undefined);
 
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
     setAddress(e);
   };
 
-  // API call to back end using Axios
+  // Handle button click when a user searches for their waller
   const handleButtonClick = async () => {
     try {
       await getWalletDetails(address);
@@ -21,29 +23,33 @@ export default function SearchWalletBalance() {
     }
   };
 
+  // Axios API call to get the wallet details
   const getWalletDetails = async (address) => {
-    const response = await axios.get(`/ethereum/wallet-balance/${address}/`);
+    const response = await axios.get(
+      `/${walletType}/wallet-balance/${address}/`
+    );
     setWalletDetails(response.data);
   };
 
+  // Logic to request new prices every 30 seconds and re-define the state of the wallet details
   const getPricesEveryThirtySecondInterval = async () => {
     console.log(`I just ran: ${new Date()}`);
     await getWalletDetails(address);
     setTimeout(getPricesEveryThirtySecondInterval, 30000);
   };
 
-  // If on search individual address page
-  // start the loop when they click the button
-  // If on profile wallet page
-  // start the loop when the page loads (or component render)
-
   return (
     <>
       <h1>Lookup Wallet</h1>
       <div className="address-input-form">
+        <Dropdown
+          placeholderValue="Select wallet type"
+          dropdownOptions={['Ethereum', 'Bitcoin']}
+          handleOptionSelect={setwalletType}
+        />
         <input
           type="text"
-          placeholder="address"
+          placeholder="e.g 0x0613Cd2076bd432C7A60a1b926b11B17BaAaFE11"
           onChange={(e) => handleInputChange(e.target.value)}
         />
         <div>

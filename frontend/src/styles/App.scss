@@ -34,18 +34,18 @@ body {
   }
 }
 
-h1 {
-  font-size: 30px;
-  color: #fff;
+h1,
+h2,
+h3 {
+  color: $white;
   text-transform: uppercase;
   font-weight: 300;
   text-align: center;
 }
+h1 {
+  font-size: 30px;
+}
 
 h3 {
   font-size: 15px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 300;
-  text-align: center;
 }

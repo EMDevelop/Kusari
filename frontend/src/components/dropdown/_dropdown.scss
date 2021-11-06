@@ -1,5 +1,21 @@
 .dropdown {
-  background-color: red;
-  height: 100px;
-  width: 100px;
+  appearance: none;
+  background-color: none;
+  height: 60% !important;
+  width: fit-content;
+  width: 25%;
+  height: 30px;
+  padding: 10px 15px;
+  border-radius: $radius;
+  letter-spacing: 0.01em;
+  margin-right: $small-margin;
+}
+.disabled-option {
+  color: #ccc;
+}
+
+.dropdown:active,
+.dropdown:focus {
+  border: none;
+  outline: none;
 }
