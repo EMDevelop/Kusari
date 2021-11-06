@@ -1,4 +1,6 @@
 from .get_symbols_from_dictionary import *
+from .add_dictionary_to_session import *
+from .date_parser import get_time_now_as_string
 from pycoingecko import CoinGeckoAPI
 import requests
 import json
@@ -26,9 +28,9 @@ def get_cryptocompare_token_price_by_id(token_data):
 
 
 
-def get_coingecko_all_crypto_prices():
+def get_coingecko_all_crypto_prices(request):
     # What does this method do?
-
+    print('I am running')
     # This fetches all of the below information from coingecko.com (see backend/crypto/helper/dummy_data/CoingeckoResponse.txt for full data structure)
         # "id": "ethereum",
         # "symbol": "eth",
@@ -61,6 +63,8 @@ def get_coingecko_all_crypto_prices():
                 "image": token['image']
             }
         page_number += 1
-    tokenDictionary['last_updated'] = datetime.now()
 
-    return tokenDictionary
+    tokenDictionary['last_updated'] = get_time_now_as_string()
+    
+    set_storage_value(request, tokenDictionary)
+  

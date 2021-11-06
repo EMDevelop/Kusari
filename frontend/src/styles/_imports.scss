@@ -4,11 +4,14 @@
 @import './fonts';
 
 // Components
-@import '../components/Navbar/navbar';
+@import '../components/routes/navbar/navbar';
 @import '../components/dataTable/dataTable';
+@import '../components/multipleInputs/multipleInputs';
+@import '../components/searchDropdown/searchDropdown';
+@import '../components/dropdown/dropdown';
 @import '../components/cards/cryptoTokenBalance/cryptoTokenBalance';
 
 // Routes
-@import '../components/routes/SearchWalletBalance/searchWalletBalance';
+@import '../components/routes/LookupWallet/lookupWallet';
 @import '../components/routes/Login/login';
 @import '../components/routes/Profile/profile';

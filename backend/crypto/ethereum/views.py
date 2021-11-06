@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+# from django.shortcuts import render
+from django.http import JsonResponse
 import requests
 import json
 import os
@@ -7,7 +7,6 @@ from helper.add_decimals_to_number import *
 from helper.get_symbols_from_dictionary import *
 from helper.get_crypto_prices import *
 from helper.get_token_current_value import *
-from datetime import datetime
 
 
 def get_moralis_erc20(address):
@@ -37,23 +36,13 @@ def get_moralis_erc20(address):
 
 
 def get_ethereum_and_erc20_wallet_balance(request, address):
-    print('Previous Storage Value:')
-    if 'price_list' in request.session:
-        print(request.session['price_list'])
-    else:
-        print('no session here mate')
-    # token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
-    # token_symbol_name_quantity_price = get_cryptocompare_token_price_by_id(token_symbol_name_quantity)
-    # token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price) 
-    token_symbol_name_quantity_price_balance = [{'hello': 'world'}, {'hello': 'world'}]
-    print('setting new storage valye...')
-    request.session['price_list'] = {
-        "last_updated": "", 
-        "tokens": {
-            'eth': {
-                'name': 'ethereum', 
-                'image': 'image...'
-            }
-        }
-    }
+
+    # commented out no, this is storage:
+
+    token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
+    token_symbol_name_quantity_price = get_cryptocompare_token_price_by_id(token_symbol_name_quantity)
+    token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price) 
     return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
+
+
+

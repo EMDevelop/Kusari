@@ -8,6 +8,9 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: 'MyFont';
+  // @include gradient-two;
+  background-color: $c-dark;
+  font-family: 'Roboto', sans-serif;
 }
 
 .app {
@@ -20,8 +23,8 @@ body {
     width: 70%;
     height: 100vh;
     margin: auto;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     overflow-y: scroll;
   }
 
@@ -30,4 +33,41 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}
+
+h1,
+h2,
+h3 {
+  color: $c-light-one;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+}
+h1 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 15px;
+}
+
+// Buttons and Inputs
+input[type='text'],
+input[type='input'],
+input[type='password'] {
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: none;
+  border-radius: $radius;
+  letter-spacing: 0.01em;
+  padding-left: $small-margin;
+}
+
+input[type='text']:focus,
+input[type='input']:focus,
+input[type='password']:focus,
+textarea:focus {
+  // border: none;
+  outline: none;
 }

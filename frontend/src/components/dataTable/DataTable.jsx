@@ -1,11 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
 export default function DataTable(props) {
+  const [itemsToFilter, setItemsToFilter] = useState([]);
+  const [filteredData, setFilteredData] = useState(props.rowData);
+  const [tickZeroBalance, setTickZeroBalance] = useState(false);
+
+  useEffect(() => {
+    filterRowData('USDperUnit');
+  }, [props.rowData]);
+
+  useEffect(() => {
+    filterRowData('USDperUnit');
+  }, [tickZeroBalance]);
+
+  // filter props.rowData with array filter keywords
+  // Filter Options: 'token', 'name', 'quantity', 'USDperUnit' and 'BalanceInUSD'
+  const filterRowData = (filterOn) => {
+    if (props.rowData) {
+      setFilteredData(
+        props.rowData.filter(
+          (element) => !itemsToFilter.includes(element[filterOn])
+        )
+      );
+    }
+  };
+
+  // to add another filter
+  // Add a check to see if any of the checkboxe states are true
+  // if they are, run a filter on them too?
+
+  // Related to the zero balance ticker
+  const handleTickZeroBalance = () => {
+    tickZeroBalance === true
+      ? removeItemFromitemsToFilter('N/A')
+      : addItemToitemsToFilter('N/A');
+
+    setTickZeroBalance(!tickZeroBalance);
+  };
+
+  // Reusable function to add item to filtered list
+  const addItemToitemsToFilter = (item) => {
+    if (!itemsToFilter.includes(item)) {
+      setItemsToFilter([...itemsToFilter, item]);
+    }
+  };
+
+  // reusable function to remove item from filtered list
+  const removeItemFromitemsToFilter = (item) => {
+    const values = [...itemsToFilter];
+    const index = itemsToFilter.indexOf(item);
+
+    values.splice(index, 1);
+    setItemsToFilter(values);
+  };
+
   return (
     <div>
-      <h1>Wallet Breakdown</h1>
+      <div className="filter-container">
+        <div className="filter zero-value">
+          <p className="filter-text">Hide Zero Balance</p>
+          <input
+            type="checkbox"
+            id="switch"
+            onChange={() => handleTickZeroBalance()}
+          />
+        </div>
+      </div>
       <div className="tbl-header">
         <table cellPadding="0" cellSpacing="0" border="0">
           <thead>
@@ -18,11 +80,11 @@ export default function DataTable(props) {
         </table>
       </div>
       <div className="tbl-content">
-        {props.rowData && (
+        {filteredData && (
           <table cellPadding="0" cellSpacing="0" border="0">
             <tbody>
               {/* Loop through all rows returned from SearchWalletBalance get request */}
-              {props.rowData.map((row) => {
+              {filteredData.map((row) => {
                 console.log(row);
                 return (
                   <tr>

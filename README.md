@@ -36,6 +36,12 @@ You will need to:
 - create a new App using: `python manage.py startapp prices`
   - `prices` is the name of the app
 
+#### Front End instructions
+
+- When we add abilities for a new chain, we need to update a prop in the 2 places the dropdown is usedwith the backend route:
+  - frontend/src/components/multipleInputs/MultipleInputs.jsx
+  - frontend/src/components/routes/LookupWallet/LookupWallet.jsx
+
 #### File Structure
 
 - Server
@@ -47,6 +53,8 @@ You will need to:
 - Traditional - This is where we will store our APIs for traditional services
   - Unsure on how to structure this - David?
 
-#### Testing 
+#### Testing
+
 To run Django tests:
+
 - Navigate to the backend and run `./manage.py test crypto`
