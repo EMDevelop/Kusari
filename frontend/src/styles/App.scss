@@ -8,6 +8,8 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: 'MyFont';
+  @include gradient-two;
+  font-family: 'Roboto', sans-serif;
 }
 
 .app {

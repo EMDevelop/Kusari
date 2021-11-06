@@ -25,7 +25,7 @@ export default function SearchWalletBalance() {
   return (
     <>
       <div className="address-input-form">
-        <input type="dropdown" placeholder="this will be a dropdown" />
+        {/* <input type="dropdown" placeholder="this will be a dropdown" /> */}
         <input
           type="text"
           placeholder="address"

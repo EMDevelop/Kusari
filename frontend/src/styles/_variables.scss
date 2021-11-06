@@ -1,14 +1,34 @@
+$c-dark: #212121;
+$c-green: #c1f665;
+$c-pink: #ea638c;
+$c-cyan: #d9f7fa;
+$c-blue: #0075a2;
+
 // Navbar colours
-$background: #212121;
-$background-transparent: #21212195;
-$link-grey: #999;
-$white: #fff;
-$highlight: #5fa2db;
+$background: #21212152;
+$background-transparent: #68666645;
+$link-grey: #c1f665;
+$white: #c1f665;
+$highlight: #0075a2;
 
 // Table colours
-$grey-transparent: rgba(255, 255, 255, 0.3);
-$gradient-one: #101357;
-$gradient-two: #86c5d8;
+$grey-transparent: #68666645;
+
+// ------ Gradients
+// Usual Suspects
+$gradient-one-one: #28313b;
+$gradient-one-two: #485461;
+
+// Labor Worker
+$gradient-two-one: #2c3e50;
+$gradient-two-two: #000000;
+
+// whale house
+$gradient-three-one: #000000;
+$gradient-three-two: #130f40;
+
+$gradient-four-one: #12100e;
+$gradient-four-two: #2b4162;
 
 // Margin
 $small-margin: 10px;
