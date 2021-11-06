@@ -5,7 +5,7 @@ import React from 'react';
 export default function DataTable(props) {
   return (
     <div>
-      <h1>Wallet Breakdown</h1>
+      <h3>Wallet Breakdown</h3>
       <div className="tbl-header">
         <table cellPadding="0" cellSpacing="0" border="0">
           <thead>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import DataTable from '../../../components/dataTable/DataTable';
+import DataTable from '../../dataTable/DataTable';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);
@@ -39,8 +39,8 @@ export default function SearchWalletBalance() {
 
   return (
     <>
+      <h1>Lookup Wallet</h1>
       <div className="address-input-form">
-        {/* <input type="dropdown" placeholder="this will be a dropdown" /> */}
         <input
           type="text"
           placeholder="address"

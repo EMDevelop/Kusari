@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
 
 // Components
-import Navbar from './components/navbar/Navbar';
+import Navbar from './components/routes/navbar/Navbar';
 
 // Routes
-import SearchWalletBalance from './components/routes/SearchWalletBalance/SearchWalletBalance';
+import LookupWallet from './components/routes/LookupWallet/LookupWallet';
 import Login from './components/routes/Login/Login';
 import Profile from './components/routes/Profile/Profile';
 
@@ -17,7 +17,7 @@ function App() {
       <main>
         <Router>
           <Routes>
-            <Route path="/" element={<SearchWalletBalance />} />
+            <Route path="/" element={<LookupWallet />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
