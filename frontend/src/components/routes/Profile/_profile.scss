@@ -1,14 +1,66 @@
 .profile-page {
-  background-color: saddlebrown;
-  height: 100%;
+  // background-color: saddlebrown;
+  height: 95%;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 6fr;
+  padding-bottom: 5%;
 }
 
 .page-title {
   width: 100%;
   height: 100%;
-  background-color: salmon;
+  // background-color: salmon;
 }
+
+.profile-description-container {
+  // background-color: skyblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $c-two;
+}
+
+.add-wallets-container {
+  // background-color: $c-cyan;
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+}
+
+.profile-save-container {
+  align-items: right;
+}
+
+.icon-save-profile {
+  width: 100%;
+  align-items: right;
+  color: $c-two;
+}
+
+.add-wallets-container {
+  // height: 100%;
+  overflow-y: scroll;
+}
+
+// disable scrollbar
+// .add-wallets-container::-webkit-scrollbar,
+.multiple-wallets-container::-webkit-scrollbar {
+  display: none;
+}
+
+.multiple-wallets-container {
+  overflow-y: scroll;
+}
+
+/* for custom scrollbar for webkit browser*/
+
+// ::-webkit-scrollbar {
+//   width: 6px;
+// }
+// ::-webkit-scrollbar-track {
+//   -webkit-box-shadow: inset 0 0 6px $c-two;
+// }
+// ::-webkit-scrollbar-thumb {
+//   -webkit-box-shadow: inset 0 0 6px $c-two;
+// }

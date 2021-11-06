@@ -1,22 +1,23 @@
 // Main Colours
-$c-dark: #212121;
-$c-green: #c1f665;
+// $c-dark: #212121;
+// $c-green: #c1f665;
 $c-pink: #ea638c;
-$c-cyan: #d9f7fa;
-$c-blue: #0075a2;
+// $c-cyan: #d9f7fa;
+// $c-blue: #0075a2;
+
 // Main Colours to be used in scss
-$c-one: $c-dark;
-$c-two: $c-green;
-$c-three: $c-pink;
-$c-four: $c-cyan;
-$c-five: $c-blue;
+$c-one: #0b0a0a;
+$c-two: #32ecb1;
+$c-three: #32ecb1;
+// $c-four: $c-cyan;
+// $c-five: $c-blue;
 $white: #fff;
 $frosted: #68666645;
 
 // Navbar colours
 // $background: #21212152;
 // $background-transparent: #68666645;
-$link-grey: #c1f665;
+$link-grey: #32ecb1;
 
 $highlight: #0075a2;
 
@@ -27,8 +28,8 @@ $highlight: #0075a2;
 $gradient-one-one: #28313b;
 $gradient-one-two: #485461;
 
-// Labor Worker
-$gradient-two-two: #2c3e50;
+// Labor Worker                   -- currently being used
+$gradient-two-two: #000000;
 $gradient-two-one: #000000;
 
 // whale house

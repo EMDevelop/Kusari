@@ -17,7 +17,8 @@ export default function SearchWalletBalance() {
   const handleButtonClick = async () => {
     try {
       await getWalletDetails(address);
-      getPricesEveryThirtySecondInterval();
+      // Commented out to pause loop:
+      // getPricesEveryThirtySecondInterval();
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +27,7 @@ export default function SearchWalletBalance() {
   // Axios API call to get the wallet details
   const getWalletDetails = async (address) => {
     const response = await axios.get(
-      `/${walletType}/wallet-balance/${address}/`
+      `/${walletType.toLowerCase()}/wallet-balance/${address}/`
     );
     setWalletDetails(response.data);
   };
@@ -49,6 +50,7 @@ export default function SearchWalletBalance() {
         />
         <input
           type="text"
+          className="search-wallet-input-field"
           placeholder="e.g 0x0613Cd2076bd432C7A60a1b926b11B17BaAaFE11"
           onChange={(e) => handleInputChange(e.target.value)}
         />

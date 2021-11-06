@@ -3,7 +3,8 @@ table {
   table-layout: fixed;
 }
 .tbl-header {
-  background-color: $frosted;
+  // background-color: $frosted;
+  border: 2px solid $frosted;
 }
 .tbl-content {
   height: 50vh;
@@ -28,7 +29,6 @@ td {
   color: $white;
   border-bottom: solid 1px rgba(255, 255, 255, 0.1);
 }
-ß
 
 /* for custom scrollbar for webkit browser*/
 

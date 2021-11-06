@@ -1,5 +1,5 @@
 .dropdown {
-  appearance: none;
+  // appearance: none;
   background-color: none;
   height: 60% !important;
   width: fit-content;
@@ -10,6 +10,17 @@
   letter-spacing: 0.01em;
   margin-right: $small-margin;
 }
+.dropdown-width-max {
+  // appearance: none;
+  background-color: none;
+  height: 100% !important;
+  width: fit-content;
+  width: 100%;
+  height: 30px;
+  padding: 10px 15px;
+  border-radius: $radius;
+  letter-spacing: 0.01em;
+}
 .disabled-option {
   color: #ccc;
 }
@@ -18,4 +29,8 @@
 .dropdown:focus {
   border: none;
   outline: none;
+}
+
+.dropdown-icon {
+  color: $c-two;
 }
