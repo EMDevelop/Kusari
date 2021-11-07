@@ -45,7 +45,6 @@ def get_ethereum_and_erc20_wallet_balance(request, address):
 
     token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
     token_symbol_name_quantity_price_image = append_price_and_image(request, token_symbol_name_quantity)
-    print(token_symbol_name_quantity_price_image)
     token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price_image) 
     return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
 

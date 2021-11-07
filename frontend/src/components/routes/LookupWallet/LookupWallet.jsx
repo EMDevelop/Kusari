@@ -88,7 +88,14 @@ export default function SearchWalletBalance() {
         </div>
       </div>
       <DataTable
-        headers={['Symbol', 'Token Name', 'Quantity', 'Price', 'Current Value']}
+        headers={[
+          '',
+          'Symbol',
+          'Token Name',
+          'Quantity',
+          'Price',
+          'Current Value',
+        ]}
         rowData={walletDetails}
       />
     </div>

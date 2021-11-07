@@ -13,9 +13,9 @@ def append_price_and_image(request, existing_dictionary):
     
     for token in existing_dictionary:
         try: 
-          token['image'] = get_item_from_storage(request, token['token'].lower(), 'image')
+            token['image'] = get_item_from_storage(request, token['token'].lower(), 'image')
         except:
-            token['image'] = "https://www.seekpng.com/png/full/13-136272_question-mark-in-a-circle-comments-circle-question.png"
+            token['image'] = "https://www.cryptocurrencymarket.uk/coins_images/shitcoin-token/large.png"
     
     return existing_dictionary
 
