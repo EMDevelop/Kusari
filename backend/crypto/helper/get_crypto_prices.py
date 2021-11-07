@@ -5,6 +5,7 @@ from pycoingecko import CoinGeckoAPI
 import requests
 import json
 from datetime import datetime
+from helper.date_parser import *
 
 
 def get_cryptocompare_token_price_by_id(token_data):
@@ -67,4 +68,10 @@ def get_coingecko_all_crypto_prices(request):
     tokenDictionary['last_updated'] = get_time_now_as_string()
     
     set_storage_value(request, tokenDictionary)
-  
+
+def check_if_longer_than_30_seconds(request):
+  current_time = get_date_from_string(request.session['price_list']['last_updated'])
+  if (datetime.now() - current_time).seconds > 30:
+    return True
+  else:
+    return False
