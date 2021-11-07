@@ -1,0 +1,138 @@
+.container {
+  position: fixed;
+  height: 20%;
+  // border: solid 1px #e5e5e5;
+  width: 200px;
+}
+
+.road {
+  // border-top: 25px solid #333;
+  height: 100px;
+  background: url('https://purepng.com/public/uploads/large/purepng.com-black-lamborghini-centenario-lp-770-4-carcarvehicletransportlamborghini-961524644015hyost.png');
+  background-size: 100px auto;
+  -webkit-animation: road 2s linear infinite;
+  animation: road 2s linear infinite;
+  // box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px $c-green,
+  //   0 0 82px $c-green, 0 0 92px $c-green, 0 0 102px $c-green, 0 0 151px $c-green;
+}
+.car {
+  margin: 10% auto -75px;
+  // position: relative;
+  // width: 200px;
+  width: fit-content;
+  -webkit-animation: car 15s infinite;
+  animation: car 15s infinite;
+}
+.car img {
+  width: 50%;
+  animation: suspension 1s infinite;
+  filter: drop-shadow(0rem 0rem 1.3rem $c-green);
+  // color: $c-green;
+  // background: $c-green;
+}
+.car .wheel {
+  background: url('https://purepng.com/public/uploads/large/purepng.com-black-lamborghini-centenario-lp-770-4-carcarvehicletransportlamborghini-961524644015hyost.png')
+    no-repeat center center;
+  background-size: 99% auto;
+  background-color: transparent;
+  display: block;
+  width: 42px;
+  height: 42px;
+  // position: absolute;
+  // bottom: 5px;
+  -webkit-animation: spin 0.2s linear infinite;
+  animation: spin 0.2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes road {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+@keyframes road {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+@-webkit-keyframes car {
+  50% {
+    -webkit-transform: translateX(10%);
+  }
+  70% {
+    -webkit-transform: translateX(-20%);
+  }
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+@keyframes car {
+  50% {
+    transform: translateX(10%);
+  }
+  70% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@-webkit-keyframes suspension {
+  0% {
+    -webkit-transform: translateY(1px);
+  }
+  50% {
+    -webkit-transform: translateY(3px);
+  }
+  100% {
+    -webkit-transform: translateY(1px);
+  }
+}
+@keyframes suspension {
+  0% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(1px);
+  }
+}
+@-webkit-keyframes clouds {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+@keyframes clouds {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
