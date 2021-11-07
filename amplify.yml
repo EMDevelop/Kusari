@@ -7,7 +7,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - sudo -H pip3 install -U pipenv
+        - pip3 install -U pipenv
         - cd frontend
         - npm install
         - cd ..
