@@ -12,6 +12,7 @@ django-dotenv = "*"
 pytest = "*"
 psycopg2 = "*"
 pycoingecko = "*"
+djangorestframework-jwt = "*"
 
 [dev-packages]
 
