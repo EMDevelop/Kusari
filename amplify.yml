@@ -7,12 +7,11 @@ frontend:
   phases:
     preBuild:
       commands:
-        - pip3 install -U pipenv
+        - pip install -U pipenv
         - cd frontend
         - npm install
         - cd ..
         - cd backend
-        - pip3 install -U pipenv
         - pipenv install django
         - pipenv install djangorestframework
         - pipenv install django-cors-headers
