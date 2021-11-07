@@ -10,6 +10,7 @@ frontend:
         - cd frontend
         - npm install
         - cd ..
+        - cd backend
         - python manage.py migrate
         - pip3 install -U pipenv
         - pipenv install django
