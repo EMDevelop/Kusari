@@ -25,3 +25,11 @@ def check_if_longer_than_30_seconds(request):
     return True
   else:
     return False
+
+def say_hello(request):
+    print('here:')
+    print(request.GET['tokens'])
+    # for token in request.GET['tokens[]']:
+    #   print(token)
+    print('^')
+    return JsonResponse({'hello': 'world'})

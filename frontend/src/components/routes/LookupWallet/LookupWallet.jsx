@@ -6,7 +6,7 @@ import LamboLoader from '../../LamboLoader/LamboLoader';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);
-  const [walletDetails, setWalletDetails] = useState(undefined);
+  const [walletDetails, setWalletDetails] = useState([]);
   const [walletType, setwalletType] = useState(undefined);
   const [fetchingAddressInfo, setFetchingAddressInfo] = useState(false);
 
@@ -34,6 +34,7 @@ export default function SearchWalletBalance() {
       `/${walletType.toLowerCase()}/wallet-balance/${address}/`
     );
     setWalletDetails(response.data);
+    console.log(response.data);
   };
 
   // Logic to request new prices every 30 seconds and re-define the state of the wallet details
@@ -41,6 +42,45 @@ export default function SearchWalletBalance() {
     console.log(`I just ran: ${new Date()}`);
     await getWalletDetails(address);
     setTimeout(getPricesEveryThirtySecondInterval, 30000);
+  };
+
+  //   [
+  //     {
+  //         "token": "BONDLY",
+  //         "name": "Bondly Token",
+  //         "quantity": 993.3971165225804,
+  //         "USDperUnit": 0.1353,
+  //         "BalanceInUSD": 134.40662986550512
+  //     },
+  //     {
+  //         "token": "BSJ",
+  //         "name": "BASENJI",
+  //         "quantity": 50,
+  //         "USDperUnit": "N/A",
+  //         "BalanceInUSD": "N/A"
+  //     }
+  // ]
+
+  // Get Prices, pass in current stored wallet details, return new prices
+  const getUpdatedPricesForCurrentWallet = async () => {
+    // Check if there are currently any tokens in the wallet
+    console.log('oitside');
+    if (walletDetails.length > 0) {
+      console.log('Inside If');
+      // If there are, get the prices for each token
+      const response = await axios.get(`prices/update-wallet-prices`, {
+        params: {
+          tokens: JSON.stringify(walletDetails),
+        },
+      });
+      console.log(response);
+    }
+  };
+
+  const testFunction = () => {
+    console.log('I ran');
+    getUpdatedPricesForCurrentWallet();
+    console.log('I am the end of the test');
   };
 
   return (
@@ -69,6 +109,7 @@ export default function SearchWalletBalance() {
             ></i>
           )}
         </div>
+        <button onClick={() => testFunction()}>random button</button>
       </div>
       <DataTable
         headers={['Symbol', 'Token Name', 'Quantity', 'Price', 'Current Value']}
