@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //import './styles/App.scss';
 
 // Components
-import Nav from './components/routes/navbar/Navbar';
+import Navbar from './components/routes/navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
@@ -100,7 +100,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Nav
+        <Navbar
           logged_in={this.state.logged_in}
           display_form={this.display_form}
           handle_logout={this.handle_logout}
