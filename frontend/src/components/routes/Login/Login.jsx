@@ -6,8 +6,7 @@ function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async (e, data) => {
-    console.log(data);
+  const handleLogin = async (e) => {
     e.preventDefault();
     // axios post request to url with body as data
     try {

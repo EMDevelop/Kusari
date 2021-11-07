@@ -28,6 +28,13 @@ export default function SearchWalletBalance() {
     }
   };
 
+  // Logic to request new prices every 30 seconds and re-define the state of the wallet details
+  const getPricesEveryThirtySecondInterval = async () => {
+    console.log(`I just ran: ${new Date()}`);
+    await getWalletDetails(address);
+    setTimeout(getPricesEveryThirtySecondInterval, 30000);
+  };
+
   // Axios API call to get the wallet details
   const getWalletDetails = async (address) => {
     const response = await axios.get(
@@ -36,30 +43,6 @@ export default function SearchWalletBalance() {
     setWalletDetails(response.data);
     console.log(response.data);
   };
-
-  // Logic to request new prices every 30 seconds and re-define the state of the wallet details
-  const getPricesEveryThirtySecondInterval = async () => {
-    console.log(`I just ran: ${new Date()}`);
-    await getWalletDetails(address);
-    setTimeout(getPricesEveryThirtySecondInterval, 30000);
-  };
-
-  //   [
-  //     {
-  //         "token": "BONDLY",
-  //         "name": "Bondly Token",
-  //         "quantity": 993.3971165225804,
-  //         "USDperUnit": 0.1353,
-  //         "BalanceInUSD": 134.40662986550512
-  //     },
-  //     {
-  //         "token": "BSJ",
-  //         "name": "BASENJI",
-  //         "quantity": 50,
-  //         "USDperUnit": "N/A",
-  //         "BalanceInUSD": "N/A"
-  //     }
-  // ]
 
   // Get Prices, pass in current stored wallet details, return new prices
   const getUpdatedPricesForCurrentWallet = async () => {

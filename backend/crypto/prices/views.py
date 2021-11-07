@@ -26,13 +26,11 @@ def get_price_from_session_by_symbol(request, symbol):
     print(request.session['price_list']['tokens'][symbol]['current_price'])
     return JsonResponse({'getting': 'stuff'})
 
-
-
 # This is a repeat request.
 # It should check if new prices are needed
 # If they are, go get them and then return the Json
 # Otherwise do not. 
-def updateSingleWalletBalance(request):
+def update_wallet_balance(request):
   # if it hasn't been 30 seconds, return json: not been 30 seconds
     # get_coin_gecko_prices(request)
     # current_wallet = request.GET['tokens']

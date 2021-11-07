@@ -11,22 +11,6 @@ import {
 
 // Credit to: https://codepen.io/JFarrow/pen/fFrpg for the navbar
 
-// function Navbar(props) {
-//   const logged_out_nav = (
-//     <ul>
-//       <li onClick={() => props.display_form('login')}>login</li>
-//       <li onClick={() => props.display_form('signup')}>signup</li>
-//     </ul>
-//   );
-
-//   const loggedIn_nav = (
-//     <ul>
-//       <li onClick={props.handle_logout}>logout</li>
-//     </ul>
-//   );
-//   return <div>{props.loggedIn ? loggedIn_nav : logged_out_nav}</div>;
-// }
-
 function Navbar(props) {
   const logged_out_nav = (
     <nav className="main-menu">

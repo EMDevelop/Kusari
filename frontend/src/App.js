@@ -21,13 +21,18 @@ function App() {
   );
   const [username, setUsername] = useState(undefined);
 
-  // If user is logged in, check if their stored token is still valid
-  // This will be valid for 2 weeks by django default.
   useEffect(() => {
     authorizeTokenFromStorage();
+    singleUpdatePrices();
   }, []);
 
+  const singleUpdatePrices = async () => {
+    await axios.get('/prices/startup-request-prices');
+  };
+
   const authorizeTokenFromStorage = async (token) => {
+    // If user is logged in, check if their stored token is still valid
+    // This will be valid for 2 weeks by django default.
     try {
       const response = await axios.get('/prices/current_user/', {
         headers: { Authorization: `JWT ${localStorage.getItem('token')}` },

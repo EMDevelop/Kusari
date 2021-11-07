@@ -6,10 +6,6 @@ function Signup(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
-  };
-
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
