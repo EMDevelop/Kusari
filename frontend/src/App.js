@@ -15,7 +15,6 @@ import Signup from './components/routes/Signup/Signup';
 import Profile from './components/routes/Profile/Profile';
 
 function App() {
-  const [displayedForm, setDisplayedForm] = useState('');
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem('token') ? true : false
   );
