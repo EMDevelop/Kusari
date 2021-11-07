@@ -19,12 +19,12 @@ import {
 //     </ul>
 //   );
 
-//   const logged_in_nav = (
+//   const loggedIn_nav = (
 //     <ul>
 //       <li onClick={props.handle_logout}>logout</li>
 //     </ul>
 //   );
-//   return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+//   return <div>{props.loggedIn ? loggedIn_nav : logged_out_nav}</div>;
 // }
 
 function Navbar(props) {
@@ -67,7 +67,7 @@ function Navbar(props) {
     </nav>
   );
 
-  const logged_in_nav = (
+  const loggedIn_nav = (
     <nav className="main-menu">
       <ul>
         <li>
@@ -115,11 +115,11 @@ function Navbar(props) {
     </nav>
   );
 
-  return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+  return <div>{props.loggedIn ? loggedIn_nav : logged_out_nav}</div>;
 }
 
 Navbar.propTypes = {
-  logged_in: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
   handle_logout: PropTypes.func.isRequired,
 };
 

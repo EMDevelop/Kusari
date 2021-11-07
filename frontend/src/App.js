@@ -29,10 +29,9 @@ function App() {
 
   const authorizeTokenFromStorage = async (token) => {
     try {
-      const response = await axios.get(
-        'http://localhost:8000/prices/current_user/',
-        { headers: { Authorization: `JWT ${localStorage.getItem('token')}` } }
-      );
+      const response = await axios.get('/prices/current_user/', {
+        headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
+      });
       setLoggedIn(true); //???
       setUsername(response.data.user.username); // previously this.setState({ username: json.username });
     } catch (error) {
@@ -46,13 +45,10 @@ function App() {
     // axios post request to url with body as data
     try {
       const response = await axios.post(
-        'http://localhost:8000/token-auth/',
+        '/token-auth/',
         data // JSON.stringify(data)
       );
-      console.log(response);
-      localStorage.setItem('token', response.data.token);
-      setLoggedIn(true);
-      setUsername(response.data.user.username);
+      storeLoginCredentials(response.data.user.username, response.data.token);
     } catch (error) {
       console.log(error);
     }
@@ -60,14 +56,35 @@ function App() {
 
   const handleSignup = async (e, data) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/prices/users/',
+        data // JSON.stringify(data)
+      );
+      storeLoginCredentials(response.data.user.username, response.data.token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const storeLoginCredentials = (username, token) => {
+    setLoggedIn(true);
+    setUsername(username);
+    token && localStorage.setItem('token', token);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUsername('');
+    setLoggedIn(false);
   };
 
   return (
     <div className="app">
       <Navbar
-      // logged_in={state.logged_in}
-      // display_form={display_form}
-      // handle_logout={handle_logout}
+        loggedIn={loggedIn}
+        // display_form={display_form}
+        handleLogout={handleLogout}
       />
       <main>
         <Router>
@@ -78,7 +95,10 @@ function App() {
               element={<Login handleLogin={handleLogin} />}
             />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/signup"
+              element={<Signup handleSignup={handleSignup} />}
+            />
           </Routes>
         </Router>
       </main>
@@ -87,26 +107,6 @@ function App() {
 }
 
 export default App;
-
-//   handle_signup = (e, data) => {
-//     e.preventDefault();
-//     fetch('http://localhost:8000/prices/users/', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(data),
-//     })
-//       .then((res) => res.json())
-//       .then((json) => {
-//         localStorage.setItem('token', json.token);
-//         this.setState({
-//           logged_in: true,
-//           displayed_form: '',
-//           username: json.username,
-//         });
-//       });
-//   };
 
 //   handle_logout = () => {
 //     localStorage.removeItem('token');
@@ -160,6 +160,26 @@ export default App;
 //           logged_in: true,
 //           displayed_form: '',
 //           username: json.user.username,
+//         });
+//       });
+//   };
+
+//   handle_signup = (e, data) => {
+//     e.preventDefault();
+//     fetch('', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(data),
+//     })
+//       .then((res) => res.json())
+//       .then((json) => {
+//         localStorage.setItem('token', json.token);
+//         this.setState({
+//           logged_in: true,
+//           displayed_form: '',
+//           username: json.username,
 //         });
 //       });
 //   };
