@@ -3,24 +3,24 @@ backend:
   phases:
     postBuild:
       commands:
+frontend:
+  phases:
+    preBuild:
+      commands:
         - cd frontend
         - npm install
         - cd ..
         - python manage.py migrate
         - pip3 install -U pipenv
-        - pipenv shell
         - pipenv install django
         - pipenv install djangorestframework
         - pipenv install django-cors-headers
         - pipenv install requests
         - pipenv install django-dotenv
         - pipenv install pytest
-frontend:
-  phases:
-    preBuild:
-      commands:
     build:
       commands:
+        - pipenv shell
         - npm run bob
   artifacts:
     baseDirectory: frontend/build
