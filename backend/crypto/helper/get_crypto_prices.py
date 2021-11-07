@@ -16,15 +16,9 @@ def get_cryptocompare_token_price_by_id(token_data):
 
     url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=" + get_list_of_symbols(token_data) + "&tsyms=USD"
     response = requests.request("GET", url)
-    print("hwn dir test" + response.text)
     token_prices = json.loads(response.text)
-    print("this is token prices.....")
-    print(token_prices)
     for token in token_data:
         try: 
-            print("inside the for loop!!!!!")
-            print(token['token'])
-            print(token_prices[token['token']])
             token['USDperUnit'] = token_prices[token['token']]['USD']
         except:
             token['USDperUnit'] = "N/A"
