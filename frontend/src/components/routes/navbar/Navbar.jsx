@@ -48,7 +48,7 @@ function Navbar(props) {
           </a>
         </li>
       </ul>
-      <li onClick={() => props.display_form('signup')}>
+      <li>
         <a href="/signup">
           <div className="fa-home">
             <FontAwesomeIcon icon={faSignInAlt} />
@@ -56,7 +56,7 @@ function Navbar(props) {
           <span className="nav-text">Signup</span>
         </a>
       </li>
-      <li onClick={() => props.display_form('login')}>
+      <li>
         <a href="/login">
           <div className="fa-home">
             <FontAwesomeIcon icon={faSignInAlt} />
@@ -120,7 +120,6 @@ function Navbar(props) {
 
 Navbar.propTypes = {
   logged_in: PropTypes.bool.isRequired,
-  display_form: PropTypes.func.isRequired,
   handle_logout: PropTypes.func.isRequired,
 };
 
