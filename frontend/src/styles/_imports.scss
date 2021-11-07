@@ -12,7 +12,9 @@
 @import '../components/cards/cryptoTokenBalance/cryptoTokenBalance';
 @import '../components/LamboLoader/lamboLoader';
 
+@import '../components/login/login';
+@import '../components/signup/signup';
 // Routes
 @import '../components/routes/LookupWallet/lookupWallet';
-@import '../components/routes/Login/login';
 @import '../components/routes/Profile/profile';
+@import '../components/routes/LoginSignup/loginSignup';

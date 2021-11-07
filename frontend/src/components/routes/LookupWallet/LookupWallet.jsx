@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
 import Dropdown from '../../dropdown/Dropdown';
-import LamboLoader from '../../LamboLoader/LamboLoader';
+import LamboLoader from '../../lamboLoader/LamboLoader';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);

@@ -33,19 +33,11 @@ function Navbar(props) {
         </li>
       </ul>
       <li>
-        <a href="/signup">
+        <a href="/login-signup">
           <div className="fa-home">
             <FontAwesomeIcon icon={faSignInAlt} />
           </div>
-          <span className="nav-text">Signup</span>
-        </a>
-      </li>
-      <li>
-        <a href="/login">
-          <div className="fa-home">
-            <FontAwesomeIcon icon={faSignInAlt} />
-          </div>
-          <span className="nav-text">Login</span>
+          <span className="nav-text">Login / Signup</span>
         </a>
       </li>
     </nav>

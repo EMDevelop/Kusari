@@ -10,9 +10,10 @@ import Navbar from './components/routes/navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
-import Login from './components/routes/Login/Login';
-import Signup from './components/routes/Signup/Signup';
+import Login from './components/login/Login';
+import Signup from './components/signup/Signup';
 import Profile from './components/routes/Profile/Profile';
+import LoginSignup from './components/routes/LoginSignup/LoginSignup';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -66,14 +67,12 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<LookupWallet />} />
-            <Route
-              path="/login"
-              element={<Login storeDetailsInApp={storeLoginCredentials} />}
-            />
             <Route path="/profile" element={<Profile />} />
             <Route
-              path="/signup"
-              element={<Signup storeDetailsInApp={storeLoginCredentials} />}
+              path="/login-signup"
+              element={
+                <LoginSignup storeDetailsInApp={storeLoginCredentials} />
+              }
             />
           </Routes>
         </Router>

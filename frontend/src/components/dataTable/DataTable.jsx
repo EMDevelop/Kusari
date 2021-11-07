@@ -104,13 +104,16 @@ export default function DataTable(props) {
                     <td>{row['quantity']}</td>
                     <td>
                       {row['USDperUnit'] === 'N/A'
-                        ? 'N/A'
+                        ? '-'
                         : `$${row['USDperUnit']}`}
                     </td>
                     <td>
                       {row['BalanceInUSD'] === 'N/A'
-                        ? 'N/A'
-                        : `$${row['BalanceInUSD'].toFixed(2)}`}
+                        ? '-'
+                        : `$${row['BalanceInUSD']
+                            .toFixed(2)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                     </td>
                   </tr>
                 );
