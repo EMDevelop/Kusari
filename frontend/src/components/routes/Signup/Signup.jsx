@@ -13,10 +13,10 @@ function Signup(props) {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        '/prices/users/',
-        { username: username, password: 'password' } // JSON.stringify(data)
-      );
+      const response = await axios.post('/prices/users/', {
+        username: username,
+        password: password,
+      });
       props.storeDetailsInApp(response.data.user.username, response.data.token);
     } catch (error) {
       console.log(error);

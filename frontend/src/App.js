@@ -39,21 +39,6 @@ function App() {
     }
   };
 
-  const handleLogin = async (e, data) => {
-    console.log(data);
-    e.preventDefault();
-    // axios post request to url with body as data
-    try {
-      const response = await axios.post(
-        '/token-auth/',
-        data // JSON.stringify(data)
-      );
-      storeLoginCredentials(response.data.user.username, response.data.token);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const storeLoginCredentials = (username, token) => {
     setLoggedIn(true);
     setUsername(username);
@@ -79,12 +64,7 @@ function App() {
             <Route path="/" element={<LookupWallet />} />
             <Route
               path="/login"
-              element={
-                <Login
-                  handleLogin={handleLogin}
-                  storeDetailsInApp={storeLoginCredentials}
-                />
-              }
+              element={<Login storeDetailsInApp={storeLoginCredentials} />}
             />
             <Route path="/profile" element={<Profile />} />
             <Route
