@@ -11,6 +11,7 @@ frontend:
         - cd frontend
         - npm install
         - cd ..
+        - pipenv shell
         - cd backend
         - pipenv install django
         - pipenv install djangorestframework
@@ -20,7 +21,6 @@ frontend:
         - pipenv install pytest
     build:
       commands:
-        - pipenv shell
         - npm run bob
   artifacts:
     baseDirectory: frontend/build
