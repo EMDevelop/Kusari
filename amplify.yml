@@ -4,16 +4,17 @@ backend:
     postBuild:
       commands:
         - cd frontend
-          - npm install
-          - cd ..
-          - python manage.py migrate
-          - pip3 install -U pipenv
-          - pipenv install django
-          - pipenv install djangorestframework
-          - pipenv install django-cors-headers
-          - pipenv install requests
-          - pipenv install django-dotenv
-          - pipenv install pytest
+        - npm install
+        - cd ..
+        - python manage.py migrate
+        - pip3 install -U pipenv
+        - pipenv shell
+        - pipenv install django
+        - pipenv install djangorestframework
+        - pipenv install django-cors-headers
+        - pipenv install requests
+        - pipenv install django-dotenv
+        - pipenv install pytest
 frontend:
   phases:
     preBuild:
