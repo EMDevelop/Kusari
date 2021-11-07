@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+# from django.shortcuts import render
+from django.http import JsonResponse
 import requests
 import json
 import os
@@ -36,7 +36,13 @@ def get_moralis_erc20(address):
 
 
 def get_ethereum_and_erc20_wallet_balance(request, address):
-    tokens = get_moralis_erc20(address) #refactor into next line
-    tokens = get_cryptocompare_token_price_by_id(tokens)
-    tokens = get_token_current_value_in_USD(tokens)
-    return JsonResponse(tokens, safe=False)
+
+    # commented out no, this is storage:
+
+    token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
+    token_symbol_name_quantity_price = get_cryptocompare_token_price_by_id(token_symbol_name_quantity)
+    token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price) 
+    return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
+
+
+

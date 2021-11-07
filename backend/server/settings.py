@@ -148,3 +148,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '../frontend/build/static'),
 ]
 
+
+# Link to resource: https://docs.djangoproject.com/en/3.2/topics/cache/#filesystem-caching
+# On AWS we might need to set the LOCATION as readable and writable by the web server
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.environ['TEMP_DIR']
+    }
+}

@@ -1,0 +1,8 @@
+@mixin gradient-one {
+  background: -webkit-linear-gradient(
+    left,
+    $gradient-one-one,
+    $gradient-one-two
+  );
+  background: linear-gradient(to right, $gradient-one-one, $gradient-one-two);
+}
