@@ -1,8 +1,9 @@
 version: 1
-frontend:
+backend:
   phases:
-    preBuild:
+    postBuild:
       commands:
+        - python manage.py migrate
         - pip3 install -U pipenv
         - pipenv install django
         - pipenv install djangorestframework
@@ -10,7 +11,10 @@ frontend:
         - pipenv install requests
         - pipenv install django-dotenv
         - pipenv install pytest
-        - pipenv shell
+frontend:
+  phases:
+    preBuild:
+      commands:
         - cd frontend
         - npm install
         - cd ..
@@ -18,11 +22,6 @@ frontend:
       commands:
         - npm run client
         - npm run server
-  backend:
-    phases:
-      postBuild:
-        commands:
-          - python manage.py migrate
   artifacts:
     baseDirectory: frontend/build
     files:
