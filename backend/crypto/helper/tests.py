@@ -17,7 +17,9 @@ class Get_Cryptocompare_Token_Price_By_Id_Test(TestCase):
 
 
 class Get_Token_Current_Value_In_USD_Test(TestCase):
-	@mock.patch('requests.request', side_effect=mocked_requests_get)
-	def test_USD_calculation(self, mock_get):
+	def test_USD_calculation_when_NA(self):
 		array_of_tokens = get_token_current_value_in_USD([{"USDperUnit": "N/A", "token": "TEST1", "quantity": 1, "name": "TestCoin"}])
 		self.assertEqual(array_of_tokens, [{"BalanceInUSD": "N/A", "USDperUnit": "N/A", "token": "TEST1", "quantity": 1, "name": "TestCoin"}])
+	def test_USD_calculation_when_int(self):
+		array_of_tokens = get_token_current_value_in_USD([{"USDperUnit": 5, "token": "TEST2", "quantity": 2, "name": "TestCoin"}])
+		self.assertEqual(array_of_tokens, [{"BalanceInUSD": 10, "USDperUnit": 5, "token": "TEST2", "quantity": 2, "name": "TestCoin"}])
