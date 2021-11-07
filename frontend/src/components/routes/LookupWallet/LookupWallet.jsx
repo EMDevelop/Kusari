@@ -60,12 +60,6 @@ export default function SearchWalletBalance() {
     }
   };
 
-  const testFunction = () => {
-    console.log('I ran');
-    getUpdatedPricesForCurrentWallet();
-    console.log('I am the end of the test');
-  };
-
   return (
     <div className="lookup-wallet-container">
       <h1>Lookup Wallet</h1>
@@ -92,7 +86,6 @@ export default function SearchWalletBalance() {
             ></i>
           )}
         </div>
-        <button onClick={() => testFunction()}>random button</button>
       </div>
       <DataTable
         headers={['Symbol', 'Token Name', 'Quantity', 'Price', 'Current Value']}
