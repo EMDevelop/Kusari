@@ -7,7 +7,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - pip install -U pipenv
+        - pip3 install -U pipenv
         - cd frontend
         - npm install
         - cd ..
