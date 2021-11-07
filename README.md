@@ -4,10 +4,12 @@
 
 - Clone the Repo: `Git Clone https://github.com/EMDevelop/investment-tracker.git`
 - Globally install pipenv `sudo -H pip3 install -U pipenv`
-- Install Dependencies: `pipenv install django djangorestframework`
-- Start Virtual Envirnment: `pipenv shell`
+- Install Dependencies: `pipenv install django djangorestframework django-cors-headers requests django-dotenv pytest`
+- Start Virtual Environment: `pipenv shell`
 - Navigate into the frontend directory and install packages`cd frontend && npm install`
 - Navigate back into the route directory `cd ..`
+- `pip install psycopg2`
+- Migrate DB with `python manage.py migrate`
 - Open 2 terminal windows:
   - 1st terminal, start react: `npm run client`
   - 2nd terminal, start django: `npm run server`
@@ -34,6 +36,12 @@ You will need to:
 - create a new App using: `python manage.py startapp prices`
   - `prices` is the name of the app
 
+#### Front End instructions
+
+- When we add abilities for a new chain, we need to update a prop in the 2 places the dropdown is usedwith the backend route:
+  - frontend/src/components/multipleInputs/MultipleInputs.jsx
+  - frontend/src/components/routes/LookupWallet/LookupWallet.jsx
+
 #### File Structure
 
 - Server
@@ -44,3 +52,9 @@ You will need to:
   - 1 App per chain
 - Traditional - This is where we will store our APIs for traditional services
   - Unsure on how to structure this - David?
+
+#### Testing
+
+To run Django tests:
+
+- Navigate to the backend and run `./manage.py test crypto`

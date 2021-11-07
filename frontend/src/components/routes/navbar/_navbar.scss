@@ -1,13 +1,27 @@
-.fa-2x {
+.fa-2x,
+fa-home {
   font-size: 2em;
 }
-.fa {
-  display: table-cell;
+.fa,
+.fa-home {
+  // display: table-cell;
+  display: flex;
   width: 60px;
   height: 36px;
   text-align: center;
   vertical-align: middle;
   font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
+svg {
+  align-self: center;
+  justify-self: center;
+}
+
+.fa-home::before {
+  display: none;
+  appearance: none;
 }
 
 .nav-text {
@@ -22,7 +36,7 @@ nav.main-menu.expanded {
 }
 
 .main-menu {
-  background-color: $background;
+  // background-color: $background;
   top: 0;
   bottom: 0;
   height: 100vh;
@@ -44,7 +58,7 @@ nav.main-menu.expanded {
   display: table;
   border-collapse: collapse;
   border-spacing: 0;
-  color: $link-grey;
+  color: $c-green;
   font-family: arial;
   font-size: 14px;
   text-decoration: none;
@@ -105,12 +119,12 @@ nav.main-menu li.active > a,
 .dropdown-menu > .active > a:focus,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a {
-  color: $white;
-  background-color: $highlight;
+  color: $c-green;
+  background-color: $frosted;
 }
 .area {
   float: left;
-  background: #e2e2e2;
+  // background: #e2e2e2;
   width: 100%;
   height: 100%;
 }

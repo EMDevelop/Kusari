@@ -1,83 +1,48 @@
-from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+# from django.shortcuts import render
+from django.http import JsonResponse
 import requests
 import json
 import os
-# from dotenv import load_dotenv
+from helper.add_decimals_to_number import *
+from helper.get_symbols_from_dictionary import *
+from helper.get_crypto_prices import *
+from helper.get_token_current_value import *
 
-# localhost:8000/ethereum/wallet-balance/0xdB3c617cDd2fBf0bb4309C325F47678e37F096D9
 
-# Create your views here.
+def get_moralis_erc20(address):
+    # What does this method do?
 
-def get_wallet_balance(request, address):
+    # It takes in an address from the front end (if "ethereum") is selected
+    # it returns a list of dictionaries, each dictionary represents an ERC token and its balances
 
-    url = "https://deep-index.moralis.io/api/v2/0xdB3c617cDd2fBf0bb4309C325F47678e37F096D9/erc20?chain=eth"
+    url = f"https://deep-index.moralis.io/api/v2/{address}/erc20?chain=eth"
         
     headers = {
-    'x-api-key': os.environ['MORALIS_API_KEY']
+        'x-api-key': os.environ['MORALIS_API_KEY']
     }
 
     response = requests.request("GET", url, headers=headers)        
-    tokens = json.loads(response.text)
+    tokens = json.loads(response.text) #Example Data, tokens: [{'token_address': '0xd2dda223b2617cb616c1580db421e4cfae6a8a85', 'name': 'Bondly Token', 'symbol': 'BONDLY', 'logo': 'https://cdn.moralis.io/eth/0xd2dda223b2617cb616c1580db421e4cfae6a8a85.png', 'thumbnail': 'https://cdn.moralis.io/eth/0xd2dda223b2617cb616c1580db421e4cfae6a8a85_thumb.png', 'decimals': '18', 'balance': '993397116522580432404'}, {'token_address': '0x43901e05f08f48546fff8d6f8df108f60570498b', 'name': 'BASENJI', 'symbol': 'BSJ', 'logo': None, 'thumbnail': None, 'decimals': '18', 'balance': '50000000000000000000'}]
     token_list = []
-
     for token in tokens:
         token_dict = {}
         token_dict['token'] = token['symbol']
-        token_dict['balance'] = token['balance']
         token_dict['name'] = token['name']
-        token_list.append(token_dict)    
-    
-    return JsonResponse(token_list,safe=False)
+        token_dict['quantity'] = create_decimal_from_number(token['balance'], token['decimals'])
+        token_list.append(token_dict)
+
+    # Example Data, token_list: [{'token': 'BONDLY', 'name': 'Bondly Token', 'quantity': 993.3971165225804}, {'token': 'BSJ', 'name': 'BASENJI', 'quantity': 50.0}]
+    return token_list
 
 
-# def get_wallet_balance(request):
-#     return render(request, "home.html")
+def get_ethereum_and_erc20_wallet_balance(request, address):
+
+    # commented out no, this is storage:
+
+    token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
+    token_symbol_name_quantity_price = get_cryptocompare_token_price_by_id(token_symbol_name_quantity)
+    token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price) 
+    return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
 
 
-# class Tokens: 
-#     def __init__(self, wallet_address):
-#         self.wallet_address = wallet_address   
-
-#     def get_tokens(self):       
-
-#         url = "https://deep-index.moralis.io/api/v2/0xdB3c617cDd2fBf0bb4309C325F47678e37F096D9/erc20?chain=eth"
-        
-#         headers = {
-#         'x-api-key': os.environ['MORALIS_API_KEY']
-#         }
-
-#         response = requests.request("GET", url, headers=headers)        
-#         tokens = json.loads(response.text)
-#         token_list = []
-
-#         for token in tokens:
-#             token_dict = {}
-#             token_dict['token'] = token['symbol']
-#             token_dict['balance'] = token['balance']
-#             token_dict['name'] = token['name']
-#             token_list.append(token_dict)
-       
-#         return token_list
-
-#     def token_prices(self,token_data):
-#         # pass in token array for getting prices using cryptocompare
-#         token = token_data['token']         
-#         url = "https://min-api.cryptocompare.com/data/price?fsym=" + token + "&tsyms=USD,EUR,GBP&api_key=" + os.environ['CRYPTOCOMPARE_API_KEY']
-#         response = requests.request("GET", url)
-#         token_prices = json.loads(response.text)        
-#         token_wallet_prices = {**token_data, **token_prices}
-#         print('------')
-#         print(token_wallet_prices)
-
-#         return token_wallet_prices
-
-#     def get_tokens_in_wallet(self):
-#         # get the tokens in the wallet, pass the Symbol from token_list to token prices to add the prices to the dict wallet
-#         token_list = self.get_tokens()
-#         wallet = []
-#         for token in token_list:            
-#             wallet.append(self.token_prices(token))     
-        
-#         return wallet
 

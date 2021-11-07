@@ -1,0 +1,32 @@
+.lookup-wallet-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 1fr 6fr;
+}
+
+.address-input-form {
+  // background-color: red;
+  height: 70px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.token-list {
+  width: 100%;
+  height: fit-content;
+  // background-color: aqua;
+  flex: 9;
+}
+
+.fa-search {
+  width: 60px;
+  height: 36px;
+  color: $c-green;
+}
+
+.search-wallet-input-field {
+  height: 60% !important;
+  width: 60%;
+}

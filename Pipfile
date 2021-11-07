@@ -9,6 +9,9 @@ django = "*"
 django-cors-headers = "*"
 requests = "*"
 django-dotenv = "*"
+pytest = "*"
+psycopg2 = "*"
+pycoingecko = "*"
 
 [dev-packages]
 

@@ -1,253 +1,103 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
 export default function DataTable(props) {
+  const [itemsToFilter, setItemsToFilter] = useState([]);
+  const [filteredData, setFilteredData] = useState(props.rowData);
+  const [tickZeroBalance, setTickZeroBalance] = useState(false);
+
+  useEffect(() => {
+    filterRowData('USDperUnit');
+  }, [props.rowData]);
+
+  useEffect(() => {
+    filterRowData('USDperUnit');
+  }, [tickZeroBalance]);
+
+  // filter props.rowData with array filter keywords
+  // Filter Options: 'token', 'name', 'quantity', 'USDperUnit' and 'BalanceInUSD'
+  const filterRowData = (filterOn) => {
+    if (props.rowData) {
+      setFilteredData(
+        props.rowData.filter(
+          (element) => !itemsToFilter.includes(element[filterOn])
+        )
+      );
+    }
+  };
+
+  // to add another filter
+  // Add a check to see if any of the checkboxe states are true
+  // if they are, run a filter on them too?
+
+  // Related to the zero balance ticker
+  const handleTickZeroBalance = () => {
+    tickZeroBalance === true
+      ? removeItemFromitemsToFilter('N/A')
+      : addItemToitemsToFilter('N/A');
+
+    setTickZeroBalance(!tickZeroBalance);
+  };
+
+  // Reusable function to add item to filtered list
+  const addItemToitemsToFilter = (item) => {
+    if (!itemsToFilter.includes(item)) {
+      setItemsToFilter([...itemsToFilter, item]);
+    }
+  };
+
+  // reusable function to remove item from filtered list
+  const removeItemFromitemsToFilter = (item) => {
+    const values = [...itemsToFilter];
+    const index = itemsToFilter.indexOf(item);
+
+    values.splice(index, 1);
+    setItemsToFilter(values);
+  };
+
   return (
     <div>
-      <h1>My Balance</h1>
-      <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
+      <div className="filter-container">
+        <div className="filter zero-value">
+          <p className="filter-text">Hide Zero Balance</p>
+          <input
+            type="checkbox"
+            id="switch"
+            onChange={() => handleTickZeroBalance()}
+          />
+        </div>
+      </div>
+      <div className="tbl-header">
+        <table cellPadding="0" cellSpacing="0" border="0">
           <thead>
             <tr>
-              <th>Code</th>
-              <th>Company</th>
-              <th>Price</th>
-              <th>Change</th>
-              <th>Change %</th>
+              {props.headers.map((header) => (
+                <th>{header}</th>
+              ))}
             </tr>
           </thead>
         </table>
       </div>
-      <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
-          <tbody>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-            <tr>
-              <td>AAC</td>
-              <td>AUSTRALIAN COMPANY </td>
-              <td>$1.38</td>
-              <td>+2.01</td>
-              <td>-0.36%</td>
-            </tr>
-            <tr>
-              <td>AAD</td>
-              <td>AUSENCO</td>
-              <td>$2.38</td>
-              <td>-0.01</td>
-              <td>-1.36%</td>
-            </tr>
-            <tr>
-              <td>AAX</td>
-              <td>ADELAIDE</td>
-              <td>$3.22</td>
-              <td>+0.01</td>
-              <td>+1.36%</td>
-            </tr>
-            <tr>
-              <td>XXD</td>
-              <td>ADITYA BIRLA</td>
-              <td>$1.02</td>
-              <td>-1.01</td>
-              <td>+2.36%</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="tbl-content">
+        {filteredData && (
+          <table cellPadding="0" cellSpacing="0" border="0">
+            <tbody>
+              {/* Loop through all rows returned from SearchWalletBalance get request */}
+              {filteredData.map((row) => {
+                console.log(row);
+                return (
+                  <tr>
+                    {/* Add data into column for current row */}
+                    {Object.keys(row).map((key) => {
+                      return <td>{row[key]}</td>;
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
