@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import {
   faSignInAlt,
   faHome,
@@ -10,8 +11,63 @@ import {
 
 // Credit to: https://codepen.io/JFarrow/pen/fFrpg for the navbar
 
-export default function Navbar() {
-  return (
+// function Navbar(props) {
+//   const logged_out_nav = (
+//     <ul>
+//       <li onClick={() => props.display_form('login')}>login</li>
+//       <li onClick={() => props.display_form('signup')}>signup</li>
+//     </ul>
+//   );
+
+//   const logged_in_nav = (
+//     <ul>
+//       <li onClick={props.handle_logout}>logout</li>
+//     </ul>
+//   );
+//   return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+// }
+
+function Navbar(props) {
+  const logged_out_nav = (
+    <nav className="main-menu">
+      <ul>
+        <li>
+          <a href="/">
+            <div className="fa-home">
+              <FontAwesomeIcon icon={faHome} />
+            </div>
+            <span className="nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/">
+            <div className="fa-home">
+              <FontAwesomeIcon icon={faSearch} />
+            </div>
+            <span className="nav-text">Lookup Wallet</span>
+          </a>
+        </li>
+      </ul>
+      <li>
+        <a href="/signup">
+          <div className="fa-home">
+            <FontAwesomeIcon icon={faSignInAlt} />
+          </div>
+          <span className="nav-text">Signup</span>
+        </a>
+      </li>
+      <li>
+        <a href="/login">
+          <div className="fa-home">
+            <FontAwesomeIcon icon={faSignInAlt} />
+          </div>
+          <span className="nav-text">Login</span>
+        </a>
+      </li>
+    </nav>
+  );
+
+  const logged_in_nav = (
     <nav className="main-menu">
       <ul>
         <li>
@@ -48,16 +104,8 @@ export default function Navbar() {
           </a>
         </li>
       </ul>
-      <li>
-        <a href="/login">
-          <div className="fa-home">
-            <FontAwesomeIcon icon={faSignInAlt} />
-          </div>
-          <span className="nav-text">Signup/Signin</span>
-        </a>
-      </li>
       <ul className="logout">
-        <li>
+        <li onClick={props.handle_logout}>
           <a href="#">
             <i className="fa fa-power-off fa-2x"></i>
             <span className="nav-text">Logout</span>
@@ -66,4 +114,13 @@ export default function Navbar() {
       </ul>
     </nav>
   );
+
+  return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
 }
+
+Navbar.propTypes = {
+  logged_in: PropTypes.bool.isRequired,
+  handle_logout: PropTypes.func.isRequired,
+};
+
+export default Navbar;
