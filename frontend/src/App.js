@@ -6,12 +6,10 @@ import './styles/App.scss';
 import axios from 'axios';
 
 // Components
-import Navbar from './components/routes/navbar/Navbar';
+import Navbar from './components/routes/Navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
-import Login from './components/login/Login';
-import Signup from './components/signup/Signup';
 import Profile from './components/routes/Profile/Profile';
 import LoginSignup from './components/routes/LoginSignup/LoginSignup';
 
@@ -57,14 +55,14 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <Navbar
-        loggedIn={loggedIn}
-        // display_form={display_form}
-        handleLogout={handleLogout}
-      />
-      <main>
-        <Router>
+    <Router>
+      <div className="app">
+        <Navbar
+          loggedIn={loggedIn}
+          // display_form={display_form}
+          handleLogout={handleLogout}
+        />
+        <main>
           <Routes>
             <Route path="/" element={<LookupWallet />} />
             <Route path="/profile" element={<Profile />} />
@@ -75,9 +73,9 @@ function App() {
               }
             />
           </Routes>
-        </Router>
-      </main>
-    </div>
+        </main>
+      </div>
+    </Router>
   );
 }
 

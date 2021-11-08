@@ -8,15 +8,23 @@ import {
   faSearch,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 // Credit to: https://codepen.io/JFarrow/pen/fFrpg for the navbar
 
 function Navbar(props) {
+  const navigate = useNavigate();
+
+  const handleClick = (e, route) => {
+    e.preventDefault();
+    navigate(route);
+  };
+
   const logged_out_nav = (
     <nav className="main-menu">
       <ul>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faHome} />
             </div>
@@ -24,7 +32,7 @@ function Navbar(props) {
           </a>
         </li>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faSearch} />
             </div>
@@ -33,7 +41,7 @@ function Navbar(props) {
         </li>
       </ul>
       <li>
-        <a href="/login-signup">
+        <a onClick={(e) => handleClick(e, '/login-signup')}>
           <div className="fa-home">
             <FontAwesomeIcon icon={faSignInAlt} />
           </div>
@@ -47,16 +55,15 @@ function Navbar(props) {
     <nav className="main-menu">
       <ul>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faHome} />
             </div>
             <span className="nav-text">Dashboard</span>
           </a>
         </li>
-
         <li>
-          <a href="/profile">
+          <a onClick={(e) => handleClick(e, '/profile')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faUserCircle} />
             </div>
@@ -64,7 +71,7 @@ function Navbar(props) {
           </a>
         </li>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faWallet} />
             </div>
@@ -72,7 +79,7 @@ function Navbar(props) {
           </a>
         </li>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faSearch} />
             </div>
@@ -81,7 +88,7 @@ function Navbar(props) {
         </li>
       </ul>
       <ul className="logout">
-        <li onClick={props.handle_logout}>
+        <li onClick={props.handleLogout}>
           <a href="#">
             <i className="fa fa-power-off fa-2x"></i>
             <span className="nav-text">Logout</span>
