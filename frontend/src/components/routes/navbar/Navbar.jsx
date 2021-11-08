@@ -8,31 +8,23 @@ import {
   faSearch,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 // Credit to: https://codepen.io/JFarrow/pen/fFrpg for the navbar
 
-// function Navbar(props) {
-//   const logged_out_nav = (
-//     <ul>
-//       <li onClick={() => props.display_form('login')}>login</li>
-//       <li onClick={() => props.display_form('signup')}>signup</li>
-//     </ul>
-//   );
-
-//   const logged_in_nav = (
-//     <ul>
-//       <li onClick={props.handle_logout}>logout</li>
-//     </ul>
-//   );
-//   return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
-// }
-
 function Navbar(props) {
+  const navigate = useNavigate();
+
+  const handleClick = (e, route) => {
+    e.preventDefault();
+    navigate(route);
+  };
+
   const logged_out_nav = (
     <nav className="main-menu">
       <ul>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faHome} />
             </div>
@@ -40,7 +32,7 @@ function Navbar(props) {
           </a>
         </li>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faSearch} />
             </div>
@@ -49,38 +41,29 @@ function Navbar(props) {
         </li>
       </ul>
       <li>
-        <a href="/signup">
+        <a onClick={(e) => handleClick(e, '/login-signup')}>
           <div className="fa-home">
             <FontAwesomeIcon icon={faSignInAlt} />
           </div>
-          <span className="nav-text">Signup</span>
-        </a>
-      </li>
-      <li>
-        <a href="/login">
-          <div className="fa-home">
-            <FontAwesomeIcon icon={faSignInAlt} />
-          </div>
-          <span className="nav-text">Login</span>
+          <span className="nav-text">Login / Signup</span>
         </a>
       </li>
     </nav>
   );
 
-  const logged_in_nav = (
+  const loggedIn_nav = (
     <nav className="main-menu">
       <ul>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faHome} />
             </div>
             <span className="nav-text">Dashboard</span>
           </a>
         </li>
-
         <li>
-          <a href="/profile">
+          <a onClick={(e) => handleClick(e, '/profile')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faUserCircle} />
             </div>
@@ -88,7 +71,7 @@ function Navbar(props) {
           </a>
         </li>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faWallet} />
             </div>
@@ -96,7 +79,7 @@ function Navbar(props) {
           </a>
         </li>
         <li>
-          <a href="/">
+          <a onClick={(e) => handleClick(e, '/')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faSearch} />
             </div>
@@ -105,7 +88,7 @@ function Navbar(props) {
         </li>
       </ul>
       <ul className="logout">
-        <li onClick={props.handle_logout}>
+        <li onClick={props.handleLogout}>
           <a href="#">
             <i className="fa fa-power-off fa-2x"></i>
             <span className="nav-text">Logout</span>
@@ -115,11 +98,11 @@ function Navbar(props) {
     </nav>
   );
 
-  return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+  return <div>{props.loggedIn ? loggedIn_nav : logged_out_nav}</div>;
 }
 
 Navbar.propTypes = {
-  logged_in: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
   handle_logout: PropTypes.func.isRequired,
 };
 

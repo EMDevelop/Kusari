@@ -89,9 +89,32 @@ export default function DataTable(props) {
                 return (
                   <tr>
                     {/* Add data into column for current row */}
-                    {Object.keys(row).map((key) => {
+                    {/* {Object.keys(row).map((key) => {
                       return <td>{row[key]}</td>;
-                    })}
+                    })} */}
+                    <td>
+                      <img
+                        className="token-icon"
+                        src={row['image']}
+                        alt={row['token']}
+                      />
+                    </td>
+                    <td>{row['token']}</td>
+                    <td>{row['name']}</td>
+                    <td>{row['quantity']}</td>
+                    <td>
+                      {row['USDperUnit'] === 'N/A'
+                        ? '-'
+                        : `$${row['USDperUnit']}`}
+                    </td>
+                    <td>
+                      {row['BalanceInUSD'] === 'N/A'
+                        ? '-'
+                        : `$${row['BalanceInUSD']
+                            .toFixed(2)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+                    </td>
                   </tr>
                 );
               })}

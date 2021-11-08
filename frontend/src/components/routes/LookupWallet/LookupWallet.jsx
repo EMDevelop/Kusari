@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
 import Dropdown from '../../dropdown/Dropdown';
+import LamboLoader from '../../lamboLoader/LamboLoader';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);
-  const [walletDetails, setWalletDetails] = useState(undefined);
+  const [walletDetails, setWalletDetails] = useState([]);
   const [walletType, setwalletType] = useState(undefined);
+  const [fetchingAddressInfo, setFetchingAddressInfo] = useState(false);
 
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
@@ -16,12 +18,21 @@ export default function SearchWalletBalance() {
   // Handle button click when a user searches for their waller
   const handleButtonClick = async () => {
     try {
+      setFetchingAddressInfo(true);
       await getWalletDetails(address);
       // Commented out to pause loop:
       // getPricesEveryThirtySecondInterval();
+      setFetchingAddressInfo(false);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Logic to request new prices every 30 seconds and re-define the state of the wallet details
+  const getPricesEveryThirtySecondInterval = async () => {
+    console.log(`I just ran: ${new Date()}`);
+    await getWalletDetails(address);
+    setTimeout(getPricesEveryThirtySecondInterval, 30000);
   };
 
   // Axios API call to get the wallet details
@@ -30,13 +41,23 @@ export default function SearchWalletBalance() {
       `/${walletType.toLowerCase()}/wallet-balance/${address}/`
     );
     setWalletDetails(response.data);
+    console.log(response.data);
   };
 
-  // Logic to request new prices every 30 seconds and re-define the state of the wallet details
-  const getPricesEveryThirtySecondInterval = async () => {
-    console.log(`I just ran: ${new Date()}`);
-    await getWalletDetails(address);
-    setTimeout(getPricesEveryThirtySecondInterval, 30000);
+  // Get Prices, pass in current stored wallet details, return new prices
+  const getUpdatedPricesForCurrentWallet = async () => {
+    // Check if there are currently any tokens in the wallet
+    console.log('oitside');
+    if (walletDetails.length > 0) {
+      console.log('Inside If');
+      // If there are, get the prices for each token
+      const response = await axios.get(`prices/update-wallet-prices`, {
+        params: {
+          tokens: JSON.stringify(walletDetails),
+        },
+      });
+      console.log(response);
+    }
   };
 
   return (
@@ -55,15 +76,26 @@ export default function SearchWalletBalance() {
           onChange={(e) => handleInputChange(e.target.value)}
         />
         <div>
-          <i
-            className="fa fa-search"
-            aria-hidden="true"
-            onClick={() => handleButtonClick()}
-          ></i>
+          {fetchingAddressInfo ? (
+            <LamboLoader />
+          ) : (
+            <i
+              className="fa fa-search"
+              aria-hidden="true"
+              onClick={() => handleButtonClick()}
+            ></i>
+          )}
         </div>
       </div>
       <DataTable
-        headers={['Symbol', 'Token Name', 'Quantity', 'Price', 'Current Value']}
+        headers={[
+          '',
+          'Symbol',
+          'Token Name',
+          'Quantity',
+          'Price',
+          'Current Value',
+        ]}
         rowData={walletDetails}
       />
     </div>

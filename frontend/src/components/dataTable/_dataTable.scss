@@ -33,13 +33,13 @@ td {
 /* for custom scrollbar for webkit browser*/
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 0px;
 }
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px $c-green;
+  -webkit-box-shadow: none;
 }
 ::-webkit-scrollbar-thumb {
-  -webkit-box-shadow: inset 0 0 6px $c-green;
+  -webkit-box-shadow: none;
 }
 
 // Filters
@@ -58,4 +58,9 @@ td {
 
 .filter-text {
   color: $c-light-one;
+}
+
+.token-icon {
+  height: 30px;
+  width: auto;
 }
