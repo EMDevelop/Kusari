@@ -3,12 +3,15 @@ import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
 import Dropdown from '../../dropdown/Dropdown';
 import LamboLoader from '../../lamboLoader/LamboLoader';
+import { useSnackbar } from 'notistack';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);
   const [walletDetails, setWalletDetails] = useState([]);
   const [walletType, setwalletType] = useState(undefined);
   const [fetchingAddressInfo, setFetchingAddressInfo] = useState(false);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
@@ -18,12 +21,31 @@ export default function SearchWalletBalance() {
   // Handle button click when a user searches for their waller
   const handleButtonClick = async () => {
     try {
+      // https://iamhosseindhv.com/notistack/demos#variants
+      info('Fetching Wallet Balance...');
       setFetchingAddressInfo(true);
       await getWalletDetails(address);
       setFetchingAddressInfo(false);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+
+  const fail = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+  const info = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'info',
+    });
   };
 
   // Axios API call to get the wallet details

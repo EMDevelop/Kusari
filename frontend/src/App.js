@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
+import { SnackbarProvider } from 'notistack';
 
 // axios
 import axios from 'axios';
@@ -64,20 +65,22 @@ function App() {
           // display_form={display_form}
           handleLogout={handleLogout}
         />
-        <main>
-          <Routes>
-            <Route path="/" element={<LookupWallet />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route
-              path="/login-signup"
-              element={
-                <LoginSignup storeDetailsInApp={storeLoginCredentials} />
-              }
-            />
-            <Route path="/token/:symbol" element={<TokenInformation />} />
-            <Route path="/top-coins" element={<TopCoins />} />
-          </Routes>
-        </main>
+        <SnackbarProvider maxSnack={3}>
+          <main>
+            <Routes>
+              <Route path="/" element={<LookupWallet />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/login-signup"
+                element={
+                  <LoginSignup storeDetailsInApp={storeLoginCredentials} />
+                }
+              />
+              <Route path="/token/:symbol" element={<TokenInformation />} />
+              <Route path="/top-coins" element={<TopCoins />} />
+            </Routes>
+          </main>
+        </SnackbarProvider>
       </div>
     </Router>
   );
