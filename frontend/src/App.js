@@ -12,6 +12,8 @@ import Navbar from './components/routes/navbar/Navbar';
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
 import Profile from './components/routes/Profile/Profile';
 import LoginSignup from './components/routes/LoginSignup/LoginSignup';
+import TokenInformation from './components/routes/TokenInformation/TokenInformation';
+import TopCoins from './components/routes/TopCoins/TopCoins';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -72,6 +74,8 @@ function App() {
                 <LoginSignup storeDetailsInApp={storeLoginCredentials} />
               }
             />
+            <Route path="/token/:symbol" element={<TokenInformation />} />
+            <Route path="/top-coins" element={<TopCoins />} />
           </Routes>
         </main>
       </div>

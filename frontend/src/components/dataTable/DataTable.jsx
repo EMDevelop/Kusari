@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
@@ -6,6 +7,8 @@ export default function DataTable(props) {
   const [itemsToFilter, setItemsToFilter] = useState([]);
   const [filteredData, setFilteredData] = useState(props.rowData);
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     filterRowData('USDperUnit');
@@ -56,6 +59,12 @@ export default function DataTable(props) {
     setItemsToFilter(values);
   };
 
+  const handleRowClick = (event, token) => {
+    console.log(event);
+    console.log(token);
+    navigate(`/token/${token}`);
+  };
+
   return (
     <div>
       <div className="filter-container">
@@ -87,7 +96,7 @@ export default function DataTable(props) {
               {filteredData.map((row) => {
                 console.log(row);
                 return (
-                  <tr>
+                  <tr onClick={(e) => handleRowClick(e, row['token'])}>
                     {/* Add data into column for current row */}
                     {/* {Object.keys(row).map((key) => {
                       return <td>{row[key]}</td>;

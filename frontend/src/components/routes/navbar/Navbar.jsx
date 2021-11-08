@@ -7,6 +7,7 @@ import {
   faUserCircle,
   faSearch,
   faWallet,
+  faTrophy,
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,6 +47,14 @@ function Navbar(props) {
             <FontAwesomeIcon icon={faSignInAlt} />
           </div>
           <span className="nav-text">Login / Signup</span>
+        </a>
+      </li>
+      <li>
+        <a onClick={(e) => handleClick(e, '/top-coins')}>
+          <div className="fa-home">
+            <FontAwesomeIcon icon={faTrophy} />
+          </div>
+          <span className="nav-text">Top Coins</span>
         </a>
       </li>
     </nav>
