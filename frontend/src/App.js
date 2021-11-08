@@ -57,6 +57,13 @@ function App() {
     setLoggedIn(false);
   };
 
+  const styles = {
+    success: { backgroundColor: 'purple' },
+    error: { backgroundColor: 'blue' },
+    warning: { backgroundColor: 'green' },
+    info: { backgroundColor: 'yellow' },
+  };
+
   return (
     <Router>
       <div className="app">
@@ -65,7 +72,7 @@ function App() {
           // display_form={display_form}
           handleLogout={handleLogout}
         />
-        <SnackbarProvider maxSnack={3}>
+        <SnackbarProvider maxSnack={4}>
           <main>
             <Routes>
               <Route path="/" element={<LookupWallet />} />

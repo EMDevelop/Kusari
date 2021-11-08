@@ -75,3 +75,13 @@ textarea:focus {
   // border: none;
   outline: none;
 }
+
+.SnackbarItem-variantSuccess {
+  background-color: $c-green !important;
+}
+.SnackbarItem-variantError {
+  background-color: #f97068ff !important;
+}
+.SnackbarItem-variantInfo {
+  background-color: $frosted !important;
+}
