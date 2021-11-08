@@ -24,6 +24,9 @@ class Get_Token_Current_Value_In_USD_Test(TestCase):
 	def test_USD_calculation_when_int(self):
 		array_of_tokens = get_token_current_value_in_USD([{"USDperUnit": 5, "token": "TEST2", "quantity": 2, "name": "TestCoin"}])
 		self.assertEqual(array_of_tokens, [{"BalanceInUSD": 10, "USDperUnit": 5, "token": "TEST2", "quantity": 2, "name": "TestCoin"}])
+	def test_USD_calculation_when_float(self):
+		array_of_tokens = get_token_current_value_in_USD([{"USDperUnit": 5.1, "token": "TEST2", "quantity": 2, "name": "TestCoin"}])
+		self.assertEqual(array_of_tokens, [{"BalanceInUSD": 10.2, "USDperUnit": 5.1, "token": "TEST2", "quantity": 2, "name": "TestCoin"}])
 
 class Get_Symbols_From_Dictionary(TestCase):
 	def test_get_list_of_symbols_single(self):
