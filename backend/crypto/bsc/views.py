@@ -13,28 +13,36 @@ def get_bitquery_bep20(wallet_address):
 
 	url = "https://graphql.bitquery.io"
 
-	query = """query {
-		ethereum(network: bsc) {
-    		address(address: {is: "0x4ad2b8dAc6ca5e77030Af4529d6eFf12d3FFF502"}) {
-      			balances {
-        			value
-        			currency {
-          				name
-          				symbol
-						decimals
-        			}
-      			}
-    		}
-  		}
-	}
-	"""
+	# query = """query {
+	# 	ethereum(network: bsc) {
+  #   		address(address: {is: "0xf977814e90da44bfa03b6295a0616a897441acec"}) {
+  #     			balances {
+  #       			value
+  #       			currency {
+  #         				name
+  #         				symbol
+	# 								decimals
+  #       			}
+  #     			}
+  #   		}
+  # 		}
+	# }
+	# """
 
-	# query = 'query {\nethereum(network: bsc) {\naddress(address: {is: "' + wallet_address + '"}) {\nbalances {\nvalue\ncurrency {\nname\nsymbol\ndecimal\n}}}}}'
+	query = 'query {\n\t\tethereum(network: bsc) {\n    \t\taddress(address: {is: "' + wallet_address + '"}) {\n      \t\t\tbalances {\n        \t\t\tvalue\n        \t\t\tcurrency {\n          \t\t\t\tname\n          \t\t\t\tsymbol\n\t\t\t\t\t\t\t\t\tdecimals\n        \t\t\t}\n      \t\t\t}\n    \t\t}\n  \t\t}\n\t}\n\t'
 
 	response = requests.post(url, json={'query': query})
 	tokens = json.loads(response.text)
 	balances = tokens['data']['ethereum']['address'][0]['balances']
-	return balances
+	token_list = []
+	for token in balances:
+		token_dict = {}
+		token_dict['token'] = token['currency']['symbol']
+		token_dict['name'] = token['currency']['name']
+		token_dict['quantity'] = token['value']
+		token_list.append(token_dict)
+
+	return token_list
 
 def get_bep20_wallet_balance(request, address):
     # What does this method do?
