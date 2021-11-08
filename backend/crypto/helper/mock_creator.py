@@ -7,12 +7,17 @@ def mocked_requests_get(*args, **kwargs):
         def json(self):
             return self.json_data
 
-    array_of_test_urls = [
+    primary_test_urls = [
         'https://deep-index.moralis.io/api/v2/test/erc20?chain=eth',
-        'https://min-api.cryptocompare.com/data/pricemulti?fsyms=TEST&tsyms=USD'
+        'https://min-api.cryptocompare.com/data/pricemulti?fsyms=TEST1&tsyms=USD'
+    ]
+    secondary_test_urls = [
+        'https://min-api.cryptocompare.com/data/pricemulti?fsyms=TEST2&tsyms=USD'
     ]
 
-    if args[1] in array_of_test_urls:
-        return MockResponse('[{"symbol": "TEST", "balance": "10", "name": "TestCoin", "decimals": "1", "USD": "5"}]', 200)
+    if args[1] in primary_test_urls:
+        return MockResponse('[{"symbol": "TEST1", "balance": "10", "name": "TestCoin", "decimals": "1"}]', 200)
+    elif args[1] in secondary_test_urls:
+        return MockResponse('{"TEST2": {"USD": 5.0}}', 200)
 
     return MockResponse(None, 404)

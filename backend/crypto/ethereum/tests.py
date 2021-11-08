@@ -13,7 +13,7 @@ class Get_Moralis_ERC_20_Test(TestCase):
 	@mock.patch('requests.request', side_effect=mocked_requests_get)
 	def test_moralis(self, mock_get):
 		array_of_tokens = get_moralis_erc20("test")
-		self.assertEqual(array_of_tokens, [{"token": "TEST", "quantity": 1, "name": "TestCoin"}])
+		self.assertEqual(array_of_tokens, [{"token": "TEST1", "name": "TestCoin", "quantity": 1.0}])
 
 
 if __name__ == '__main__':
