@@ -3,6 +3,7 @@ import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
 import Dropdown from '../../dropdown/Dropdown';
 import LamboLoader from '../../lamboLoader/LamboLoader';
+import Snackbar from '../../snackbar/Snackbar';
 
 export default function SearchWalletBalance() {
   const [address, setAddress] = useState(undefined);
@@ -59,6 +60,13 @@ export default function SearchWalletBalance() {
       console.log(response);
     }
   };
+
+  const message = 'One moment please. Fetching prices.';
+  const handleClick = () => {
+    this.props.enqueueSnackbar(message, {
+      variant: 'default',
+    });
+  }
 
   return (
     <div className="lookup-wallet-container">
