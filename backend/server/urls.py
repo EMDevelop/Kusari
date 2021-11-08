@@ -16,9 +16,11 @@ Including another URLconf
 # from django.conf.urls import include  # VS code suggested I import include. 
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ethereum/', include('ethereum.urls')),
     path('prices/', include('prices.urls')),
+    path('token-auth/', obtain_jwt_token),
 ]
