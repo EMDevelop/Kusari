@@ -12,6 +12,7 @@ import Navbar from './components/routes/Navbar/Navbar';
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
 import Profile from './components/routes/Profile/Profile';
 import LoginSignup from './components/routes/LoginSignup/LoginSignup';
+import TokenInformation from './components/routes/TokenInformation/TokenInformation';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -72,6 +73,7 @@ function App() {
                 <LoginSignup storeDetailsInApp={storeLoginCredentials} />
               }
             />
+            <Route path="/token/:symbol" element={<TokenInformation />} />
           </Routes>
         </main>
       </div>
