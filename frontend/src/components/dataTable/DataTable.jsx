@@ -60,8 +60,6 @@ export default function DataTable(props) {
   };
 
   const handleRowClick = (event, token) => {
-    console.log(event);
-    console.log(token);
     navigate(`/token/${token}`);
   };
 
@@ -94,7 +92,6 @@ export default function DataTable(props) {
             <tbody>
               {/* Loop through all rows returned from SearchWalletBalance get request */}
               {filteredData.map((row) => {
-                console.log(row);
                 return (
                   <tr onClick={(e) => handleRowClick(e, row['token'])}>
                     {/* Add data into column for current row */}
