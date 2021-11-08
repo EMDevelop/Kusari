@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
 import Dropdown from '../../dropdown/Dropdown';
 import LamboLoader from '../../lamboLoader/LamboLoader';
 import { useSnackbar } from 'notistack';
+import { GlobalContext } from '../../../context/globalContext';
 
 export default function SearchWalletBalance() {
-  const [address, setAddress] = useState(undefined);
-  const [walletDetails, setWalletDetails] = useState([]);
+  // const [address, setAddress] = useState(undefined);
+  // const [walletDetails, setWalletDetails] = useState([]);
   const [walletType, setwalletType] = useState(undefined);
   const [fetchingAddressInfo, setFetchingAddressInfo] = useState(false);
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { address, setAddress, walletDetails, setWalletDetails } =
+    useContext(GlobalContext);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
