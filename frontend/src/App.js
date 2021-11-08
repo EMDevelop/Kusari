@@ -6,7 +6,7 @@ import './styles/App.scss';
 import axios from 'axios';
 
 // Components
-import Navbar from './components/routes/Navbar/Navbar';
+import Navbar from './components/routes/navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
