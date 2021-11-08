@@ -11,6 +11,8 @@ export default function TokenInformation(props) {
   return (
     <div className="token-info-page">
       <h1>{`${symbol} Information`}</h1>
+      <div> middle section</div>
+      <div> Bottom section</div>
     </div>
   );
 }

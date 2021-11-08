@@ -13,6 +13,7 @@ import LookupWallet from './components/routes/LookupWallet/LookupWallet';
 import Profile from './components/routes/Profile/Profile';
 import LoginSignup from './components/routes/LoginSignup/LoginSignup';
 import TokenInformation from './components/routes/TokenInformation/TokenInformation';
+import TopCoins from './components/routes/TopCoins/TopCoins';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -74,6 +75,7 @@ function App() {
               }
             />
             <Route path="/token/:symbol" element={<TokenInformation />} />
+            <Route path="/top-coins" element={<TopCoins />} />
           </Routes>
         </main>
       </div>
