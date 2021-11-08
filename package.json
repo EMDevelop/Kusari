@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/EMDevelop/investment-tracker/issues"
   },
-  "homepage": "https://github.com/EMDevelop/investment-tracker#readme"
+  "homepage": "https://github.com/EMDevelop/investment-tracker#readme",
+  "dependencies": {
+    "bob": "^2.5.0"
+  }
 }
