@@ -32,6 +32,7 @@ def get_bitquery_bep20(wallet_address):
 	query = 'query {\n\t\tethereum(network: bsc) {\n    \t\taddress(address: {is: "' + wallet_address + '"}) {\n      \t\t\tbalances {\n        \t\t\tvalue\n        \t\t\tcurrency {\n          \t\t\t\tname\n          \t\t\t\tsymbol\n\t\t\t\t\t\t\t\t\tdecimals\n        \t\t\t}\n      \t\t\t}\n    \t\t}\n  \t\t}\n\t}\n\t'
 
 	response = requests.post(url, json={'query': query})
+	print(response.text)
 	tokens = json.loads(response.text)
 	balances = tokens['data']['ethereum']['address'][0]['balances']
 	token_list = []
