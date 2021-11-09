@@ -15,7 +15,7 @@ frontend:
         - rm -f ../Python-3.9.6.tgz
         - cd ..
         - python3.9 -V
-        - pipenv install -U pipenv
+        - pip3 install -U pipenv
         - pipenv uninstall python-dotenv
         - pipenv install -U python-dotenv
         - pipenv --python python3.9
