@@ -55,3 +55,9 @@ def walletUpdate(request, pk):
         serializer.save()
     
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def walletDelete(request, pk):
+    wallet = Wallet.objects.get(id=pk)
+    wallet.delete()
+    return Response(serializer.data)

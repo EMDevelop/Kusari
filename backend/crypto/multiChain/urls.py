@@ -7,5 +7,6 @@ urlpatterns = [
     path('wallet-detail/<str:pk>/', views.walletDetail, name='wallet-detail'),
     path('wallet-create/', views.walletCreate, name='wallet-create'),
     path('wallet-update/<str:pk>/', views.walletUpdate, name='wallet-update'),
+    path('wallet-delete/<str:pk>/', views.walletDelete, name='wallet-delete'),
     path('get-prices/<username>', views.get_all_wallet_prices)
 ]
