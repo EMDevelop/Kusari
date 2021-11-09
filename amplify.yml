@@ -23,7 +23,7 @@ frontend:
         - cd ..
     build:
       commands:
-        - pipenv run cd backend && python manage.py runserver
+        - pipenv run npm run server
   artifacts:
     baseDirectory: frontend/build
     files:
