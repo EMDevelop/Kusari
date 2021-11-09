@@ -7,7 +7,12 @@ frontend:
   phases:
     preBuild:
       commands:
-        - python3 --version
+        - sudo wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
+        - sudo tar -xvf Python-3.9.6.tgz
+        - cd Python-3.9.6
+        - sudo ./configure --enable-optimizations
+        - sudo make altinstall
+        - sudo rm -f ../Python-3.9.6.tgz
         - pip3 install -U pipenv
         - cd frontend
         - npm install
