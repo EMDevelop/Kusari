@@ -16,7 +16,7 @@ frontend:
         - cd ..
         - python3.9 -V
         - pip3 install -U pipenv
-        - pipenv run pip install python-dotenv
+        - pipenv install
         - pipenv --python python3.9
         - cd frontend
         - pipenv run npm install
