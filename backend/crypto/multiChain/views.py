@@ -3,6 +3,8 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .serializers import WalletSerializer
+from .models import Wallet
 
 # Create your views here.
 
@@ -17,10 +19,22 @@ def get_all_wallet_prices(request, username):
 @api_view(['GET'])
 def walletsOverview(request):
     wallet_urls = {
-        'List':'/wallet=list/',
+        'List':'/wallet-list/',
         'Detail View':'/wallet-detail/<str:pk>/',
         'Create':'/wallet-create/',
         'Update':'/wallet-update/<str:pk>',
         'Delete':'wallet-delete/<str:pk>',
     }
     return Response(wallet_urls)
+
+@api_view(['GET'])
+def walletList(request):
+    wallets = Wallet.objects.all()
+    serializer = WalletSerializer(wallets, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def walletDetail(request, pk):
+    wallets = Wallet.objects.get(id=pk)
+    serializer = WalletSerializer(wallets, many=False)
+    return Response(serializer.data)
