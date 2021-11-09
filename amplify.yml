@@ -13,6 +13,7 @@ frontend:
         - ./configure --enable-optimizations
         - make altinstall
         - rm -f ../Python-3.9.6.tgz
+        - cd ..
         - pip3 install -U pipenv
         - cd frontend
         - npm install
