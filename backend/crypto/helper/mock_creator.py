@@ -23,7 +23,7 @@ def mocked_requests_get(*args, **kwargs):
     
 
     if args[1] in primary_test_urls:
-        return MockResponse('[{"symbol": "TEST1", "balance": "10", "name": "TestCoin", "decimals": "1", "contract_address": "0x0"}]', 200)
+        return MockResponse('[{"symbol": "TEST1", "balance": "10", "name": "TestCoin", "decimals": "1", "token_address": "0x0"}]', 200)
     elif args[1] in secondary_test_urls:
         return MockResponse('{"TEST2": {"USD": 5.0}}', 200)
     elif args[1] == bsc_test_url:
