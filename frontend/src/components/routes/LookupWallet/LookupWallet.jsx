@@ -63,7 +63,7 @@ export default function SearchWalletBalance() {
   const getWalletDetails = async (address) => {
     try {
       const response = await axios.get(
-        `/${walletType.toLowerCase()}/wallet-balance/${address}/`
+        `/${walletType.toLowerCase()}/wallet-balance/${address}/single`
       );
       setWalletDetails(response.data);
     } catch (error) {
@@ -101,7 +101,7 @@ export default function SearchWalletBalance() {
       <div className="address-input-form">
         <Dropdown
           placeholderValue="Select wallet type"
-          dropdownOptions={['Ethereum', 'Bitcoin','BSC']}
+          dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
           handleOptionSelect={setwalletType}
         />
         <input

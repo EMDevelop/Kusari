@@ -8,7 +8,7 @@ import { GlobalContextProvider } from './context/globalContext';
 import axios from 'axios';
 
 // Components
-import Navbar from './components/routes/navbar/Navbar';
+import Navbar from './components/routes/Navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
