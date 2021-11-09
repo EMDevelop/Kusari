@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
 import { SnackbarProvider } from 'notistack';
@@ -19,7 +19,8 @@ import TopCoins from './components/routes/TopCoins/TopCoins';
 import Portfolio from './components/routes/Portfolio/Portfolio';
 
 function App() {
-  const { loggedIn, setLoggedIn, setUsername } = useContext(GlobalContext);
+  const { loggedIn, setLoggedIn, setLoggedInUserName } =
+    useContext(GlobalContext);
 
   useEffect(() => {
     // authorizeTokenFromStorage();
@@ -50,8 +51,8 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    setUsername('');
     setLoggedIn(false);
+    setLoggedInUserName('');
   };
 
   return (

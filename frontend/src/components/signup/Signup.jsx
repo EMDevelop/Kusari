@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../context/globalContext';
-function Signup(props) {
-  const { setUserID, setUsername, username, setLoggedIn } =
-    useContext(GlobalContext);
+import { useSnackbar } from 'notistack';
 
+function Signup(props) {
+  const { setUserID, setLoggedInUserName, setLoggedIn } =
+    useContext(GlobalContext);
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ function Signup(props) {
         password: password,
       });
       props.storeDetailsInApp(response.data.user.username, response.data.token);
+      success('Account Created');
     } catch (error) {
       console.log(error);
     }
@@ -38,9 +41,29 @@ function Signup(props) {
       setUsername(response.data.user.username);
       setLoggedIn(true);
       navigate('/');
+      success(`Welcome To Kusari ${response.data.user.username}!`);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+
+  const fail = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+  const info = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'info',
+    });
   };
 
   return (

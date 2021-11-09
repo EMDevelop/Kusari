@@ -5,7 +5,7 @@ export const GlobalContext = createContext();
 export const GlobalContextProvider = (props) => {
   const [walletDetails, setWalletDetails] = useState([]);
   const [address, setAddress] = useState(undefined);
-  const [username, setUsername] = useState('');
+  const [loggedInUserName, setLoggedInUserName] = useState('');
   const [userID, setUserID] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -16,8 +16,8 @@ export const GlobalContextProvider = (props) => {
         setWalletDetails,
         address,
         setAddress,
-        username,
-        setUsername,
+        loggedInUserName,
+        setLoggedInUserName,
         userID,
         setUserID,
         loggedIn,
