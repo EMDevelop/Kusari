@@ -60,4 +60,4 @@ def walletUpdate(request, pk):
 def walletDelete(request, pk):
     wallet = Wallet.objects.get(id=pk)
     wallet.delete()
-    return Response(serializer.data)
+    return Response('Item deleted')
