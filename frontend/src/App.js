@@ -48,9 +48,16 @@ function App() {
   // };
 
   const storeLoginCredentials = (username, token) => {
+    console.log(
+      `I Am Storing Credentials username: ${username} and Token: ${token}`
+    );
     setLoggedIn(true);
     setUsername(username);
+
     token && localStorage.setItem('token', token);
+    console.log(
+      `Token in local storage exist?: ${localStorage.getItem('token')}`
+    );
   };
 
   const handleLogout = () => {
