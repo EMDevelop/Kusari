@@ -21,8 +21,6 @@ frontend:
         - cd frontend
         - npm install
         - cd ..
-        - pip install psycopg2-binary
-        - cd backend
     build:
       commands:
         - npm run bob
