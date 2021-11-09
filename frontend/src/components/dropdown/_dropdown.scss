@@ -1,6 +1,5 @@
 .dropdown {
   // appearance: none;
-  background-color: none;
   height: 60% !important;
   width: fit-content;
   width: 25%;
@@ -9,10 +8,12 @@
   border-radius: $radius;
   letter-spacing: 0.01em;
   margin-right: $small-margin;
+  background-color: transparent;
+  border: 2px solid $c-green !important;
+  color: $c-green;
 }
 .dropdown-width-max {
   // appearance: none;
-  background-color: none;
   height: 100% !important;
   width: fit-content;
   width: 100%;
@@ -20,6 +21,9 @@
   padding: 10px 15px;
   border-radius: $radius;
   letter-spacing: 0.01em;
+  background-color: transparent;
+  border: 2px solid $c-green !important;
+  color: $c-green;
 }
 .disabled-option {
   color: #ccc;
