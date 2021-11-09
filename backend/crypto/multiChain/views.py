@@ -46,3 +46,12 @@ def walletCreate(request):
         serializer.save()
     
     return Response(serializer.data)
+
+@api_view(['POST'])
+def walletUpdate(request, pk):
+    wallet = Wallet.objects.get(id=pk)
+    serializer = WalletSerializer(instance=wallet, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    
+    return Response(serializer.data)
