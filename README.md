@@ -33,7 +33,7 @@ You will need to:
 
 - open the terminal
 - navigate to the relevant folder where your app lives, e.g. `cd backend/crypto`
-- create a new App using: `python manage.py startapp prices`
+- create a new App using: `python3 manage.py startapp prices`
   - `prices` is the name of the app
 
 #### Front End instructions
