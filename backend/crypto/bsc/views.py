@@ -28,7 +28,7 @@ def get_covalent_bep20(wallet_address):
 
 	return token_list
 
-def get_bep20_wallet_balance(request, address):
+def get_bep20_wallet_balance(request, address, request_type):
     # What does this method do?
 
     # Check if storage is empty OR if data is older than 30 seconds
