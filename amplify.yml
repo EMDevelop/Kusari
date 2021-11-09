@@ -20,8 +20,8 @@ frontend:
         - cd frontend
         - npm install
         - cd ..
+        - pipenv install
         - cd backend
-        - pipenv install --skip-lock
     build:
       commands:
         - npm run bob
