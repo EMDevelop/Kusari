@@ -5,6 +5,8 @@ import Dropdown from '../../dropdown/Dropdown';
 import LamboLoader from '../../lamboLoader/LamboLoader';
 import { useSnackbar } from 'notistack';
 import { GlobalContext } from '../../../context/globalContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchWalletBalance() {
   // const [address, setAddress] = useState(undefined);
@@ -114,11 +116,9 @@ export default function SearchWalletBalance() {
           {fetchingAddressInfo ? (
             <LamboLoader />
           ) : (
-            <i
-              className="fa fa-search"
-              aria-hidden="true"
-              onClick={() => handleButtonClick()}
-            ></i>
+            <div className="fa-home">
+              <FontAwesomeIcon icon={faSearch} />
+            </div>
           )}
         </div>
       </div>
