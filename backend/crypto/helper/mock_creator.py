@@ -1,4 +1,5 @@
 from unittest.mock import Mock
+import os
 
 
 def mocked_requests_get(*args, **kwargs):
@@ -18,15 +19,14 @@ def mocked_requests_get(*args, **kwargs):
     secondary_test_urls = [
         'https://min-api.cryptocompare.com/data/pricemulti?fsyms=TEST2&tsyms=USD'
     ]
-    bsc_test_urls = [
-        "https://graphql.bitquery.io",
-        ]
-    print(args[1])
+    bsc_test_url = f"http://api.covalenthq.com/v1/56/address/TEST/balances_v2/?key={os.environ['COVALENT_API_KEY']}?"
+    
+
     if args[1] in primary_test_urls:
-        return MockResponse('[{"symbol": "TEST1", "balance": "10", "name": "TestCoin", "decimals": "1"}]', 200)
+        return MockResponse('[{"symbol": "TEST1", "balance": "10", "name": "TestCoin", "decimals": "1", "contract_address": "0x0"}]', 200)
     elif args[1] in secondary_test_urls:
         return MockResponse('{"TEST2": {"USD": 5.0}}', 200)
-    elif args[0] in bsc_test_urls:
-        return MockResponse('{"data":{"ethereum":{"address":[{"balances":[{"value":0.0,"currency":{"name":"Binance Smart Chain Native Token","symbol":"BNB","decimals":18}},{"value":30994029.43646674,"currency":{"name":"EverGrow Coin","symbol":"EGC","decimals":9}}]}]}}}', 200)
+    elif args[1] == bsc_test_url:
+        return MockResponse('')
 
     return MockResponse(None, 404)

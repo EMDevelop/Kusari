@@ -18,7 +18,7 @@ def get_moralis_eth(address):
 
     eth_balance = w3.eth.get_balance(address)
     
-    return {'token': 'ETH', 'name': 'Ethereum', 'quantity': create_decimal_from_number(eth_balance, 18)}
+    return {'token': 'ETH', 'name': 'Ethereum', 'quantity': create_decimal_from_number(eth_balance, 18), 'contract_address': '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'}
 
 
 def get_moralis_erc20(address):
@@ -36,14 +36,12 @@ def get_moralis_erc20(address):
     response = requests.request("GET", url, headers=headers)        
     tokens = json.loads(response.text) #Example Data, tokens: [{'token_address': '0xd2dda223b2617cb616c1580db421e4cfae6a8a85', 'name': 'Bondly Token', 'symbol': 'BONDLY', 'logo': 'https://cdn.moralis.io/eth/0xd2dda223b2617cb616c1580db421e4cfae6a8a85.png', 'thumbnail': 'https://cdn.moralis.io/eth/0xd2dda223b2617cb616c1580db421e4cfae6a8a85_thumb.png', 'decimals': '18', 'balance': '993397116522580432404'}, {'token_address': '0x43901e05f08f48546fff8d6f8df108f60570498b', 'name': 'BASENJI', 'symbol': 'BSJ', 'logo': None, 'thumbnail': None, 'decimals': '18', 'balance': '50000000000000000000'}]
     token_list = []
-    print("----------------------")
-    print("THIS IS TOKENS")
-    print(tokens)
     for token in tokens:
         token_dict = {}
         token_dict['token'] = token['symbol']
         token_dict['name'] = token['name']
         token_dict['quantity'] = create_decimal_from_number(token['balance'], token['decimals'])
+        token_dict['contract_address'] = token['token_address']
         token_list.append(token_dict)
 
     # Example Data, token_list: [{'token': 'BONDLY', 'name': 'Bondly Token', 'quantity': 993.3971165225804}, {'token': 'BSJ', 'name': 'BASENJI', 'quantity': 50.0}]
@@ -60,7 +58,6 @@ def get_ethereum_and_erc20_wallet_balance(request, address):
     eth_quantity = get_moralis_eth(address)
     token_symbol_name_quantity = get_moralis_erc20(address) #refactor into next line
     token_symbol_name_quantity.insert(0, eth_quantity)
-    print(token_symbol_name_quantity)
     token_symbol_name_quantity_price_image = append_price_and_image(request, token_symbol_name_quantity)
     token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price_image) 
     return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
