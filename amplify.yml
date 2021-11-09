@@ -20,14 +20,6 @@ frontend:
         - cd frontend
         - npm install
         - cd ..
-        - pip3 install psycopg2
-        - pip3 install djangorestframework
-        - pip3 install django
-        - pip3 install django-cors-headers
-        - pip3 install requests
-        - pip3 install django-dotenv
-        - pip3 install pytest
-        - pip3 install psycopg2
         - pipenv install
         - cd backend
     build:
