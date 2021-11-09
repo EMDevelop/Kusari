@@ -16,13 +16,14 @@ frontend:
         - cd ..
         - python3.9 -V
         - pip3 install -U pipenv
-        - pipenv install django
-        - pipenv install djangorestframework
-        - pipenv install django-cors-headers
-        - pipenv install requests
-        - pipenv install django-dotenv
-        - pipenv install pytest
+        - pipenv run pip install django
+        - pipenv run pip install djangorestframework
+        - pipenv run pip install django-cors-headers
+        - pipenv run pip install requests
         - pipenv run pip install django-dotenv
+        - pipenv run pip uninstall python-dotenv
+        - pipenv run pip install pytest
+        - pipenv install djangorestframework-jwt
         - pipenv --python python3.9
         - cd frontend
         - pipenv run npm install
