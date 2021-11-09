@@ -14,7 +14,9 @@ frontend:
         - make altinstall
         - rm -f ../Python-3.9.6.tgz
         - cd ..
+        - python3.9 -V
         - pip3 install -U pipenv
+        - pipenv --python python3.9
         - cd frontend
         - npm install
         - cd ..
