@@ -20,5 +20,5 @@ def main():
 
 
 if __name__ == '__main__':
-    dotenv.read_dotenv(override = True)
+    load_dotenv.read_dotenv(override = True)
     main()
