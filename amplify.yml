@@ -20,14 +20,8 @@ frontend:
         - cd frontend
         - npm install
         - cd ..
-        - pipenv shell
         - cd backend
-        - pipenv install django
-        - pipenv install djangorestframework
-        - pipenv install django-cors-headers
-        - pipenv install requests
-        - pipenv install django-dotenv
-        - pipenv install pytest
+        - pipenv install
     build:
       commands:
         - npm run bob
