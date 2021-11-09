@@ -1,3 +1,4 @@
+from django.http import response
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
@@ -13,5 +14,13 @@ def get_all_wallet_prices(request, username):
     # Return the token info  and the prices to the client.
     return render(request, 'multiChain/wallet_prices.html')
 
+@api_view(['GET'])
 def walletsOverview(request):
-    return JsonResponse('Wallets base point', safe=False)
+    wallet_urls = {
+        'List':'/wallet=list/',
+        'Detail View':'/wallet-detail/<str:pk>/',
+        'Create':'/wallet-create/',
+        'Update':'/wallet-update/<str:pk>',
+        'Delete':'wallet-delete/<str:pk>',
+    }
+    return Response(wallet_urls)
