@@ -16,6 +16,8 @@ frontend:
         - cd ..
         - python3.9 -V
         - pip3 install -U pipenv
+        - pipenv uninstall dotenv
+        - pipenv uninstall python-dotenv
         - pipenv install python-dotenv
         - pipenv --python python3.9
         - cd frontend
