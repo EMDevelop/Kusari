@@ -8,6 +8,7 @@ import {
   faSearch,
   faWallet,
   faTrophy,
+  faPowerOff,
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -99,7 +100,9 @@ function Navbar(props) {
       <ul className="logout">
         <li onClick={props.handleLogout}>
           <a href="#">
-            <i className="fa fa-power-off fa-2x"></i>
+            <div className="fa-home">
+              <FontAwesomeIcon icon={faPowerOff} />
+            </div>
             <span className="nav-text">Logout</span>
           </a>
         </li>

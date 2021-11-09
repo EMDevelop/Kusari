@@ -16,26 +16,18 @@ from helper.get_from_session_storage import *
 
 # Create your views here.
 def get_coin_gecko_prices(request):
-    if check_if_longer_than_30_seconds(request) == True: 
-        get_coingecko_all_crypto_prices(request);
-        return JsonResponse({'status': 'Fetched prices'})
-    else:
-        return JsonResponse({'status': 'has not been 30 seconds'})
+    get_coingecko_all_crypto_prices(request)
+    return JsonResponse({'status': 'Fetched prices'})
+
 
 
 def update_wallet_balance(request):
     # This is a repeat request triggered every 30 seconds to update the `lookup wallet` screen
     # We fetch the most up to date prices froms storage and return them to the screen. 
     get_coin_gecko_prices(request)
-    print(1)
     current_wallet = json.loads(request.GET['tokens'])
-    print('current_wallet')
-    print(current_wallet)
-    
+
     for token in current_wallet:
-        print(2)
-        print(token)
-        print(token['USDperUnit'])
         try:
             token['USDperUnit'] = get_item_from_storage(request, token['token'].lower(), 'current_price')
         except:
@@ -67,7 +59,6 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 

@@ -5,6 +5,8 @@ import Dropdown from '../../dropdown/Dropdown';
 import LamboLoader from '../../lamboLoader/LamboLoader';
 import { useSnackbar } from 'notistack';
 import { GlobalContext } from '../../../context/globalContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchWalletBalance() {
   // const [address, setAddress] = useState(undefined);
@@ -63,7 +65,7 @@ export default function SearchWalletBalance() {
   const getWalletDetails = async (address) => {
     try {
       const response = await axios.get(
-        `/${walletType.toLowerCase()}/wallet-balance/${address}/`
+        `/${walletType.toLowerCase()}/wallet-balance/${address}/single`
       );
       setWalletDetails(response.data);
     } catch (error) {
@@ -101,7 +103,7 @@ export default function SearchWalletBalance() {
       <div className="address-input-form">
         <Dropdown
           placeholderValue="Select wallet type"
-          dropdownOptions={['Ethereum', 'Bitcoin']}
+          dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
           handleOptionSelect={setwalletType}
         />
         <input
@@ -114,11 +116,9 @@ export default function SearchWalletBalance() {
           {fetchingAddressInfo ? (
             <LamboLoader />
           ) : (
-            <i
-              className="fa fa-search"
-              aria-hidden="true"
-              onClick={() => handleButtonClick()}
-            ></i>
+            <div className="fa-home">
+              <FontAwesomeIcon icon={faSearch} />
+            </div>
           )}
         </div>
       </div>
