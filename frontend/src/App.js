@@ -16,6 +16,7 @@ import Profile from './components/routes/Profile/Profile';
 import LoginSignup from './components/routes/LoginSignup/LoginSignup';
 import TokenInformation from './components/routes/TokenInformation/TokenInformation';
 import TopCoins from './components/routes/TopCoins/TopCoins';
+import Portfolio from './components/routes/Portfolio/Portfolio';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -80,6 +81,7 @@ function App() {
                 />
                 <Route path="/token/:symbol" element={<TokenInformation />} />
                 <Route path="/top-coins" element={<TopCoins />} />
+                <Route path="/portfolio" element={<Portfolio />} />
               </Routes>
             </main>
           </SnackbarProvider>
