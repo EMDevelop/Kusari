@@ -15,9 +15,9 @@ frontend:
         - rm -f ../Python-3.9.6.tgz
         - cd ..
         - python3.9 -V
-        - pip3 install -U pipenv
-        - pip3 uninstall python-dotenv
-        - pip3 install -U python-dotenv
+        - pipenv install -U pipenv
+        - pipenv uninstall python-dotenv
+        - pipenv install -U python-dotenv
         - pipenv --python python3.9
         - cd frontend
         - pipenv run npm install
