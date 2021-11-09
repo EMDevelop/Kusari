@@ -16,12 +16,12 @@ frontend:
         - cd ..
         - python3.9 -V
         - pip3 install -U pipenv
+        - pipenv install
         - pipenv --python python3.9
         - cd frontend
         - npm install
         - cd ..
         - pip install psycopg2-binary
-        - pipenv install
         - cd backend
     build:
       commands:
