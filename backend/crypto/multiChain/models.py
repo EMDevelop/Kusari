@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 # make a django model to store wallets associated to each user
 class Wallet(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    wallet_type = models.CharField(max_length=200)
-    wallet_address = models.CharField(max_length=200)
+    wallet_type = models.CharField(max_length=200, blank=True, null=True)
+    wallet_address = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.wallet_address

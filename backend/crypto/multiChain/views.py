@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from .serializers import WalletSerializer
 from .models import Wallet
 from .models import User
+import json
 
 # Create your views here.
 
@@ -65,7 +66,13 @@ def walletDelete(request, pk):
 
 @api_view(['GET'])
 def userWalletList(request, user_id):
-    print(request)
     wallets = Wallet.objects.filter(user=user_id)
     serializer = WalletSerializer(wallets, many=True)
-    return Response(serializer.data)
+    arrayOfWallets = serializer.data
+    if len(arrayOfWallets) == 0:
+        singleWallet = Wallet.objects.create(user = request.user, wallet_type = "", wallet_address = "")
+        return Response(json.load(singleWallet))
+    else:        
+        return Response(arrayOfWallets)
+
+
