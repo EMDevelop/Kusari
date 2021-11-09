@@ -17,7 +17,7 @@ from helper.get_from_session_storage import *
 # Create your views here.
 def get_coin_gecko_prices(request):
     if check_if_longer_than_30_seconds(request) == True: 
-        get_coingecko_all_crypto_prices(request);
+        get_coingecko_all_crypto_prices(request)
         return JsonResponse({'status': 'Fetched prices'})
     else:
         return JsonResponse({'status': 'has not been 30 seconds'})

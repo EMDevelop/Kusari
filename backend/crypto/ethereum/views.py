@@ -48,7 +48,7 @@ def get_moralis_erc20(address):
     return token_list
 
 
-def get_ethereum_and_erc20_wallet_balance(request, address, request_type):
+def get_ethereum_and_erc20_wallet_balance(request, address):
     # What does this method do?
 
     # Check if storage is empty OR if data is older than 30 seconds
