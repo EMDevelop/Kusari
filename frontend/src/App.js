@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
 import { SnackbarProvider } from 'notistack';
-import { GlobalContextProvider } from './context/globalContext';
+import { GlobalContext } from './context/globalContext';
 
 // axios
 import axios from 'axios';
@@ -19,10 +19,7 @@ import TopCoins from './components/routes/TopCoins/TopCoins';
 import Portfolio from './components/routes/Portfolio/Portfolio';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem('token') ? true : false
-  );
-  const [username, setUsername] = useState(undefined);
+  const { loggedIn, setLoggedIn, setUsername } = useContext(GlobalContext);
 
   useEffect(() => {
     // authorizeTokenFromStorage();
@@ -47,17 +44,8 @@ function App() {
   //   }
   // };
 
-  const storeLoginCredentials = (username, token) => {
-    console.log(
-      `I Am Storing Credentials username: ${username} and Token: ${token}`
-    );
-    setLoggedIn(true);
-    setUsername(username);
-
+  const storeLoginCredentials = (token) => {
     token && localStorage.setItem('token', token);
-    console.log(
-      `Token in local storage exist?: ${localStorage.getItem('token')}`
-    );
   };
 
   const handleLogout = () => {
@@ -67,34 +55,32 @@ function App() {
   };
 
   return (
-    <GlobalContextProvider>
-      <Router>
-        <div className="app">
-          <Navbar
-            loggedIn={loggedIn}
-            // display_form={display_form}
-            handleLogout={handleLogout}
-          />
-          <SnackbarProvider maxSnack={4}>
-            <main>
-              <Routes>
-                <Route path="/" element={<LookupWallet />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route
-                  path="/login-signup"
-                  element={
-                    <LoginSignup storeDetailsInApp={storeLoginCredentials} />
-                  }
-                />
-                <Route path="/token/:symbol" element={<TokenInformation />} />
-                <Route path="/top-coins" element={<TopCoins />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-              </Routes>
-            </main>
-          </SnackbarProvider>
-        </div>
-      </Router>
-    </GlobalContextProvider>
+    <Router>
+      <div className="app">
+        <Navbar
+          loggedIn={loggedIn}
+          // display_form={display_form}
+          handleLogout={handleLogout}
+        />
+        <SnackbarProvider maxSnack={4}>
+          <main>
+            <Routes>
+              <Route path="/" element={<LookupWallet />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/login-signup"
+                element={
+                  <LoginSignup storeDetailsInApp={storeLoginCredentials} />
+                }
+              />
+              <Route path="/token/:symbol" element={<TokenInformation />} />
+              <Route path="/top-coins" element={<TopCoins />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+            </Routes>
+          </main>
+        </SnackbarProvider>
+      </div>
+    </Router>
   );
 }
 

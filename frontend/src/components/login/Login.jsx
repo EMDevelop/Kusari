@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../../context/globalContext';
 
 function Login(props) {
-  const [username, setUsername] = useState('');
+  const { setUserID, setUsername, username, setLoggedIn } =
+    useContext(GlobalContext);
+
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -16,7 +19,9 @@ function Login(props) {
         password: password,
       });
       props.storeDetailsInApp(response.data.user.username, response.data.token);
-      console.log(response.data);
+      setUserID(response.data.user_id);
+      setUsername(response.data.user.username);
+      setLoggedIn(true);
       navigate('/');
     } catch (error) {
       console.log(error);

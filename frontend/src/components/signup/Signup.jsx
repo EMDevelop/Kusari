@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { GlobalContext } from '../../context/globalContext';
 function Signup(props) {
-  const [username, setUsername] = useState('');
+  const { setUserID, setUsername, username, setLoggedIn } =
+    useContext(GlobalContext);
+
   const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
@@ -30,7 +33,10 @@ function Signup(props) {
         username: username,
         password: password,
       });
-      props.storeDetailsInApp(response.data.user.username, response.data.token);
+      props.storeDetailsInApp(response.data.token);
+      setUserID(response.data.user_id);
+      setUsername(response.data.user.username);
+      setLoggedIn(true);
       navigate('/');
     } catch (error) {
       console.log(error);
