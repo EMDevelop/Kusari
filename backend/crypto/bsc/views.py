@@ -10,14 +10,12 @@ from helper.get_token_current_value import *
 from helper.get_from_session_storage import *
 
 def get_covalent_bep20(wallet_address):
-	url = f"http://api.covalenthq.com/v1/56/address/{wallet_address}/balances_v2/?key={os.environ['COVALENT_API_KEY']}?"
-	# url = f"http://api.covalenthq.com/v1/56/address/{wallet_address}/balances_v2/?key=ckey_b1edf0879e4d4ad5877c1f262db?"
+	# url = f"http://api.covalenthq.com/v1/56/address/{wallet_address}/balances_v2/?key={os.environ['COVALENT_API_KEY']}?"
+	url = f"http://api.covalenthq.com/v1/56/address/{wallet_address}/balances_v2/?key=ckey_b1edf0879e4d4ad5877c1f262db?"
 	headers = {"Content-Type": "application/json",}
 
-	response = requests.request("GET", url, headers=headers)
-	print(response.text)
+	response = requests.request("GET", url, headers=headers) # Example Data: {"data":{"address":"0x4ad2b8dac6ca5e77030af4529d6eff12d3fff502","updated_at":"2021-11-09T15:09:16.662877504Z","next_update_at":"2021-11-09T15:14:16.662877944Z","quote_currency":"USD","chain_id":56,"items":[{"contract_decimals":9,"contract_name":"EverGrow Coin","contract_ticker_symbol":"EGC","contract_address":"0xc001bbe2b87079294c63ece98bdd0a88d761434e","supports_erc":["erc20"],"logo_url":"https://logos.covalenthq.com/tokens/56/0xc001bbe2b87079294c63ece98bdd0a88d761434e.png","last_transferred_at":"2021-10-31T00:46:24Z","type":"cryptocurrency","balance":"30994029436466735","balance_24h":null,"quote_rate":1.59E-6,"quote_rate_24h":1.3145403E-6,"quote":49.280506,"quote_24h":null,"nft_data":null},{"contract_decimals":18,"contract_name":"Binance Coin","contract_ticker_symbol":"BNB","contract_address":"0xb8c77482e45f1f44de1745f52c74426c631bdd52","supports_erc":null,"logo_url":"https://www.covalenthq.com/static/images/icons/display-icons/binance-coin-bnb-logo.png","last_transferred_at":null,"type":"cryptocurrency","balance":"0","balance_24h":null,"quote_rate":645.85,"quote_rate_24h":600.8414,"quote":0.0,"quote_24h":null,"nft_data":null}],"pagination":null},"error":false,"error_message":null,"error_code":null}
 	tokens = json.loads(response.text)
-	print(tokens)
 	balances = tokens['data']['items']
 	token_list = []
 	for token in balances:
