@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
@@ -6,6 +7,8 @@ export default function DataTable(props) {
   const [itemsToFilter, setItemsToFilter] = useState([]);
   const [filteredData, setFilteredData] = useState(props.rowData);
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     filterRowData('USDperUnit');
@@ -56,6 +59,10 @@ export default function DataTable(props) {
     setItemsToFilter(values);
   };
 
+  const handleRowClick = (event, token) => {
+    navigate(`/token/${token}`);
+  };
+
   return (
     <div>
       <div className="filter-container">
@@ -85,13 +92,35 @@ export default function DataTable(props) {
             <tbody>
               {/* Loop through all rows returned from SearchWalletBalance get request */}
               {filteredData.map((row) => {
-                console.log(row);
                 return (
-                  <tr>
-                    {/* Add data into column for current row */}
-                    {Object.keys(row).map((key) => {
-                      return <td>{row[key]}</td>;
-                    })}
+                  <tr
+                    className="data-row"
+                    onClick={(e) => handleRowClick(e, row['token'])}
+                  >
+                    {}
+                    <td>
+                      <img
+                        className="token-icon"
+                        src={row['image']}
+                        alt={row['token']}
+                      />
+                    </td>
+                    <td>{row['token']}</td>
+                    <td>{row['name']}</td>
+                    <td>{row['quantity']}</td>
+                    <td>
+                      {row['USDperUnit'] === 'N/A'
+                        ? '-'
+                        : `$${row['USDperUnit']}`}
+                    </td>
+                    <td>
+                      {row['BalanceInUSD'] === 'N/A'
+                        ? '-'
+                        : `$${row['BalanceInUSD']
+                            .toFixed(2)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+                    </td>
                   </tr>
                 );
               })}

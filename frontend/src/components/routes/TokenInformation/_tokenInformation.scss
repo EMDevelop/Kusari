@@ -1,0 +1,111 @@
+.token-info-page {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 1fr 6fr;
+}
+
+@import "https://fonts.googleapis.com/css?family=Lato";
+* {
+	font-family: 'Lato', sans-serif !important;
+}
+a.cryptocompare-logo {
+	display: none;
+}
+.tabcontent {
+	display: none !important;
+	display: none;
+}
+.cTypeTabActive {
+	background-color: rgba(216,216,216, 0.8) !important;
+}
+.tabperiods {
+	font-family: 'Raleway', sans-serif;
+	border-radius: 7px;
+	padding: 2px 1px;
+	background-color: rgba(0,0,0, 0.03);
+	&:hover {
+		background-color: rgb(231, 240, 249);
+	}
+}
+.tabperiods_active {
+	background-color: rgba(10,115,167, 0.1);
+}
+.tablinks {
+	border-radius: 7px;
+	border-width: 1px;
+	padding: 5px 10px;
+	border-style: solid;
+	background-color: #ffffff;
+	border-color: rgb(255, 255, 255) !important;
+	&:hover {
+		background-color: #f2f2f2;
+		border-color: rgba(127,211,179, 0.8);
+	}
+}
+.tablinks.active {
+	border-color: rgba(255, 255, 255, 0.01) !important;
+	background-color: #e6e6e6 !important;
+}
+.amcharts-graph-line {
+	fill: rgba(255, 255, 255, 0.9);
+}
+.cccCustomRadioContainer {
+	display: none;
+}
+.ccc-widget {
+	border: 0px solid;
+}
+.ccc-chart-v3 {
+	border: 0px solid;
+}
+tspan {
+	font-size: 0.8rem;
+}
+textPath {
+	font-size: 0.8rem;
+}
+rect.amcharts-cursor-div {
+	background-color: #000000;
+}
+.chartTypeTabLinks {
+	&:hover {
+		background-color: #e5e5e5 !important;
+		color: rgba(0, 0, 0, 0.6) !important;
+	}
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+.amcharts-graph-fill {
+	fill: rgb(139, 146, 167);
+}
+.amcharts-graph-stroke {
+	fill-opacity: 0.8;
+	stroke-width: 2;
+	stroke-opacity: 0.8;
+	stroke: rgb(125, 149, 182);
+}
+.amcharts-category-axis {
+	fill: rgba(0,0,0, 0.8);
+}
+.amcharts-cursor-fill {
+	fill: rgba(10,115,167, 0.8);
+	stroke: rgb(4, 0, 0) !important;
+	display: none !important;
+}
+.amcharts-plot-area {
+	fill: rgb(25, 225, 225) !important;
+}
+.amcharts-legend-marker {
+	fill: rgba(10,115,167, 0.3) !important;
+	stroke: rgba(10,115,167, 0.6) !important;
+}
+.amcharts-balloon-div {
+	fill: rgba(10,115,167, 0.9) !important;
+	position: absolute !important;
+	border: 1px !important;
+}
+#loaderccc {
+	display: none !important;
+}

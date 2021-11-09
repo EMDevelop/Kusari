@@ -4,14 +4,20 @@
 @import './fonts';
 
 // Components
-@import '../components/routes/navbar/navbar';
+
 @import '../components/dataTable/dataTable';
 @import '../components/multipleInputs/multipleInputs';
 @import '../components/searchDropdown/searchDropdown';
 @import '../components/dropdown/dropdown';
 @import '../components/cards/cryptoTokenBalance/cryptoTokenBalance';
+@import '../components/LamboLoader/lamboLoader';
+@import '../components/login/login';
+@import '../components/signup/signup';
 
 // Routes
+@import '../components/routes/Navbar/navbar';
 @import '../components/routes/LookupWallet/lookupWallet';
-@import '../components/routes/Login/login';
 @import '../components/routes/Profile/profile';
+@import '../components/routes/LoginSignup/loginSignup';
+@import '../components/routes/TokenInformation/tokenInformation';
+@import '../components/routes/TopCoins/topCoins';
