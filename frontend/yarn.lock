@@ -9637,6 +9637,11 @@
   dependencies:
     "history" "^5.0.3"
 
+"react-script-tag@^1.1.2":
+  "integrity" "sha512-4oR9ntvGfX4igiP77vK310ru5Oa77xO7CeYB3Xi9lu0qsikpGpK1Kq1WMFocvy8U4fQFq8ovtrZS/8adfCziFw=="
+  "resolved" "https://registry.npmjs.org/react-script-tag/-/react-script-tag-1.1.2.tgz"
+  "version" "1.1.2"
+
 "react-scripts@4.0.3":
   "integrity" "sha512-S5eO4vjUzUisvkIPB7jVsKtuH2HhWcASREYWHAQ1FP5HyCv3xgn+wpILAEWkmy+A+tTNbSZClhxjT3qz6g4L1A=="
   "resolved" "https://registry.npmjs.org/react-scripts/-/react-scripts-4.0.3.tgz"
@@ -9713,7 +9718,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^16 || ^17", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.x", "react@17.0.2":
+"react@*", "react@^16 || ^17", "react@^16.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.x", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

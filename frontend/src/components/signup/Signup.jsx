@@ -16,6 +16,21 @@ function Signup(props) {
         password: password,
       });
       props.storeDetailsInApp(response.data.user.username, response.data.token);
+    } catch (error) {
+      console.log(error);
+    }
+    handleLogin(e);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    // axios post request to url with body as data
+    try {
+      const response = await axios.post('/token-auth/', {
+        username: username,
+        password: password,
+      });
+      props.storeDetailsInApp(response.data.user.username, response.data.token);
       navigate('/');
     } catch (error) {
       console.log(error);
