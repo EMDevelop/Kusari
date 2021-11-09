@@ -47,7 +47,7 @@ export default function MultipleInputs() {
             <Dropdown
               name="wallet-type"
               placeholderValue="Select wallet type"
-              dropdownOptions={['Ethereum', 'Bitcoin']}
+              dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
               widthClass="dropdown-width-max"
               parentSetInputFields={setInputFields}
               parentInputFields={inputFields}

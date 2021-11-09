@@ -4,28 +4,29 @@ from .date_parser import get_time_now_as_string
 from pycoingecko import CoinGeckoAPI
 import requests
 import json
+import os
 from datetime import datetime
 from helper.date_parser import *
 
 
-def get_cryptocompare_token_price_by_id(token_data):
+# def get_cryptocompare_token_price_by_id(token_data):
 
-    # What does this method do?
+#     # What does this method do?
 
-    # It takes in input of a list of dictionaries, one must be 'token': [{'token': 'BONDLY', 'name': 'Bondly Token', 'quantity': 993.3971165225804}, {'token': 'BSJ', 'name': 'BASENJI', 'quantity': 50.0}]
-    # It returns the same data but with an additional field, USDperUnit
+#     # It takes in input of a list of dictionaries, one must be 'token': [{'token': 'BONDLY', 'name': 'Bondly Token', 'quantity': 993.3971165225804}, {'token': 'BSJ', 'name': 'BASENJI', 'quantity': 50.0}]
+#     # It returns the same data but with an additional field, USDperUnit
 
-    url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=" + get_list_of_symbols(token_data) + "&tsyms=USD"
-    response = requests.request("GET", url)
-    token_prices = json.loads(response.text)
-    for token in token_data:
-        try: 
-            token['USDperUnit'] = token_prices[token['token']]['USD']
-        except:
-            token['USDperUnit'] = "N/A"
+#     url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=" + get_list_of_symbols(token_data) + "&tsyms=USD"
+#     response = requests.request("GET", url)
+#     token_prices = json.loads(response.text)
+#     for token in token_data:
+#         try: 
+#             token['USDperUnit'] = token_prices[token['token']]['USD']
+#         except:
+#             token['USDperUnit'] = "N/A"
 
-    # Example Data, token_data: [{'token': 'BONDLY', 'name': 'Bondly Token', 'quantity': 993.3971165225804, 'USDperUnit': 0.07563}, {'token': 'BSJ', 'name': 'BASENJI', 'quantity': 50.0, 'USDperUnit': 'N/A'}]      
-    return token_data
+#     # Example Data, token_data: [{'token': 'BONDLY', 'name': 'Bondly Token', 'quantity': 993.3971165225804, 'USDperUnit': 0.07563}, {'token': 'BSJ', 'name': 'BASENJI', 'quantity': 50.0, 'USDperUnit': 'N/A'}]      
+#     return token_data
 
 
 
@@ -60,6 +61,26 @@ def get_coingecko_all_crypto_prices(request):
     tokenDictionary['last_updated'] = get_time_now_as_string()
     
     set_storage_value(request, tokenDictionary)
+
+# def get_covalent_all_crypto_prices(request):
+#     print('Fetching top 10,000 crypto tokens')
+
+#     page_size = 10000
+#     tokenDictionary = {
+#         "last_updated": "",
+#         "tokens": {
+
+#         }
+#     }
+
+#     url = f"https://api.covalenthq.com/v1/pricing/tickers/?page-size={page_size}&key={os.environ['COVALENT_API_KEY']}"
+
+#     headers = {"Content-Type": "application/json"}
+
+#     response = requests.request("GET", url, headers=headers)
+#     print(response.text)
+
+
 
 def check_if_longer_than_30_seconds(request):
   current_time = get_date_from_string(request.session['price_list']['last_updated'])
