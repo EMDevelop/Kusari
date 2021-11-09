@@ -21,5 +21,8 @@ def append_price_and_image(request, existing_dictionary):
 
 def get_item_from_storage(request, symbol, return_key):
   return request.session['price_list']['tokens'][symbol][return_key]
+  
 
-
+# def get_price_from_session_by_symbol(request, symbol):
+#     print(request.session['price_list']['tokens'][symbol]['current_price'])
+#     return JsonResponse({'getting': 'stuff'})

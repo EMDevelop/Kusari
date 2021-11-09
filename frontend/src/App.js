@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
+import { SnackbarProvider } from 'notistack';
+import { GlobalContextProvider } from './context/globalContext';
 
 // axios
 import axios from 'axios';
@@ -22,7 +24,7 @@ function App() {
   const [username, setUsername] = useState(undefined);
 
   useEffect(() => {
-    authorizeTokenFromStorage();
+    // authorizeTokenFromStorage();
     singleUpdatePrices();
   }, []);
 
@@ -30,19 +32,19 @@ function App() {
     await axios.get('/prices/startup-request-prices');
   };
 
-  const authorizeTokenFromStorage = async (token) => {
-    // If user is logged in, check if their stored token is still valid
-    // This will be valid for 2 weeks by django default.
-    try {
-      const response = await axios.get('/prices/current_user/', {
-        headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
-      });
-      setLoggedIn(true); //???
-      setUsername(response.data.user.username); // previously this.setState({ username: json.username });
-    } catch (error) {
-      setLoggedIn(false);
-    }
-  };
+  // const authorizeTokenFromStorage = async (token) => {
+  //   // If user is logged in, check if their stored token is still valid
+  //   // This will be valid for 2 weeks by django default.
+  //   try {
+  //     const response = await axios.get('/prices/current_user/', {
+  //       headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
+  //     });
+  //     setLoggedIn(true); //???
+  //     setUsername(response.data.user.username); // previously this.setState({ username: json.username });
+  //   } catch (error) {
+  //     setLoggedIn(false);
+  //   }
+  // };
 
   const storeLoginCredentials = (username, token) => {
     setLoggedIn(true);
@@ -57,29 +59,33 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="app">
-        <Navbar
-          loggedIn={loggedIn}
-          // display_form={display_form}
-          handleLogout={handleLogout}
-        />
-        <main>
-          <Routes>
-            <Route path="/" element={<LookupWallet />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route
-              path="/login-signup"
-              element={
-                <LoginSignup storeDetailsInApp={storeLoginCredentials} />
-              }
-            />
-            <Route path="/token/:symbol" element={<TokenInformation />} />
-            <Route path="/top-coins" element={<TopCoins />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+    <GlobalContextProvider>
+      <Router>
+        <div className="app">
+          <Navbar
+            loggedIn={loggedIn}
+            // display_form={display_form}
+            handleLogout={handleLogout}
+          />
+          <SnackbarProvider maxSnack={4}>
+            <main>
+              <Routes>
+                <Route path="/" element={<LookupWallet />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route
+                  path="/login-signup"
+                  element={
+                    <LoginSignup storeDetailsInApp={storeLoginCredentials} />
+                  }
+                />
+                <Route path="/token/:symbol" element={<TokenInformation />} />
+                <Route path="/top-coins" element={<TopCoins />} />
+              </Routes>
+            </main>
+          </SnackbarProvider>
+        </div>
+      </Router>
+    </GlobalContextProvider>
   );
 }
 

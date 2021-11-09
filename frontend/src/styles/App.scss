@@ -63,6 +63,9 @@ input[type='password'] {
   border-radius: $radius;
   letter-spacing: 0.01em;
   padding-left: $small-margin;
+  background-color: transparent;
+  border: 2px solid $c-green !important;
+  color: $c-green;
 }
 
 input[type='text']:focus,
@@ -71,4 +74,15 @@ input[type='password']:focus,
 textarea:focus {
   // border: none;
   outline: none;
+}
+
+.SnackbarItem-variantSuccess {
+  background-color: $c-green !important;
+  color: $c-dark !important;
+}
+.SnackbarItem-variantError {
+  background-color: #f97068ff !important;
+}
+.SnackbarItem-variantInfo {
+  background-color: $frosted !important;
 }

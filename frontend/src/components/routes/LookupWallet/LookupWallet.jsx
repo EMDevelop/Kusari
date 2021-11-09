@@ -1,64 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
 import Dropdown from '../../dropdown/Dropdown';
 import LamboLoader from '../../lamboLoader/LamboLoader';
+import { useSnackbar } from 'notistack';
+import { GlobalContext } from '../../../context/globalContext';
 
 export default function SearchWalletBalance() {
-  const [address, setAddress] = useState(undefined);
-  const [walletDetails, setWalletDetails] = useState([]);
+  // const [address, setAddress] = useState(undefined);
+  // const [walletDetails, setWalletDetails] = useState([]);
   const [walletType, setwalletType] = useState(undefined);
   const [fetchingAddressInfo, setFetchingAddressInfo] = useState(false);
+
+  const { address, setAddress, walletDetails, setWalletDetails } =
+    useContext(GlobalContext);
 
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
     setAddress(e);
   };
 
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+
+  const fail = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+  const info = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'info',
+    });
+  };
+
+  useEffect(() => {
+    info(
+      'Select the wallet type, paste your wallet address and click the search icon'
+    );
+  }, []);
+
   // Handle button click when a user searches for their waller
   const handleButtonClick = async () => {
     try {
+      info('Fetching Wallet Balance...');
       setFetchingAddressInfo(true);
       await getWalletDetails(address);
-      // Commented out to pause loop:
-      // getPricesEveryThirtySecondInterval();
       setFetchingAddressInfo(false);
+      success('Fetching complete');
+    } catch (error) {
+      fail('There was a problem with the request! Please try again');
+      console.log(error);
+    }
+  };
+
+  // Axios API call to get the wallet details
+  const getWalletDetails = async (address) => {
+    try {
+      const response = await axios.get(
+        `/${walletType.toLowerCase()}/wallet-balance/${address}/`
+      );
+      setWalletDetails(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Logic to request new prices every 30 seconds and re-define the state of the wallet details
-  const getPricesEveryThirtySecondInterval = async () => {
-    console.log(`I just ran: ${new Date()}`);
-    await getWalletDetails(address);
-    setTimeout(getPricesEveryThirtySecondInterval, 30000);
-  };
+  useEffect(() => {
+    const getUpdateWallet = async () => {
+      console.log(walletDetails);
+      if (walletDetails.length > 0) {
+        try {
+          const response = await axios.get(`prices/update-wallet-prices`, {
+            params: {
+              tokens: JSON.stringify(walletDetails),
+            },
+          });
+          console.log();
+          setWalletDetails(response.data.updated_tokens);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
 
-  // Axios API call to get the wallet details
-  const getWalletDetails = async (address) => {
-    const response = await axios.get(
-      `/${walletType.toLowerCase()}/wallet-balance/${address}/`
-    );
-    setWalletDetails(response.data);
-    console.log(response.data);
-  };
-
-  // Get Prices, pass in current stored wallet details, return new prices
-  const getUpdatedPricesForCurrentWallet = async () => {
-    // Check if there are currently any tokens in the wallet
-    console.log('oitside');
     if (walletDetails.length > 0) {
-      console.log('Inside If');
-      // If there are, get the prices for each token
-      const response = await axios.get(`prices/update-wallet-prices`, {
-        params: {
-          tokens: JSON.stringify(walletDetails),
-        },
-      });
-      console.log(response);
+      const timer = setInterval(() => getUpdateWallet(), 30000);
+      return () => clearInterval(timer);
     }
-  };
+  }, [walletDetails]);
 
   return (
     <div className="lookup-wallet-container">

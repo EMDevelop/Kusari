@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ function Login(props) {
         password: password,
       });
       props.storeDetailsInApp(response.data.user.username, response.data.token);
+      navigate('/');
     } catch (error) {
       console.log(error);
     }

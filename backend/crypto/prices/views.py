@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, UserSerializerWithToken
-
+from helper.get_from_session_storage import *
 
 # Create your views here.
 def get_coin_gecko_prices(request):
@@ -22,27 +22,46 @@ def get_coin_gecko_prices(request):
     else:
         return JsonResponse({'status': 'has not been 30 seconds'})
 
-def get_price_from_session_by_symbol(request, symbol):
-    print(request.session['price_list']['tokens'][symbol]['current_price'])
-    return JsonResponse({'getting': 'stuff'})
 
-# This is a repeat request.
-# It should check if new prices are needed
-# If they are, go get them and then return the Json
-# Otherwise do not. 
 def update_wallet_balance(request):
-  # if it hasn't been 30 seconds, return json: not been 30 seconds
-    # get_coin_gecko_prices(request)
-    # current_wallet = request.GET['tokens']
-    # for token in current_wallet:
-    #     # check storage using token as key
-    #     if token in request.session['price_list']['tokens']:
-    #         # set current_wallet token to the storage token
-    #         current_wallet[token] = request.session['price_list']['tokens'][token]['current_price']
-    return JsonResponse({'tokens': 'current_wallet'})
+    # This is a repeat request triggered every 30 seconds to update the `lookup wallet` screen
+    # We fetch the most up to date prices froms storage and return them to the screen. 
+    get_coin_gecko_prices(request)
+    print(1)
+    current_wallet = json.loads(request.GET['tokens'])
+    print('current_wallet')
+    print(current_wallet)
+    
+    for token in current_wallet:
+        print(2)
+        print(token)
+        print(token['USDperUnit'])
+        try:
+            token['USDperUnit'] = get_item_from_storage(request, token['token'].lower(), 'current_price')
+        except:
+            token['USDperUnit'] = "N/A"
+
+        if not token['USDperUnit'] == "N/A":
+            try:
+                token['BalanceInUSD'] = token['USDperUnit'] * token['quantity']
+            except:
+                token['BalanceInUSD'] = "N/A"
+    
+    return JsonResponse({'updated_tokens': current_wallet})
 
 
 
+
+
+
+
+
+
+
+
+
+
+# Hope to refactor this into a Users app. 
 @api_view(['GET'])
 def current_user(request):
     """
