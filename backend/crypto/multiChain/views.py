@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -9,3 +10,6 @@ def get_all_wallet_prices(request, username):
     # Get prices as usual from storage
     # Return the token info  and the prices to the client.
     return render(request, 'multiChain/wallet_prices.html')
+
+def walletsOverview(request):
+    return JsonResponse('Wallets base point', safe=False)

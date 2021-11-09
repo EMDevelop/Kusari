@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'helper',
     'prices.apps.PricesConfig',
+    'multiChain.apps.MultichainConfig',
 ]
 
 MIDDLEWARE = [
