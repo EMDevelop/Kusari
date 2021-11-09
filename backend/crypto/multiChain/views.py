@@ -38,3 +38,11 @@ def walletDetail(request, pk):
     wallets = Wallet.objects.get(id=pk)
     serializer = WalletSerializer(wallets, many=False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def walletCreate(request):
+    serializer = WalletSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    
+    return Response(serializer.data)
