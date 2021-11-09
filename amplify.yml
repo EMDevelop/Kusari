@@ -23,6 +23,7 @@ frontend:
         - cd ..
     build:
       commands:
+        - pipenv shell
         - npm run bob
   artifacts:
     baseDirectory: frontend/build
