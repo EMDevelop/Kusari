@@ -4,7 +4,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1fr 6fr;
+  grid-template-rows: 2fr 6fr;
   // padding-bottom: 5%;
 }
 
@@ -36,13 +36,18 @@
 }
 
 .profile-save-container {
+  display: flex;
+  justify-content: flex-end;
   align-items: right;
+  float: right;
 }
 
 .icon-save-profile {
   width: 100%;
   align-items: right;
   color: $c-green;
+  float: right;
+  align-self: right;
 }
 
 .add-wallets-container {

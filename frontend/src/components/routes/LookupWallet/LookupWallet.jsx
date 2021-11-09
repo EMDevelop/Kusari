@@ -15,26 +15,12 @@ export default function SearchWalletBalance() {
   const { address, setAddress, walletDetails, setWalletDetails } =
     useContext(GlobalContext);
 
-  const { enqueueSnackbar } = useSnackbar();
-
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
     setAddress(e);
   };
 
-  // Handle button click when a user searches for their waller
-  const handleButtonClick = async () => {
-    try {
-      info('Fetching Wallet Balance...');
-      setFetchingAddressInfo(true);
-      await getWalletDetails(address);
-      setFetchingAddressInfo(false);
-      success('Fetching complete');
-    } catch (error) {
-      fail('There was a problem with the request! Please try again');
-      console.log(error);
-    }
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const success = (message) => {
     enqueueSnackbar(message, {
@@ -51,6 +37,26 @@ export default function SearchWalletBalance() {
     enqueueSnackbar(message, {
       variant: 'info',
     });
+  };
+
+  useEffect(() => {
+    info(
+      'Select the wallet type, paste your wallet address and click the search icon'
+    );
+  }, []);
+
+  // Handle button click when a user searches for their waller
+  const handleButtonClick = async () => {
+    try {
+      info('Fetching Wallet Balance...');
+      setFetchingAddressInfo(true);
+      await getWalletDetails(address);
+      setFetchingAddressInfo(false);
+      success('Fetching complete');
+    } catch (error) {
+      fail('There was a problem with the request! Please try again');
+      console.log(error);
+    }
   };
 
   // Axios API call to get the wallet details

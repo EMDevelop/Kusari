@@ -78,6 +78,7 @@ textarea:focus {
 
 .SnackbarItem-variantSuccess {
   background-color: $c-green !important;
+  color: $c-dark !important;
 }
 .SnackbarItem-variantError {
   background-color: #f97068ff !important;
