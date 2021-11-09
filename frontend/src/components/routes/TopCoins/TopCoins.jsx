@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function TopCoins() {
   const [items, setItems] = useState([]);
@@ -7,11 +8,10 @@ export default function TopCoins() {
   useEffect(() => {
     try {
       async function fetchData() {
-        const response = await fetch(
+        const response = await axios.get(
           "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
         );
-        console.log(response);
-        setItems(response);
+        setItems(response.data);
         setIsLoaded(true);
       }
       fetchData();
@@ -28,9 +28,15 @@ export default function TopCoins() {
         <div className="top-coins-page">
           <ul>
             {items.map((item) => {
-              <li key={item.id}>
-                Coin: {item.coin} | Price: {item.price}
-              </li>;
+              return (
+                <li key={item.id}>
+                  {/* <img src={item.image} alt="" /> */}
+                  <h4>
+                    Currency: {item.name} | Current Price: ${item.current_price}{" "}
+                    | Market Cap: ${item.market_cap}
+                  </h4>
+                </li>
+              );
             })}
             ;
           </ul>
@@ -41,48 +47,3 @@ export default function TopCoins() {
     <div>Loading...</div>
   );
 }
-
-// class TopCoinsPage extends Components {
-
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       items: [],
-//       isLoaded: false,
-//     }
-//   }
-
-//   componentDidMount() {
-
-//     fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=GBP&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h')
-//         .then(res => res.json())
-//         .then(json => {
-//           this.setState({
-//             isLoaded: true,
-//             items: json,
-//           })
-//         });
-//   }
-
-//   render() {
-
-//     var { isLoaded, items } = this.state;
-
-//     if (!isLoaded) {
-//       return <div>Loading...</div>;
-//     }
-
-//     else {}
-//       return (
-//         <div className="top-coins-page">
-//             <ul>
-//               {items.map(item => {
-//                   <li key={item.id}>
-//                       Coin: {item.coin} | Price: {item.price}
-//                   </li>
-//               })};
-//             </ul>
-//         </div>
-//       );
-//     }
-// }
