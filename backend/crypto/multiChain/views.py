@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import WalletSerializer
 from .models import Wallet
+from .models import User
 
 # Create your views here.
 
@@ -61,3 +62,10 @@ def walletDelete(request, pk):
     wallet = Wallet.objects.get(id=pk)
     wallet.delete()
     return Response('Item deleted')
+
+@api_view(['GET'])
+def userWalletList(request, user_id):
+    print(request)
+    wallets = Wallet.objects.filter(user=user_id)
+    serializer = WalletSerializer(wallets, many=True)
+    return Response(serializer.data)
