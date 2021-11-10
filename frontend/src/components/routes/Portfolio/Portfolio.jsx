@@ -12,6 +12,7 @@ export default function Portfolio() {
       try {
         const response = await axios.get(`multi/user-portfolio/${userID}/`);
         const sortedData = convertDataForDataTable(response.data);
+        console.log(sortedData);
         setPortfolioTokens(sortedData);
       } catch (error) {
         console.log(error);
