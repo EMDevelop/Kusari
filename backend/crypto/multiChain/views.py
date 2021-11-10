@@ -67,10 +67,8 @@ def userWalletList(request, user_id):
     arrayOfWallets = serializer.data
     if len(arrayOfWallets) == 0:
         singleWallet = Wallet.objects.create(user = request.user, wallet_type = "", wallet_address = "")
-        add_wallets_to_storage(request, singleWallet)
         return Response(json.load(singleWallet))
     else:   
-        add_wallets_to_storage(request, arrayOfWallets)    
         return Response(arrayOfWallets)
 
 @api_view(['GET'])
@@ -80,14 +78,8 @@ def get_all_wallet_prices(request, user_id):
     # Get prices as usual from storage
     # Return the token info  and the prices to the client.
     wallets = Wallet.objects.filter(user=user_id)
-    print(wallets)
-    print('Before Serializing')
     serializer = WalletSerializer(wallets, many=True)
     user_wallets = serializer.data
-    print(user_wallets)
-    print('After serializing')
-    # user_wallets = request.session['wallet_list']
-    print(user_wallets)
     for wallet in user_wallets:
         if wallet['wallet_type'] == 'Ethereum':
             print(get_ethereum_and_erc20_wallet_balance(request, wallet['wallet_address'], "multi").content)
