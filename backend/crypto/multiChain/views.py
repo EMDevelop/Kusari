@@ -8,16 +8,10 @@ from .models import Wallet
 from .models import User
 import json
 from crypto.helper.add_dictionary_to_session import *
+from crypto.bsc.views import get_bep20_wallet_balance
+from crypto.ethereum.views import get_ethereum_and_erc20_wallet_balance
 
 # Create your views here.
-
-
-def get_all_wallet_prices(request, user_id):
-    # Go into model, get the wallets for that user
-    # for each address, get prices feturned from each app and append do dictionary
-    # Get prices as usual from storage
-    # Return the token info  and the prices to the client.
-    return render(request, 'multiChain/wallet_prices.html')
 
 @api_view(['GET'])
 def walletsOverview(request):
@@ -78,3 +72,18 @@ def userWalletList(request, user_id):
     else:   
         add_wallets_to_storage(request, arrayOfWallets)    
         return Response(arrayOfWallets)
+
+def get_all_wallet_prices(request, user_id):
+    # Go into model, get the wallets for that user
+    # for each address, get prices feturned from each app and append do dictionary
+    # Get prices as usual from storage
+    # Return the token info  and the prices to the client.
+    user_wallets = request.session['wallet_list']
+    print(user_wallets)
+    for wallet in user_wallets:
+        if wallet.wallet_type == 'Ethereum':
+            get_ethereum_and_erc20_wallet_balance(request, wallet.wallet_address, "multi")
+        elif wallet.wallet_type == 'BSC':
+            get_bep20_wallet_balance(request, wallet.wallet_address, "multi")
+    
+    return render(request, 'multiChain/wallet_prices.html')
