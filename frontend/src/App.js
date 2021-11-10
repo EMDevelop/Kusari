@@ -13,11 +13,11 @@ import Navbar from './components/routes/Navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
-import MyWallets from './components/routes/MyWallets/MyWallets';
 import LoginSignup from './components/routes/LoginSignup/LoginSignup';
 import TokenInformation from './components/routes/TokenInformation/TokenInformation';
 import TopCoins from './components/routes/TopCoins/TopCoins';
 import Portfolio from './components/routes/Portfolio/Portfolio';
+import MyWallets from './components/routes/MyWallets/MyWallets';
 
 function App() {
   const { enqueueSnackbar } = useSnackbar();

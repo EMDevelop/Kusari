@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 
 import MultipleInputs from '../../multipleInputs/MultipleInputs';
 
-export default function Profile() {
+export default function MyWallets() {
   const { enqueueSnackbar } = useSnackbar();
 
   const success = (message) => {

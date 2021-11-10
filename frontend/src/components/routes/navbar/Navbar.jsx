@@ -65,7 +65,7 @@ function Navbar(props) {
           </a>
         </li>
         <li>
-          <a onClick={(e) => handleClick(e, '/')}>
+          <a onClick={(e) => handleClick(e, '/portfolio')}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faChartPie} />
             </div>

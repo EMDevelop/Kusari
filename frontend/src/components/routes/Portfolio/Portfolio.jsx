@@ -6,5 +6,9 @@ export default function Portfolio() {
     'multi/get-prices/:username';
   }, []);
 
-  return <div></div>;
+  return (
+    <div className="portfolio-page">
+      <h1>My Portfolio</h1>
+    </div>
+  );
 }
