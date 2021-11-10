@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-import requests
-import json
 from crypto.helper.get_from_session_storage import append_price_and_image
 from crypto.helper.get_token_current_value import get_token_current_value_in_USD
 import blockcypher
