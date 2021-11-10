@@ -79,6 +79,7 @@ export default function MultipleInputs() {
     values[values.findIndex((x) => x.id === walletID)][e.target.name] =
       e.target.value;
     setInputFields(values);
+    console.log(inputFields);
   };
 
   const handleAdd = async () => {
@@ -126,13 +127,14 @@ export default function MultipleInputs() {
           <div key={wallet['id']} className="multipleInputRow">
             <div className="multi-dropdown">
               <Dropdown
+                location="multipleInputs"
                 name="wallet_type"
                 placeholderValue="Select wallet type"
                 dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
                 widthClass="dropdown-width-max"
                 parentSetInputFields={setInputFields}
                 parentInputFields={inputFields}
-                onChange={(e) => handleDropdownChange(e, wallet['id'])}
+                parentWalletID={wallet['id']}
                 // currentIndex={index}
               />
             </div>

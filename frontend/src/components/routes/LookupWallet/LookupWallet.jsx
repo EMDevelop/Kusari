@@ -102,6 +102,7 @@ export default function SearchWalletBalance() {
       <h1>Lookup Wallet</h1>
       <div className="address-input-form">
         <Dropdown
+          location="lookupWallet"
           placeholderValue="Select wallet type"
           dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
           handleOptionSelect={setwalletType}

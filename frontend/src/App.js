@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
-import { SnackbarProvider } from 'notistack';
+
 import { GlobalContext } from './context/globalContext';
+import { useSnackbar } from 'notistack';
 
 // axios
 import axios from 'axios';
@@ -19,6 +20,24 @@ import TopCoins from './components/routes/TopCoins/TopCoins';
 import Portfolio from './components/routes/Portfolio/Portfolio';
 
 function App() {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+  const fail = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+  const info = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'info',
+    });
+  };
+
   const { loggedIn, setLoggedIn, setLoggedInUserName } =
     useContext(GlobalContext);
 
@@ -53,6 +72,7 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     setLoggedInUserName('');
+    success('Logged out successfully.');
   };
 
   return (
@@ -63,23 +83,21 @@ function App() {
           // display_form={display_form}
           handleLogout={handleLogout}
         />
-        <SnackbarProvider maxSnack={4}>
-          <main>
-            <Routes>
-              <Route path="/" element={<LookupWallet />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route
-                path="/login-signup"
-                element={
-                  <LoginSignup storeDetailsInApp={storeLoginCredentials} />
-                }
-              />
-              <Route path="/token/:symbol" element={<TokenInformation />} />
-              <Route path="/top-coins" element={<TopCoins />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-            </Routes>
-          </main>
-        </SnackbarProvider>
+        <main>
+          <Routes>
+            <Route path="/" element={<LookupWallet />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/login-signup"
+              element={
+                <LoginSignup storeDetailsInApp={storeLoginCredentials} />
+              }
+            />
+            <Route path="/token/:symbol" element={<TokenInformation />} />
+            <Route path="/top-coins" element={<TopCoins />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+          </Routes>
+        </main>
       </div>
     </Router>
   );
