@@ -1,0 +1,29 @@
+[
+  {
+    "token": "ETH",
+    "name": "Ethereum",
+    "quantity": 0,
+    "contract_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "USDperUnit": 4839.6577,
+    "image": "https://logos.covalenthq.com/tokens/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+    "BalanceInUSD": 0
+  },
+  {
+    "token": "BONDLY",
+    "name": "Bondly Token",
+    "quantity": 993.3971165225804,
+    "contract_address": "0xd2dda223b2617cb616c1580db421e4cfae6a8a85",
+    "USDperUnit": 0.12691604,
+    "image": "https://logos.covalenthq.com/tokens/0xd2dda223b2617cb616c1580db421e4cfae6a8a85.png",
+    "BalanceInUSD": 126.07802817646449
+  },
+  {
+    "token": "BSJ",
+    "name": "BASENJI",
+    "quantity": 50,
+    "contract_address": "0x43901e05f08f48546fff8d6f8df108f60570498b",
+    "USDperUnit": "N/A",
+    "image": "https://www.cryptocurrencymarket.uk/coins_images/shitcoin-token/large.png",
+    "BalanceInUSD": "N/A"
+  }
+]
