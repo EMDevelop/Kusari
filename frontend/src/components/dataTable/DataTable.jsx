@@ -13,7 +13,7 @@ export default function DataTable(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    filterRowData('USDperUnit');
+    !props.label === 'topCoins' && filterRowData('USDperUnit');
   }, [props.rowData, tickZeroBalance]);
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function DataTable(props) {
     </>
   );
 
-  const topCoinsRowData = (
+  const topCoinsRowData = props.label === 'topCoins' && (
     <>
       <table cellPadding="0" cellSpacing="0" border="0">
         <tbody>
@@ -165,9 +165,7 @@ export default function DataTable(props) {
         </table>
       </div>
       <div className="tbl-content">
-        {filteredData && props.label === 'topCoins'
-          ? topCoinsRowData
-          : walletTokenRowData}
+        {props.label === 'topCoins' ? topCoinsRowData : walletTokenRowData}
       </div>
     </div>
   );
