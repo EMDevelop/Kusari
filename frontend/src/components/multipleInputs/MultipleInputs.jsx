@@ -21,7 +21,8 @@ export default function MultipleInputs() {
   const { userID } = useContext(GlobalContext);
   const [inputFields, setInputFields] = useState([]);
   const [latestID, setLatestID] = useState(0);
-  const [deleted, setDeleted] = useState(true);
+  const [deleted, setDeleted] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -52,12 +53,13 @@ export default function MultipleInputs() {
         const response = await fetchAllWalletData();
         setInputFields(response.data);
         setDeleted(false);
+        setUpdated(false);
       } catch (error) {
         console.log(error);
       }
     }
     getWallets();
-  }, [, latestID, deleted]);
+  }, [, latestID, deleted, updated]);
 
   const fetchAllWalletData = async () => {
     return await axios.get(`multi/user-wallet-list/${userID}`, {
@@ -147,6 +149,7 @@ export default function MultipleInputs() {
           fail('Failed, wallet was not updated.');
         }
       });
+    setUpdated(true);
   };
 
   return (
@@ -154,6 +157,7 @@ export default function MultipleInputs() {
       <div className="icon-save-profile" onClick={() => handleSave()}>
         <FontAwesomeIcon icon={faSave} />
       </div>
+      {console.log(inputFields)}
       {inputFields || inputFields.length === 0 ? (
         inputFields.map((wallet) => (
           <div key={wallet['id']} className="multipleInputRow">
@@ -167,11 +171,13 @@ export default function MultipleInputs() {
                 parentSetInputFields={setInputFields}
                 parentInputFields={inputFields}
                 parentWalletID={wallet['id']}
+                parentValue={wallet['wallet_type']}
                 // currentIndex={index}
               />
             </div>
             <div className="multi-input">
               <input
+                value={wallet['wallet_address']}
                 name="wallet_address"
                 type="text"
                 className="multi-input-field"

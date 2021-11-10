@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Dropdown(props) {
   const [selectedValue, setSelectedValue] = useState(props.placeholderValue);
@@ -8,18 +8,16 @@ export default function Dropdown(props) {
     props.handleOptionSelect && props.handleOptionSelect(e.target.value);
   };
 
+  useEffect(() => {
+    props.parentValue && setSelectedValue(props.parentValue);
+  }, []);
+
   const handleMultipleInputs = (e) => {
     let values = [...props.parentInputFields];
-    console.log(values);
-    console.log('props.parentWalletID' + props.parentWalletID);
-    console.log('props.parentInputFields' + props.parentInputFields);
-    console.log(values);
-
     values[values.findIndex((x) => x.id === props.parentWalletID)][props.name] =
       e.target.value;
 
     props.parentSetInputFields(values);
-    console.log(values);
     setSelectedValue(e.target.value);
   };
 
