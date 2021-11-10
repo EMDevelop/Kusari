@@ -34,26 +34,23 @@ def walletsOverview(request):
 def walletList(request):
     wallets = Wallet.objects.all()
     serializer = WalletSerializer(wallets, many=True)
+    
     return Response(serializer.data)
 
 @api_view(['GET'])
 def walletDetail(request, pk):
     wallets = Wallet.objects.get(id=pk)
     serializer = WalletSerializer(wallets, many=False)
+
     return Response(serializer.data)
 
 # -------------------------
 @api_view(['POST'])
 def walletCreate(request):
-    print('creating wallet from plus symbol')
     serializer = WalletSerializer(data=request.data['body'])
-    print('checkpoint 1')
-
     if serializer.is_valid():
-        print('checkpoint 2')
         serializer.save()
-    
-    print('checkpoint 3')
+
     return Response(serializer.data)
 
 
