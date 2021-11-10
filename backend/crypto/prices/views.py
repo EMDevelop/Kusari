@@ -15,8 +15,8 @@ from .serializers import UserSerializer, UserSerializerWithToken
 from helper.get_from_session_storage import *
 
 # Create your views here.
-def get_coin_gecko_prices(request):
-    get_coingecko_all_crypto_prices(request)
+def get_covalent_prices(request):
+    get_covalent_all_crypto_prices(request)
     return JsonResponse({'status': 'Fetched prices'})
 
 
@@ -24,12 +24,12 @@ def get_coin_gecko_prices(request):
 def update_wallet_balance(request):
     # This is a repeat request triggered every 30 seconds to update the `lookup wallet` screen
     # We fetch the most up to date prices froms storage and return them to the screen. 
-    get_coin_gecko_prices(request)
+    get_covalent_all_crypto_prices(request)
     current_wallet = json.loads(request.GET['tokens'])
 
     for token in current_wallet:
         try:
-            token['USDperUnit'] = get_item_from_storage(request, token['token'].lower(), 'current_price')
+            token['USDperUnit'] = get_item_from_storage(request, token['contract_address'].lower(), 'current_price')
         except:
             token['USDperUnit'] = "N/A"
 
@@ -40,18 +40,6 @@ def update_wallet_balance(request):
                 token['BalanceInUSD'] = "N/A"
     
     return JsonResponse({'updated_tokens': current_wallet})
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Hope to refactor this into a Users app. 
 @api_view(['GET'])

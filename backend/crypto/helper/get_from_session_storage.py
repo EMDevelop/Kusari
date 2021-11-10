@@ -7,20 +7,20 @@ def append_price_and_image(request, existing_dictionary):
     # and append it to the existing_dictionary
     for token in existing_dictionary:
         try:
-            token['USDperUnit'] = get_item_from_storage(request, token['token'].lower(), 'current_price')
+            token['USDperUnit'] = get_item_from_storage(request, token['contract_address'].lower(), 'current_price')
         except:
             token['USDperUnit'] = "N/A"
     
     for token in existing_dictionary:
         try: 
-            token['image'] = get_item_from_storage(request, token['token'].lower(), 'image')
+            token['image'] = get_item_from_storage(request, token['contract_address'].lower(), 'image')
         except:
             token['image'] = "https://www.cryptocurrencymarket.uk/coins_images/shitcoin-token/large.png"
     
     return existing_dictionary
 
-def get_item_from_storage(request, symbol, return_key):
-  return request.session['price_list']['tokens'][symbol][return_key]
+def get_item_from_storage(request, contract_address, return_key):
+  return request.session['price_list']['tokens'][contract_address][return_key]
   
 
 # def get_price_from_session_by_symbol(request, symbol):
