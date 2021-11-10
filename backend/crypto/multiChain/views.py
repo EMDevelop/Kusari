@@ -11,7 +11,7 @@ import json
 # Create your views here.
 
 
-def get_all_wallet_prices(request, username):
+def get_all_wallet_prices(request, user_id):
     # Go into model, get the wallets for that user
     # for each address, get prices feturned from each app and append do dictionary
     # Get prices as usual from storage

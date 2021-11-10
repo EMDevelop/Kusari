@@ -10,5 +10,5 @@ urlpatterns = [
     path('wallet-update/<str:pk>/', views.walletUpdate, name='wallet-update'),
     path('wallet-delete/<str:pk>/', views.walletDelete, name='wallet-delete'),
 
-    path('get-prices/<username>', views.get_all_wallet_prices)
+    path('get-prices/<user_id>', views.get_all_wallet_prices)
 ]
