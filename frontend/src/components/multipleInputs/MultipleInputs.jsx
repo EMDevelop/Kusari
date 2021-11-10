@@ -44,26 +44,13 @@ export default function MultipleInputs() {
       try {
         const response = await fetchAllWalletData();
         setInputFields(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getWallets();
-  }, [latestID]);
-
-  // Delete use Effect
-  useEffect(() => {
-    async function getWallets() {
-      try {
-        const response = await fetchAllWalletData();
-        setInputFields(response.data);
         setDeleted(false);
       } catch (error) {
         console.log(error);
       }
     }
     getWallets();
-  }, [deleted]);
+  }, [latestID, deleted]);
 
   const fetchAllWalletData = async () => {
     return await axios.get(`multi/user-wallet-list/${userID}`, {
