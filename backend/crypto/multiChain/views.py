@@ -74,12 +74,19 @@ def userWalletList(request, user_id):
         return Response(arrayOfWallets)
 
 @api_view(['GET'])
-def get_all_wallet_prices(request):
+def get_all_wallet_prices(request, user_id):
     # Go into model, get the wallets for that user
     # for each address, get prices feturned from each app and append do dictionary
     # Get prices as usual from storage
     # Return the token info  and the prices to the client.
-    user_wallets = request.session['wallet_list']
+    wallets = Wallet.objects.filter(user=user_id)
+    print(wallets)
+    print('Before Serializing')
+    serializer = WalletSerializer(wallets, many=True)
+    user_wallets = serializer.data
+    print(user_wallets)
+    print('After serializing')
+    # user_wallets = request.session['wallet_list']
     print(user_wallets)
     for wallet in user_wallets:
         if wallet['wallet_type'] == 'Ethereum':
@@ -88,5 +95,5 @@ def get_all_wallet_prices(request):
         elif wallet['wallet_type'] == 'BSC':
             print(get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content)
     
-
-    return render(request, 'multiChain/wallet_prices.html')
+    return Response(user_wallets)
+    # return render(request, 'multiChain/wallet_prices.html')

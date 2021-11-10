@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.walletsOverview, name='wallets-overview'),
     path('wallet-list/', views.walletList, name='wallet-list'),
-    path('user-portfolio/', views.get_all_wallet_prices, name='user-portfolio'),
+    path('user-portfolio/<user_id>/', views.get_all_wallet_prices, name='user-portfolio'),
     path('user-wallet-list/<user_id>/', views.userWalletList, name='user-wallet-list'),
     path('wallet-detail/<str:pk>/', views.walletDetail, name='wallet-detail'),
     path('wallet-create/', views.walletCreate, name='wallet-create'),
