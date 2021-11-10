@@ -6,6 +6,7 @@ import { GlobalContext } from '../../context/globalContext';
 import axios from 'axios';
 import LamboLoader from '../lamboLoader/LamboLoader';
 import { useCookies } from 'react-cookie';
+import { useSnackbar } from 'notistack';
 
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
@@ -22,21 +23,27 @@ export default function MultipleInputs() {
   const [latestID, setLatestID] = useState(0);
   const [deleted, setDeleted] = useState(true);
 
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+  const fail = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+  const info = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'info',
+    });
+  };
+
   // Need to configure CSRS
   const [cookies, setCookie] = useCookies(['name']);
   const csrfToken = cookies.csrftoken;
-
-  useEffect(() => {
-    async function getWallets() {
-      try {
-        const response = await fetchAllWalletData();
-        setInputFields(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getWallets();
-  }, []);
 
   // Add use Effect
   useEffect(() => {
@@ -50,7 +57,7 @@ export default function MultipleInputs() {
       }
     }
     getWallets();
-  }, [latestID, deleted]);
+  }, [, latestID, deleted]);
 
   const fetchAllWalletData = async () => {
     return await axios.get(`multi/user-wallet-list/${userID}`, {
@@ -61,6 +68,13 @@ export default function MultipleInputs() {
   };
 
   const handleInputChange = (e, walletID) => {
+    let values = [...inputFields];
+    values[values.findIndex((x) => x.id === walletID)][e.target.name] =
+      e.target.value;
+    setInputFields(values);
+  };
+
+  const handleDropdownChange = (e, walletID) => {
     let values = [...inputFields];
     values[values.findIndex((x) => x.id === walletID)][e.target.name] =
       e.target.value;
@@ -80,9 +94,11 @@ export default function MultipleInputs() {
           wallet_type: '',
         },
       });
+      success('Wallet Added Successfully');
       if (latestID < response.data.id) setLatestID(response.data.id);
     } catch (error) {
       console.log(error);
+      fail('Failed, wallet was not created.');
     }
   };
 
@@ -96,8 +112,10 @@ export default function MultipleInputs() {
         },
       });
       if (response.status === 200) setDeleted(true);
+      success('Wallet Removed Successfully');
     } catch (error) {
       console.log(error);
+      fail('Failed, wallet was not deleted.');
     }
   };
 
@@ -114,6 +132,7 @@ export default function MultipleInputs() {
                 widthClass="dropdown-width-max"
                 parentSetInputFields={setInputFields}
                 parentInputFields={inputFields}
+                onChange={(e) => handleDropdownChange(e, wallet['id'])}
                 // currentIndex={index}
               />
             </div>
