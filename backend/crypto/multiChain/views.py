@@ -7,7 +7,8 @@ from .serializers import WalletSerializer
 from .models import Wallet
 from .models import User
 import json
-
+from django.views.decorators.csrf import ensure_csrf_cookie
+# from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -41,13 +42,20 @@ def walletDetail(request, pk):
     serializer = WalletSerializer(wallets, many=False)
     return Response(serializer.data)
 
+# -------------------------
 @api_view(['POST'])
 def walletCreate(request):
-    serializer = WalletSerializer(data=request.data)
+    print('creating wallet from plus symbol')
+    serializer = WalletSerializer(data=request.data['body'])
+    print('checkpoint 1')
+
     if serializer.is_valid():
+        print('checkpoint 2')
         serializer.save()
     
+    print('checkpoint 3')
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 def walletUpdate(request, pk):
@@ -67,9 +75,11 @@ def walletDelete(request, pk):
 # There will still be an empty saved walled which needs updating - this could cause problems later
 @api_view(['GET'])
 def userWalletList(request, user_id):
+    print('getting user wallets')
     wallets = Wallet.objects.filter(user=user_id)
     serializer = WalletSerializer(wallets, many=True)
     arrayOfWallets = serializer.data
+    print(arrayOfWallets)
     if len(arrayOfWallets) == 0:
         singleWallet = Wallet.objects.create(user = request.user, wallet_type = "", wallet_address = "")
         return Response(json.load(singleWallet))
