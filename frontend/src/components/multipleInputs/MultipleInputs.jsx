@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faSave } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from '../dropdown/Dropdown';
 import { GlobalContext } from '../../context/globalContext';
 import axios from 'axios';
@@ -120,8 +120,40 @@ export default function MultipleInputs() {
     }
   };
 
+  const handleSave = () => {
+    inputFields &&
+      inputFields.forEach(async (wallet) => {
+        try {
+          const response = await axios.put(
+            `multi/wallet-update/${wallet.id}/`,
+            {
+              headers: {
+                csrftoken: csrfToken,
+                Authorization: `JWT ${localStorage.getItem('token')}`,
+              },
+              body: {
+                user: userID,
+                wallet_address: wallet.wallet_address,
+                wallet_type: wallet.wallet_type,
+              },
+            }
+          );
+          console.log(response);
+          if (response.status === 200) {
+            success('Wallet Updated Successfully');
+          }
+        } catch (error) {
+          console.log(error);
+          fail('Failed, wallet was not updated.');
+        }
+      });
+  };
+
   return (
     <>
+      <div className="icon-save-profile" onClick={() => handleSave()}>
+        <FontAwesomeIcon icon={faSave} />
+      </div>
       {inputFields || inputFields.length === 0 ? (
         inputFields.map((wallet) => (
           <div key={wallet['id']} className="multipleInputRow">

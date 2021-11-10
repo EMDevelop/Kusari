@@ -54,10 +54,10 @@ def walletCreate(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 def walletUpdate(request, pk):
     wallet = Wallet.objects.get(id=pk)
-    serializer = WalletSerializer(instance=wallet, data=request.data)
+    serializer = WalletSerializer(instance=wallet, data=request.data['body'])
     if serializer.is_valid():
         serializer.save()
     
