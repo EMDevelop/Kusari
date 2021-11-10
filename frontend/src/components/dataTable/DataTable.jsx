@@ -10,15 +10,14 @@ export default function DataTable(props) {
   const [filteredData, setFilteredData] = useState(props.rowData);
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
   const [rowDataToDisplay, setRowDataToDisplay] = useState(undefined);
-  const [topCoins, setTopCoins] = useState(undefined);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.label === 'porfolio' || props.data === 'lookupWallet') {
+    if (props.label === 'portfolio' || props.data === 'lookupWallet') {
       setItemsToFilter('USDperUnit');
+      setFilteredData(props.rowData);
     }
-    setFilteredData(props.rowData);
   }, [props.rowData, tickZeroBalance]);
 
   const filterRowData = (filterOn) => {
@@ -66,52 +65,51 @@ export default function DataTable(props) {
 
   const walletTokenRowData = (
     <>
-      {filteredData && (
-        <table cellPadding="0" cellSpacing="0" border="0">
-          <tbody>
-            {console.log('filteredData::::::::')}
-            {console.log(filteredData)}
-            {filteredData.map((row) => {
-              return (
-                <tr
-                  className="data-row"
-                  onClick={(e) => handleRowClick(e, row['token'])}
-                >
-                  {props.label === 'portfolio' && (
-                    <>
-                      <td>{row['type']}</td>
-                      <td>{abbreviateAddress(row['address'])}</td>
-                    </>
-                  )}
-                  <td>
-                    <img
-                      className="token-icon"
-                      src={row['image']}
-                      alt={row['token']}
-                    />
-                  </td>
-                  <td>{row['token']}</td>
-                  <td>{row['name']}</td>
-                  <td>{row['quantity']}</td>
-                  <td>
-                    {row['USDperUnit'] === 'N/A'
-                      ? '-'
-                      : `$${row['USDperUnit']}`}
-                  </td>
-                  <td>
-                    {row['BalanceInUSD'] === 'N/A'
-                      ? '-'
-                      : `$${row['BalanceInUSD']
-                          .toFixed(2)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+      {(props.label === 'portfolio' || props.data === 'lookupWallet') &&
+        filteredData && (
+          <table cellPadding="0" cellSpacing="0" border="0">
+            <tbody>
+              {filteredData.map((row) => {
+                return (
+                  <tr
+                    className="data-row"
+                    onClick={(e) => handleRowClick(e, row['token'])}
+                  >
+                    {props.label === 'portfolio' && (
+                      <>
+                        <td>{row['type']}</td>
+                        <td>{abbreviateAddress(row['address'])}</td>
+                      </>
+                    )}
+                    <td>
+                      <img
+                        className="token-icon"
+                        src={row['image']}
+                        alt={row['token']}
+                      />
+                    </td>
+                    <td>{row['token']}</td>
+                    <td>{row['name']}</td>
+                    <td>{row['quantity']}</td>
+                    <td>
+                      {row['USDperUnit'] === 'N/A'
+                        ? '-'
+                        : `$${row['USDperUnit']}`}
+                    </td>
+                    <td>
+                      {row['BalanceInUSD'] === 'N/A'
+                        ? '-'
+                        : `$${row['BalanceInUSD']
+                            .toFixed(2)
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
     </>
   );
 
@@ -138,6 +136,7 @@ export default function DataTable(props) {
     <>
       <table cellPadding="0" cellSpacing="0" border="0">
         <tbody>
+          {console.log(props.rowData)}
           {props.rowData.map((row) => {
             return (
               <tr
@@ -178,7 +177,7 @@ export default function DataTable(props) {
 
   return (
     <div>
-      {!props.label === 'topCoins' && (
+      {(props.label === 'portfolio' || props.data === 'lookupWallet') && (
         <div className="filter-container">
           <div className="filter zero-value">
             <p className="filter-text">Hide Zero Balance</p>
@@ -206,9 +205,7 @@ export default function DataTable(props) {
           props.label === 'topCoins' ? 'tbl-content-top-coins' : 'tbl-content'
         }
       >
-        {(props.rowData || filteredData) && props.label === 'topCoins'
-          ? topCoinsRowData
-          : walletTokenRowData}
+        {props.label === 'topCoins' ? topCoinsRowData : walletTokenRowData}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './styles/App.scss';
 
 import { GlobalContext } from './context/globalContext';
@@ -42,7 +43,7 @@ function App() {
     useContext(GlobalContext);
 
   useEffect(() => {
-    // authorizeTokenFromStorage();
+    authorizeTokenFromStorage();
     singleUpdatePrices();
   }, []);
 
@@ -50,19 +51,20 @@ function App() {
     await axios.get('/prices/startup-request-prices');
   };
 
-  // const authorizeTokenFromStorage = async (token) => {
-  //   // If user is logged in, check if their stored token is still valid
-  //   // This will be valid for 2 weeks by django default.
-  //   try {
-  //     const response = await axios.get('/prices/current_user/', {
-  //       headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
-  //     });
-  //     setLoggedIn(true); //???
-  //     setUsername(response.data.user.username); // previously this.setState({ username: json.username });
-  //   } catch (error) {
-  //     setLoggedIn(false);
-  //   }
-  // };
+  const authorizeTokenFromStorage = async (token) => {
+    // If user is logged in, check if their stored token is still valid
+    // This will be valid for 2 weeks by django default.
+    try {
+      const response = await axios.get('/prices/current_user/', {
+        headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
+      });
+      console.log(response);
+      setLoggedIn(true); //???
+      setLoggedInUserName(response.data.user.username);
+    } catch (error) {
+      setLoggedIn(false);
+    }
+  };
 
   const storeLoginCredentials = (token) => {
     token && localStorage.setItem('token', token);
