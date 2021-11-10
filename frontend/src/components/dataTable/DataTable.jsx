@@ -15,12 +15,6 @@ export default function DataTable(props) {
     filterRowData('USDperUnit');
   }, [props.rowData, tickZeroBalance]);
 
-  // useEffect(() => {
-  //   if (props.label === 'portfolio') setRowDataToDisplay(portfolioTableData);
-  //   if (props.label === 'lookupWallet')
-  //     setRowDataToDisplay(lookupWalletTableData);
-  // }, []);
-
   const filterRowData = (filterOn) => {
     if (props.rowData) {
       setFilteredData(
