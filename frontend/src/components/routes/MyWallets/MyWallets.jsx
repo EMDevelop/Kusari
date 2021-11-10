@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 
 import MultipleInputs from '../../multipleInputs/MultipleInputs';
 
-export default function Profile() {
+export default function MyWallets() {
   const { enqueueSnackbar } = useSnackbar();
 
   const success = (message) => {
@@ -36,13 +36,7 @@ export default function Profile() {
       <div className="page-title">
         <h1>My Profile</h1>
       </div>
-
       <div className="add-wallets-container">
-        <div className="profile-save-container">
-          <div className="icon-save-profile">
-            <FontAwesomeIcon icon={faSave} />
-          </div>
-        </div>
         <div className="multiple-wallets-container">
           <MultipleInputs />
         </div>

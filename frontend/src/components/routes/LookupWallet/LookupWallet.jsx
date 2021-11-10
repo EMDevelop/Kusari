@@ -102,6 +102,7 @@ export default function SearchWalletBalance() {
       <h1>Lookup Wallet</h1>
       <div className="address-input-form">
         <Dropdown
+          location="lookupWallet"
           placeholderValue="Select wallet type"
           dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
           handleOptionSelect={setwalletType}
@@ -116,7 +117,7 @@ export default function SearchWalletBalance() {
           {fetchingAddressInfo ? (
             <LamboLoader />
           ) : (
-            <div className="fa-home">
+            <div className="fa-home" onClick={() => handleButtonClick()}>
               <FontAwesomeIcon icon={faSearch} />
             </div>
           )}

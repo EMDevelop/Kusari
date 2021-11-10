@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, os.path.join(BASE_DIR, 'crypto'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'traditional'))
 
+CSRF_COOKIE_NAME = "csrftoken"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -33,7 +34,6 @@ SECRET_KEY = 'django-insecure-e*q3+^b*yiy26u%qj2@supe^!lomv!fgxiy#*w)l^5ujym7cse
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -107,6 +107,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

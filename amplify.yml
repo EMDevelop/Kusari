@@ -1,23 +1,37 @@
 version: 1
+backend:
+  phases:
+    postBuild:
+      commands:
 frontend:
   phases:
     preBuild:
       commands:
+        - wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
+        - tar -xvf Python-3.9.6.tgz
+        - cd Python-3.9.6
+        - ./configure --enable-optimizations
+        - make altinstall
+        - rm -f ../Python-3.9.6.tgz
+        - cd ..
+        - python3.9 -V
         - pip3 install -U pipenv
-        - pipenv install
-        - pipenv shell
+        - pip3 uninstall python-dotenv
+        - pipenv run pip install django
+        - pipenv run pip install djangorestframework
+        - pipenv run pip install django-cors-headers
+        - pipenv run pip install requests
+        - pipenv run pip install django-dotenv
+        - pipenv run pip uninstall python-dotenv
+        - pipenv run pip install pytest
+        - pipenv install djangorestframework-jwt
+        - pipenv --python python3.9
         - cd frontend
-        - npm install
+        - pipenv run npm install
         - cd ..
     build:
       commands:
-        - npm run client
-        - npm run server
-  backend:
-    phases:
-      postBuild:
-        commands:
-          - python manage.py migrate
+        - pipenv run npm run server
   artifacts:
     baseDirectory: frontend/build
     files:
