@@ -20,7 +20,7 @@ function Signup(props) {
         username: username,
         password: password,
       });
-      props.storeDetailsInApp(response.data.user.username, response.data.token);
+      props.storeDetailsInApp(response.data.token);
       success('Account Created');
     } catch (error) {
       console.log(error);

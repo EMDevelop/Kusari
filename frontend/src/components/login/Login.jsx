@@ -20,7 +20,7 @@ function Login(props) {
         username: username,
         password: password,
       });
-      props.storeDetailsInApp(response.data.user.username, response.data.token);
+      props.storeDetailsInApp(response.data.token);
       console.log(response.data);
       setUserID(response.data.user_id);
       setLoggedInUserName(response.data.user.username);

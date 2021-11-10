@@ -64,6 +64,7 @@ def walletDelete(request, pk):
     wallet.delete()
     return Response('Item deleted')
 
+# There will still be an empty saved walled which needs updating - this could cause problems later
 @api_view(['GET'])
 def userWalletList(request, user_id):
     wallets = Wallet.objects.filter(user=user_id)
