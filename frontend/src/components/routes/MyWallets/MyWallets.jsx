@@ -34,7 +34,7 @@ export default function MyWallets() {
   return (
     <div className="profile-page">
       <div className="page-title">
-        <h1>My Profile</h1>
+        <h1>My Wallets</h1>
       </div>
       <div className="add-wallets-container">
         <div className="multiple-wallets-container">
