@@ -9,14 +9,15 @@ export default function DataTable(props) {
   const [itemsToFilter, setItemsToFilter] = useState([]);
   const [filteredData, setFilteredData] = useState(props.rowData);
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
-  const [rowDataToDisplay, setRowDataToDisplay] = useState(undefined);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.label === 'portfolio' || props.data === 'lookupWallet') {
-      setItemsToFilter('USDperUnit');
+    if (props.label === 'portfolio' || props.label === 'lookupWallet') {
       setFilteredData(props.rowData);
+    }
+    if (tickZeroBalance) {
+      filterRowData('BalanceInUSD');
     }
   }, [props.rowData, tickZeroBalance]);
 
@@ -65,7 +66,7 @@ export default function DataTable(props) {
 
   const walletTokenRowData = (
     <>
-      {(props.label === 'portfolio' || props.data === 'lookupWallet') &&
+      {(props.label === 'portfolio' || props.label === 'lookupWallet') &&
         filteredData && (
           <table cellPadding="0" cellSpacing="0" border="0">
             <tbody>
@@ -177,7 +178,7 @@ export default function DataTable(props) {
 
   return (
     <div>
-      {(props.label === 'portfolio' || props.data === 'lookupWallet') && (
+      {(props.label === 'portfolio' || props.label === 'lookupWallet') && (
         <div className="filter-container">
           <div className="filter zero-value">
             <p className="filter-text">Hide Zero Balance</p>
