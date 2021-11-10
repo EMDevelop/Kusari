@@ -57,6 +57,12 @@ export default function DataTable(props) {
     setTickZeroBalance(!tickZeroBalance);
   };
 
+  const abbreviateAddress = (address) => {
+    return (
+      address.substring(0, 4) + ' ... ' + address.substring(address.length - 4)
+    );
+  };
+
   const walletTokenRowData = (
     <>
       {filteredData && (
@@ -69,6 +75,12 @@ export default function DataTable(props) {
                   className="data-row"
                   onClick={(e) => handleRowClick(e, row['token'])}
                 >
+                  {props.label === 'portfolio' && (
+                    <>
+                      <td>{row['type']}</td>
+                      <td>{abbreviateAddress(row['address'])}</td>
+                    </>
+                  )}
                   <td>
                     <img
                       className="token-icon"

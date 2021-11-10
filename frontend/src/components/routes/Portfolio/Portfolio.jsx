@@ -11,14 +11,35 @@ export default function Portfolio() {
     async function fetchData() {
       try {
         const response = await axios.get(`multi/user-portfolio/${userID}/`);
-        console.log(response.data[0].content);
-        setPortfolioTokens(response.data);
+        const sortedData = convertDataForDataTable(response.data);
+        setPortfolioTokens(sortedData);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
   }, []);
+
+  // To re-use the Datatable, we need to standardise data
+  const convertDataForDataTable = (data) => {
+    const newArray = [];
+    data.forEach((address) => {
+      JSON.parse(address['content']).forEach((originalData) => {
+        newArray.push({
+          type: address['type'],
+          address: address['address'],
+          token: originalData['token'],
+          name: originalData['name'],
+          quantity: originalData['quantity'],
+          contract_address: originalData['contract_address'],
+          USDperUnit: originalData['USDperUnit'],
+          image: originalData['image'],
+          BalanceInUSD: originalData['BalanceInUSD'],
+        });
+      });
+    });
+    return newArray;
+  };
 
   return (
     <div className="portfolio-page">
@@ -32,7 +53,7 @@ export default function Portfolio() {
             // props.headers
             'Type',
             'Address',
-            '',
+            'Icon',
             'Symbol',
             'Token Name',
             'Quantity',
