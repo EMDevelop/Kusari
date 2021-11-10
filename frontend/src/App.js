@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import './styles/App.scss';
 
 import { GlobalContext } from './context/globalContext';
@@ -26,16 +25,6 @@ function App() {
   const success = (message) => {
     enqueueSnackbar(message, {
       variant: 'success',
-    });
-  };
-  const fail = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'error',
-    });
-  };
-  const info = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'info',
     });
   };
 
@@ -70,20 +59,13 @@ function App() {
     token && localStorage.setItem('token', token);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setLoggedIn(false);
-    setLoggedInUserName('');
-    success('Logged out successfully.');
-  };
-
   return (
     <Router>
       <div className="app">
         <Navbar
           loggedIn={loggedIn}
-          // display_form={display_form}
-          handleLogout={handleLogout}
+          setUsername={setLoggedInUserName}
+          setLogged={setLoggedIn}
         />
         <main>
           <Routes>

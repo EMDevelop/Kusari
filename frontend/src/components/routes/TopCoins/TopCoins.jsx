@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import DataTable from '../../dataTable/DataTable';
-import { GlobalContext } from '../../../context/globalContext';
 import axios from 'axios';
 
 export default function TopCoins() {
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     try {

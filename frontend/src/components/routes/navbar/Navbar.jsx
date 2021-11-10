@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import {
   faSignInAlt,
-  faHome,
   faCoins,
   faSearch,
   faWallet,
@@ -11,15 +10,32 @@ import {
   faPowerOff,
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 // Credit to: https://codepen.io/JFarrow/pen/fFrpg for the navbar
 
 function Navbar(props) {
   const navigate = useNavigate();
 
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+
   const handleClick = (e, route) => {
     e.preventDefault();
     navigate(route);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    props.setLogged(false);
+    props.setUsername('');
+    navigate('/');
+    success('Logged out successfully.');
   };
 
   const logged_out_nav = (
@@ -82,8 +98,8 @@ function Navbar(props) {
         </a>
       </li>
       <ul className="logout">
-        <li onClick={props.handleLogout}>
-          <a href="#">
+        <li>
+          <a onClick={() => handleLogout()}>
             <div className="fa-home">
               <FontAwesomeIcon icon={faPowerOff} />
             </div>
