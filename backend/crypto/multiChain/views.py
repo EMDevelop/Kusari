@@ -73,7 +73,8 @@ def userWalletList(request, user_id):
         add_wallets_to_storage(request, arrayOfWallets)    
         return Response(arrayOfWallets)
 
-def get_all_wallet_prices(request, user_id):
+@api_view(['GET'])
+def get_all_wallet_prices(request):
     # Go into model, get the wallets for that user
     # for each address, get prices feturned from each app and append do dictionary
     # Get prices as usual from storage
@@ -81,9 +82,11 @@ def get_all_wallet_prices(request, user_id):
     user_wallets = request.session['wallet_list']
     print(user_wallets)
     for wallet in user_wallets:
-        if wallet.wallet_type == 'Ethereum':
-            get_ethereum_and_erc20_wallet_balance(request, wallet.wallet_address, "multi")
-        elif wallet.wallet_type == 'BSC':
-            get_bep20_wallet_balance(request, wallet.wallet_address, "multi")
+        if wallet['wallet_type'] == 'Ethereum':
+            print(get_ethereum_and_erc20_wallet_balance(request, wallet['wallet_address'], "multi").content)
+
+        elif wallet['wallet_type'] == 'BSC':
+            print(get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content)
     
+
     return render(request, 'multiChain/wallet_prices.html')
