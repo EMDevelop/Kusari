@@ -7,6 +7,7 @@ from .serializers import WalletSerializer
 from .models import Wallet
 from .models import User
 import json
+from crypto.helper.add_dictionary_to_session import *
 
 # Create your views here.
 
@@ -72,8 +73,8 @@ def userWalletList(request, user_id):
     arrayOfWallets = serializer.data
     if len(arrayOfWallets) == 0:
         singleWallet = Wallet.objects.create(user = request.user, wallet_type = "", wallet_address = "")
+        add_wallets_to_storage(request, singleWallet)
         return Response(json.load(singleWallet))
-    else:        
+    else:   
+        add_wallets_to_storage(request, arrayOfWallets)    
         return Response(arrayOfWallets)
-
-
