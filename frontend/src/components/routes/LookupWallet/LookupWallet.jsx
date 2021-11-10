@@ -133,6 +133,7 @@ export default function SearchWalletBalance() {
           'Current Value',
         ]}
         rowData={walletDetails}
+        label="lookupWallet"
       />
     </div>
   );

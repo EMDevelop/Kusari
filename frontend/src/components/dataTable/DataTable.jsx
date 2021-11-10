@@ -7,19 +7,14 @@ export default function DataTable(props) {
   const [itemsToFilter, setItemsToFilter] = useState([]);
   const [filteredData, setFilteredData] = useState(props.rowData);
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
+  const [rowDataToDisplay, setRowDataToDisplay] = useState(undefined);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     filterRowData('USDperUnit');
-  }, [props.rowData]);
+  }, [props.rowData, tickZeroBalance]);
 
-  useEffect(() => {
-    filterRowData('USDperUnit');
-  }, [tickZeroBalance]);
-
-  // filter props.rowData with array filter keywords
-  // Filter Options: 'token', 'name', 'quantity', 'USDperUnit' and 'BalanceInUSD'
   const filterRowData = (filterOn) => {
     if (props.rowData) {
       setFilteredData(
@@ -28,19 +23,6 @@ export default function DataTable(props) {
         )
       );
     }
-  };
-
-  // to add another filter
-  // Add a check to see if any of the checkboxe states are true
-  // if they are, run a filter on them too?
-
-  // Related to the zero balance ticker
-  const handleTickZeroBalance = () => {
-    tickZeroBalance === true
-      ? removeItemFromitemsToFilter('N/A')
-      : addItemToitemsToFilter('N/A');
-
-    setTickZeroBalance(!tickZeroBalance);
   };
 
   // Reusable function to add item to filtered list
@@ -62,6 +44,59 @@ export default function DataTable(props) {
   const handleRowClick = (event, token) => {
     navigate(`/token/${token}`);
   };
+
+  const handleTickZeroBalance = () => {
+    tickZeroBalance === true
+      ? removeItemFromitemsToFilter('N/A')
+      : addItemToitemsToFilter('N/A');
+    setTickZeroBalance(!tickZeroBalance);
+  };
+
+  const lookupWalletTableData = (
+    <>
+      {filteredData && (
+        <table cellPadding="0" cellSpacing="0" border="0">
+          <tbody>
+            {console.log(filteredData)}
+            {filteredData.map((row) => {
+              return (
+                <tr
+                  className="data-row"
+                  onClick={(e) => handleRowClick(e, row['token'])}
+                >
+                  <td>
+                    <img
+                      className="token-icon"
+                      src={row['image']}
+                      alt={row['token']}
+                    />
+                  </td>
+                  <td>{row['token']}</td>
+                  <td>{row['name']}</td>
+                  <td>{row['quantity']}</td>
+                  <td>
+                    {row['USDperUnit'] === 'N/A'
+                      ? '-'
+                      : `$${row['USDperUnit']}`}
+                  </td>
+                  <td>
+                    {row['BalanceInUSD'] === 'N/A'
+                      ? '-'
+                      : `$${row['BalanceInUSD']
+                          .toFixed(2)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+    </>
+  );
+
+  const portfolioTableData = <></>;
 
   return (
     <div>
@@ -87,46 +122,9 @@ export default function DataTable(props) {
         </table>
       </div>
       <div className="tbl-content">
-        {filteredData && (
-          <table cellPadding="0" cellSpacing="0" border="0">
-            <tbody>
-              {/* Loop through all rows returned from SearchWalletBalance get request */}
-              {filteredData.map((row) => {
-                return (
-                  <tr
-                    className="data-row"
-                    onClick={(e) => handleRowClick(e, row['token'])}
-                  >
-                    {}
-                    <td>
-                      <img
-                        className="token-icon"
-                        src={row['image']}
-                        alt={row['token']}
-                      />
-                    </td>
-                    <td>{row['token']}</td>
-                    <td>{row['name']}</td>
-                    <td>{row['quantity']}</td>
-                    <td>
-                      {row['USDperUnit'] === 'N/A'
-                        ? '-'
-                        : `$${row['USDperUnit']}`}
-                    </td>
-                    <td>
-                      {row['BalanceInUSD'] === 'N/A'
-                        ? '-'
-                        : `$${row['BalanceInUSD']
-                            .toFixed(2)
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
+        {props.label === 'portfolio'
+          ? portfolioTableData
+          : lookupWalletTableData}
       </div>
     </div>
   );
