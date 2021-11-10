@@ -80,12 +80,22 @@ def get_all_wallet_prices(request, user_id):
     wallets = Wallet.objects.filter(user=user_id)
     serializer = WalletSerializer(wallets, many=True)
     user_wallets = serializer.data
+    list_crypto_wallets =[]
     for wallet in user_wallets:
         if wallet['wallet_type'] == 'Ethereum':
-            print(get_ethereum_and_erc20_wallet_balance(request, wallet['wallet_address'], "multi").content)
+            crypto_wallet = {
+                'address': wallet['wallet_address'],
+                'type': wallet['wallet_type'],
+                'content': get_ethereum_and_erc20_wallet_balance(request, wallet['wallet_address'], "multi").content
+            }
+            list_crypto_wallets.append(crypto_wallet)
 
         elif wallet['wallet_type'] == 'BSC':
-            print(get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content)
-    
-    return Response(user_wallets)
+            crypto_wallet = {
+                'address': wallet['wallet_address'],
+                'type': wallet['wallet_type'],
+                'content': get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content
+            }
+            list_crypto_wallets.append(crypto_wallet)
+    return Response(list_crypto_wallets)
     # return render(request, 'multiChain/wallet_prices.html')
