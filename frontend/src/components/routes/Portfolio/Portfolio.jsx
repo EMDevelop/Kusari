@@ -39,7 +39,7 @@ export default function Portfolio() {
             'Price',
             'Current Value',
           ]}
-          //rowData={portfolioTokens} // props.rowData
+          rowData={portfolioTokens} // props.rowData
           label="portfolio" // props.label
         />
       </div>

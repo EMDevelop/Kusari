@@ -13,12 +13,12 @@ export default function DataTable(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.label === 'topCoins') {
-      setTopCoins(props.rowData);
-    } else {
-      filterRowData('USDperUnit');
-    }
+    filterRowData('USDperUnit');
   }, [props.rowData, tickZeroBalance]);
+
+  useEffect(() => {
+    setFilteredData(props.rowData);
+  }, []);
 
   const filterRowData = (filterOn) => {
     if (props.rowData) {
@@ -57,11 +57,12 @@ export default function DataTable(props) {
     setTickZeroBalance(!tickZeroBalance);
   };
 
-  const lookupWalletTableData = (
+  const walletTokenRowData = (
     <>
       {filteredData && (
         <table cellPadding="0" cellSpacing="0" border="0">
           <tbody>
+            {console.log(filteredData)}
             {filteredData.map((row) => {
               return (
                 <tr
@@ -100,20 +101,46 @@ export default function DataTable(props) {
     </>
   );
 
-  const portfolioTableData = <></>;
+  const topCoinsRowData = (
+    <>
+      <table cellPadding="0" cellSpacing="0" border="0">
+        <tbody>
+          {filteredData.map((row) => {
+            return (
+              <tr
+                className="data-row"
+                onClick={(e) => handleRowClick(e, row['symbol'])}
+              >
+                <img
+                  className="token-icon"
+                  src={row['image']}
+                  alt={row['symbol']}
+                />
+                <td>{row['symbol']}</td>
+                <td>{row['name']}</td>
+                <td>{row['market_cap']}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
+  );
 
   return (
     <div>
-      <div className="filter-container">
-        <div className="filter zero-value">
-          <p className="filter-text">Hide Zero Balance</p>
-          <input
-            type="checkbox"
-            id="switch"
-            onChange={() => handleTickZeroBalance()}
-          />
+      {!props.label === 'topCoins' && (
+        <div className="filter-container">
+          <div className="filter zero-value">
+            <p className="filter-text">Hide Zero Balance</p>
+            <input
+              type="checkbox"
+              id="switch"
+              onChange={() => handleTickZeroBalance()}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="tbl-header">
         <table cellPadding="0" cellSpacing="0" border="0">
           <thead>
@@ -126,9 +153,9 @@ export default function DataTable(props) {
         </table>
       </div>
       <div className="tbl-content">
-        {props.label === 'topCoins'
-          ? portfolioTableData
-          : lookupWalletTableData}
+        {filteredData && props.label === 'topCoins'
+          ? topCoinsRowData
+          : walletTokenRowData}
       </div>
     </div>
   );

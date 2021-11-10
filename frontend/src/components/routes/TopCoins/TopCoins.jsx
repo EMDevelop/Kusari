@@ -33,19 +33,6 @@ export default function TopCoins() {
             rowData={items}
             label="topCoins"
           />
-
-          <ul>
-            {/* {items.map((item) => {
-              return (
-                <li key={item.id}>
-                  <h4>
-                    Currency: {item.name} | Current Price: ${item.current_price}{' '}
-                    | Market Cap: ${item.market_cap}
-                  </h4>
-                </li>
-              );
-            })} */}
-          </ul>
         </div>
       </div>
     </div>
