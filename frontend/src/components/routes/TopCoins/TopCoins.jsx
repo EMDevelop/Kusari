@@ -14,7 +14,7 @@ export default function TopCoins() {
     try {
       async function fetchData() {
         const response = await axios.get(`prices/top-coins/`);
-        setItems(response.data);
+        setItems(response.data.tokens);
         setIsLoaded(true);
       }
       fetchData();
@@ -28,11 +28,20 @@ export default function TopCoins() {
       <h1>Top Coins</h1>
       <div>
         <div className="top-coins-page">
-          <DataTable
-            headers={['Icon', 'symbol', 'token name', 'market cap']}
-            rowData={items}
-            label="topCoins"
-          />
+          {items && (
+            <DataTable
+              headers={[
+                'Icon',
+                'symbol',
+                'token name',
+                'price',
+                'market cap',
+                '24hr % Change',
+              ]}
+              rowData={items}
+              label="topCoins"
+            />
+          )}
         </div>
       </div>
     </div>

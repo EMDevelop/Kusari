@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
@@ -15,10 +17,6 @@ export default function DataTable(props) {
   useEffect(() => {
     !props.label === 'topCoins' && filterRowData('USDperUnit');
   }, [props.rowData, tickZeroBalance]);
-
-  useEffect(() => {
-    setFilteredData(props.rowData);
-  }, []);
 
   const filterRowData = (filterOn) => {
     if (props.rowData) {
@@ -113,24 +111,60 @@ export default function DataTable(props) {
     </>
   );
 
-  const topCoinsRowData = props.label === 'topCoins' && (
+  const percentageChange = (percentage) => {
+    percentage = percentage.toFixed(2);
+    return percentage > 0 ? (
+      <td>
+        <div className="fa-home-up">
+          <FontAwesomeIcon icon={faArrowUp} />
+          {percentage}
+        </div>
+      </td>
+    ) : (
+      <td>
+        <div className="fa-home-down">
+          <FontAwesomeIcon icon={faArrowDown} />
+          {percentage * -1}
+        </div>
+      </td>
+    );
+  };
+
+  const topCoinsRowData = props.label === 'topCoins' && props.rowData && (
     <>
+      {console.log(props.rowData)}
       <table cellPadding="0" cellSpacing="0" border="0">
         <tbody>
-          {filteredData.map((row) => {
+          {props.rowData.map((row) => {
             return (
               <tr
                 className="data-row"
                 onClick={(e) => handleRowClick(e, row['symbol'])}
               >
-                <img
-                  className="token-icon"
-                  src={row['image']}
-                  alt={row['symbol']}
-                />
+                <td>
+                  <img
+                    className="token-icon"
+                    src={row['image']}
+                    alt={row['symbol']}
+                  />
+                </td>
                 <td>{row['symbol']}</td>
                 <td>{row['name']}</td>
-                <td>{row['market_cap']}</td>
+                <td>
+                  {'$' +
+                    row['current_price']
+                      .toFixed(2)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </td>
+                <td>
+                  {'$' +
+                    row['market_cap']
+                      .toFixed(2)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                </td>
+                {percentageChange(row['price_change_percentage_24h'])}
               </tr>
             );
           })}
@@ -164,8 +198,14 @@ export default function DataTable(props) {
           </thead>
         </table>
       </div>
-      <div className="tbl-content">
-        {props.label === 'topCoins' ? topCoinsRowData : walletTokenRowData}
+      <div
+        className={
+          props.label === 'topCoins' ? 'tbl-content-top-coins' : 'tbl-content'
+        }
+      >
+        {(props.rowData || filteredData) && props.label === 'topCoins'
+          ? topCoinsRowData
+          : walletTokenRowData}
       </div>
     </div>
   );
