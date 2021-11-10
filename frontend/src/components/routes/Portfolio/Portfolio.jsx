@@ -10,11 +10,8 @@ export default function Portfolio() {
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log('hello?');
         const response = await axios.get(`multi/user-portfolio/${userID}/`);
-        console.log('hello2?');
         const sortedData = convertDataForDataTable(response.data);
-        console.log(sortedData);
         setPortfolioTokens(sortedData);
       } catch (error) {
         console.log(error);
@@ -23,11 +20,10 @@ export default function Portfolio() {
     fetchData();
   }, []);
 
+  // To re-use the Datatable, we need to standardise data
   const convertDataForDataTable = (data) => {
     const newArray = [];
-
     data.forEach((address) => {
-      console.log(address);
       JSON.parse(address['content']).forEach((originalData) => {
         newArray.push({
           type: address['type'],
@@ -57,14 +53,14 @@ export default function Portfolio() {
             // props.headers
             'Type',
             'Address',
-            '',
+            'Icon',
             'Symbol',
             'Token Name',
             'Quantity',
             'Price',
             'Current Value',
           ]}
-          //rowData={portfolioTokens} // props.rowData
+          rowData={portfolioTokens} // props.rowData
           label="portfolio" // props.label
         />
       </div>

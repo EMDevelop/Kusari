@@ -52,7 +52,13 @@ export default function DataTable(props) {
     setTickZeroBalance(!tickZeroBalance);
   };
 
-  const lookupWalletTableData = (
+  const abbreviateAddress = (address) => {
+    return (
+      address.substring(0, 4) + ' ... ' + address.substring(address.length - 4)
+    );
+  };
+
+  const walletTokenRowData = (
     <>
       {filteredData && (
         <table cellPadding="0" cellSpacing="0" border="0">
@@ -64,6 +70,12 @@ export default function DataTable(props) {
                   className="data-row"
                   onClick={(e) => handleRowClick(e, row['token'])}
                 >
+                  {props.label === 'portfolio' && (
+                    <>
+                      <td>{row['type']}</td>
+                      <td>{abbreviateAddress(row['address'])}</td>
+                    </>
+                  )}
                   <td>
                     <img
                       className="token-icon"
@@ -122,9 +134,10 @@ export default function DataTable(props) {
         </table>
       </div>
       <div className="tbl-content">
-        {props.label === 'portfolio'
-          ? portfolioTableData
-          : lookupWalletTableData}
+        {
+          // props.label === 'topCoins'?
+          walletTokenRowData
+        }
       </div>
     </div>
   );

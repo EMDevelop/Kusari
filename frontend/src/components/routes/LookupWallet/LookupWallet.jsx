@@ -125,7 +125,7 @@ export default function SearchWalletBalance() {
       </div>
       <DataTable
         headers={[
-          '',
+          'Icon',
           'Symbol',
           'Token Name',
           'Quantity',
