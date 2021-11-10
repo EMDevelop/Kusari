@@ -7,9 +7,12 @@ from .serializers import WalletSerializer
 from .models import Wallet
 from .models import User
 import json
+
+from django.views.decorators.csrf import ensure_csrf_cookie
 from crypto.helper.add_dictionary_to_session import *
 from crypto.bsc.views import get_bep20_wallet_balance
 from crypto.ethereum.views import get_ethereum_and_erc20_wallet_balance
+
 
 # Create your views here.
 
@@ -28,26 +31,30 @@ def walletsOverview(request):
 def walletList(request):
     wallets = Wallet.objects.all()
     serializer = WalletSerializer(wallets, many=True)
+    
     return Response(serializer.data)
 
 @api_view(['GET'])
 def walletDetail(request, pk):
     wallets = Wallet.objects.get(id=pk)
     serializer = WalletSerializer(wallets, many=False)
+
     return Response(serializer.data)
 
+# -------------------------
 @api_view(['POST'])
 def walletCreate(request):
-    serializer = WalletSerializer(data=request.data)
+    serializer = WalletSerializer(data=request.data['body'])
     if serializer.is_valid():
         serializer.save()
-    
+
     return Response(serializer.data)
 
-@api_view(['POST'])
+
+@api_view(['PUT'])
 def walletUpdate(request, pk):
     wallet = Wallet.objects.get(id=pk)
-    serializer = WalletSerializer(instance=wallet, data=request.data)
+    serializer = WalletSerializer(instance=wallet, data=request.data['body'])
     if serializer.is_valid():
         serializer.save()
     
@@ -62,9 +69,11 @@ def walletDelete(request, pk):
 # There will still be an empty saved walled which needs updating - this could cause problems later
 @api_view(['GET'])
 def userWalletList(request, user_id):
+    print('getting user wallets')
     wallets = Wallet.objects.filter(user=user_id)
     serializer = WalletSerializer(wallets, many=True)
     arrayOfWallets = serializer.data
+    print(arrayOfWallets)
     if len(arrayOfWallets) == 0:
         singleWallet = Wallet.objects.create(user = request.user, wallet_type = "", wallet_address = "")
         return Response(json.load(singleWallet))
