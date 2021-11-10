@@ -10,15 +10,40 @@ export default function Portfolio() {
   useEffect(() => {
     async function fetchData() {
       try {
+        console.log('hello?');
         const response = await axios.get(`multi/user-portfolio/${userID}/`);
-        console.log(response.data[0].content);
-        setPortfolioTokens(response.data);
+        console.log('hello2?');
+        const sortedData = convertDataForDataTable(response.data);
+        console.log(sortedData);
+        setPortfolioTokens(sortedData);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
   }, []);
+
+  const convertDataForDataTable = (data) => {
+    const newArray = [];
+
+    data.forEach((address) => {
+      console.log(address);
+      JSON.parse(address['content']).forEach((originalData) => {
+        newArray.push({
+          type: address['type'],
+          address: address['address'],
+          token: originalData['token'],
+          name: originalData['name'],
+          quantity: originalData['quantity'],
+          contract_address: originalData['contract_address'],
+          USDperUnit: originalData['USDperUnit'],
+          image: originalData['image'],
+          BalanceInUSD: originalData['BalanceInUSD'],
+        });
+      });
+    });
+    return newArray;
+  };
 
   return (
     <div className="portfolio-page">
