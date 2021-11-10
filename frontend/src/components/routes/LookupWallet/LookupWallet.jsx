@@ -116,7 +116,7 @@ export default function SearchWalletBalance() {
           {fetchingAddressInfo ? (
             <LamboLoader />
           ) : (
-            <div className="fa-home">
+            <div className="fa-home" onClick={() => handleButtonClick()}>
               <FontAwesomeIcon icon={faSearch} />
             </div>
           )}

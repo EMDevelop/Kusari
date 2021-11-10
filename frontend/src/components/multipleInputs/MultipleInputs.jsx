@@ -13,13 +13,12 @@ export default function MultipleInputs() {
   // If there are wallets, set the state to the wallets
 
   const { userID } = useContext(GlobalContext);
+  const [inputFields, setInputFields] = useState([]);
 
   useEffect(() => {
     async function getWallets() {
       try {
-        const response = await axios.get(`multi/user-wallet-list/${userID}`, {
-          headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
-        });
+        const response = await fetchAllWalletData();
         setInputFields(response.data);
       } catch (error) {
         console.log(error);
@@ -28,12 +27,18 @@ export default function MultipleInputs() {
     getWallets();
   }, []);
 
+  const fetchAllWalletData = async () => {
+    return await axios.get(`multi/user-wallet-list/${userID}`, {
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+    });
+  };
+
   // id: 3
   // user: 1;
   // wallet_address: '';
   // wallet_type: '';
-
-  const [inputFields, setInputFields] = useState([]);
 
   const handleInputChange = (e, walletID) => {
     console.log(e);
