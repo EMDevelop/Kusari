@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DataTable from '../../dataTable/DataTable';
 import { GlobalContext } from '../../../context/globalContext';
-// import TokenInformation from '../../../TokenInformation/TokenInformation';
 import axios from 'axios';
 
 export default function TopCoins() {
@@ -15,7 +14,6 @@ export default function TopCoins() {
     try {
       async function fetchData() {
         const response = await axios.get(`prices/top-coins/`);
-        console.log(response.data);
         setItems(response.data);
         setIsLoaded(true);
       }
@@ -30,6 +28,12 @@ export default function TopCoins() {
       <h1>Top Coins</h1>
       <div>
         <div className="top-coins-page">
+          <DataTable
+            headers={['Icon', 'symbol', 'token name', 'market cap']}
+            rowData={items}
+            label="topCoins"
+          />
+
           <ul>
             {/* {items.map((item) => {
               return (
@@ -41,7 +45,6 @@ export default function TopCoins() {
                 </li>
               );
             })} */}
-            ;
           </ul>
         </div>
       </div>

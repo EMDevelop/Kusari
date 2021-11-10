@@ -8,11 +8,16 @@ export default function DataTable(props) {
   const [filteredData, setFilteredData] = useState(props.rowData);
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
   const [rowDataToDisplay, setRowDataToDisplay] = useState(undefined);
+  const [topCoins, setTopCoins] = useState(undefined);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    filterRowData('USDperUnit');
+    if (props.label === 'topCoins') {
+      setTopCoins(props.rowData);
+    } else {
+      filterRowData('USDperUnit');
+    }
   }, [props.rowData, tickZeroBalance]);
 
   const filterRowData = (filterOn) => {
@@ -57,7 +62,6 @@ export default function DataTable(props) {
       {filteredData && (
         <table cellPadding="0" cellSpacing="0" border="0">
           <tbody>
-            {console.log(filteredData)}
             {filteredData.map((row) => {
               return (
                 <tr
@@ -122,7 +126,7 @@ export default function DataTable(props) {
         </table>
       </div>
       <div className="tbl-content">
-        {props.label === 'portfolio'
+        {props.label === 'topCoins'
           ? portfolioTableData
           : lookupWalletTableData}
       </div>
