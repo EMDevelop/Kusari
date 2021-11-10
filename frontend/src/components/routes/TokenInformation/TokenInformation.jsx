@@ -23,20 +23,77 @@ useEffect(() => {
 }, [])
 
 
-  useEffect(() => {
-    console.log(symbol);
-  }, []);
+console.log(tokenData)
+const tokenChange = Object.fromEntries(Object.entries(tokenData).filter(([key]) => key.includes('CHANGE')))
+console.log(tokenChange)
 
+for (const [key, value] of Object.entries(tokenData)) {
+  console.log(`${key}: ${value}`);
+}
+  
   return (
     <div className="token-info-page">
+
+      <div class="container">
       <h1>{`${symbol} Information`}</h1>
-      <div>
-        {tokenData &&  Object.keys(tokenData).map(key => {
-            return <h1>{tokenData[key]}</h1>
-        })}
+
+      <div class="stock">
+        <span class="symbol">Price USD</span>
+        <span class="change">{tokenData.PRICE}</span>
       </div>
+
+      <div class="stock">
+        <span class="symbol">24 Hour Change</span>
+        <span class="change">{tokenData.CHANGE24HOUR}</span>
+      </div>
+
+      <div class="stock">
+        <span class="symbol">24 Hour % Change</span>
+        <span class="change">{tokenData.CHANGEPCT24HOUR}%</span>
+      </div>
+
+      <div class="stock">
+        <span class="symbol">Daily % Change</span>
+        <span class="change">{tokenData.CHANGEPCTDAY}%</span>
+      </div>
+
+      <div class="stock">
+        <span class="symbol">Hourly Change</span>
+        <span class="change">{tokenData.CHANGEHOUR}</span>
+      </div>
+
+      <div class="stock">
+        <span class="symbol">Change % Hour</span>
+        <span class="change">{tokenData.CHANGEPCTHOUR}%</span>
+      </div>
+
+      <div class="stock">
+        <span class="symbol">Market Cap</span>
+        <span class="change">{tokenData.MKTCAP}</span>
+      </div>
+
+      <div class="stock">
+        <span class="symbol">Day High</span>
+        <span class="change">{tokenData.HIGHDAY}</span>
+      </div>
+      
+
+      </div>
+
+      {/* <div className="token-granular">
+        {tokenData &&  Object.entries(tokenData).map(([key,value]) => {
+            return (
+              <>
+              <div class="stock" id="key">
+              <span className="token-key"> {key}</span> 
+              <span className="token-value"> {value}</span> 
+              </div>
+              </>
+            )
+        })}
+      </div> */}
     
-      <div> <ScriptTag type="text/javascript" src = {`https://widgets.cryptocompare.com/serve/v3/coin/chart?fsym=${symbol}&tsyms=USD,EUR,CNY,GBP`}/></div>
+      {/* <div> <ScriptTag type="text/javascript" src = {`https://widgets.cryptocompare.com/serve/v3/coin/chart?fsym=${symbol}&tsyms=USD,EUR,CNY,GBP`}/></div> */}
     </div>
   );
 }

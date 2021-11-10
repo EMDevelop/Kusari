@@ -5,6 +5,44 @@
   grid-template-columns: 1fr;
   grid-template-rows: 2fr 1fr 6fr;
 }
+.container {
+	width: 640px;
+	padding: 5px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+  
+.stock {
+	width: 150px;
+	height: 150px;
+	background-color: #CCC;
+	position: relative;
+	float: left;
+	margin: 5px;
+	transition: box-shadow 0.2s ease;	
+}
+.symbol, .change {
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+	color: #fff;
+}
+.symbol {
+	top: 10px;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 300;
+}
+.change {
+	top: 50%;
+	font-size: 22px;
+	font-weight: 700;
+	transform: translateY(-50%);
+}
+    
 
 @import "https://fonts.googleapis.com/css?family=Lato";
 * {
@@ -106,6 +144,7 @@ rect.amcharts-cursor-div {
 	position: absolute !important;
 	border: 1px !important;
 }
+
 #loaderccc {
 	display: none !important;
 }
