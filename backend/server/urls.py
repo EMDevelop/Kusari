@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ethereum/', include('ethereum.urls')),
     path('bsc/', include('bsc.urls')),
+    path('btc/', include('btc.urls')),
     path('prices/', include('prices.urls')),
     path('token-auth/', obtain_jwt_token),
     path('multi/', include('multiChain.urls')),

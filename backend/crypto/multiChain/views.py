@@ -75,5 +75,3 @@ def userWalletList(request, user_id):
         return Response(json.load(singleWallet))
     else:        
         return Response(arrayOfWallets)
-
-

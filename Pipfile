@@ -15,6 +15,7 @@ pycoingecko = "*"
 coverage = "*"
 djangorestframework-jwt = "*"
 web3 = "*"
+blockcypher = "*"
 
 [dev-packages]
 
