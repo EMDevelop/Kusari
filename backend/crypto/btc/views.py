@@ -18,9 +18,9 @@ def get_btc_from_blockcypher(address):
 			'contract_address': '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
 		}
 
-	return btc
+	return [btc]
 
-def get_btc_balance(request, address):
+def get_btc_balance(request, address, request_type):
 	btc_balance = get_btc_from_blockcypher(address)
 	btc_balance_price_image = append_price_and_image(request, btc_balance)
 	btc_balance_price_balance = get_token_current_value_in_USD(btc_balance_price_image)
