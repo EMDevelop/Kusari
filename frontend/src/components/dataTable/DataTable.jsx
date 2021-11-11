@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { GlobalContext } from '../../context/globalContext';
-import LamboLoader from '../lamboLoader/LamboLoader';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
