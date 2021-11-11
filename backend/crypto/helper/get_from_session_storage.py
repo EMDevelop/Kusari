@@ -5,6 +5,7 @@ import os
 def append_price_and_image(request, existing_dictionary): 
     # For each token within the existing_dictionary, fetch price from local storage for that token
     # and append it to the existing_dictionary
+    print(existing_dictionary)
     for token in existing_dictionary:
         try:
             token['USDperUnit'] = get_item_from_storage(request, token['contract_address'].lower(), 'current_price')
