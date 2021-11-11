@@ -1,24 +1,10 @@
 import React, { useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { useSnackbar } from 'notistack';
-
 import MultipleInputs from '../../multipleInputs/MultipleInputs';
 
 export default function MyWallets() {
   const { enqueueSnackbar } = useSnackbar();
 
-  const success = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'success',
-    });
-  };
-
-  const fail = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'error',
-    });
-  };
   const info = (message) => {
     enqueueSnackbar(message, {
       variant: 'info',

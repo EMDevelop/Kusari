@@ -6,13 +6,16 @@ import axios from 'axios';
 export default function Portfolio() {
   const { userID } = useContext(GlobalContext);
   const [portfolioTokens, setPortfolioTokens] = useState(undefined);
+  const [walletTypeValue, setWalletTypeValue] = useState(undefined);
+  const [walletAddressValue, setWalletAddressValue] = useState(undefined);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await axios.get(`multi/user-portfolio/${userID}/`);
-        console.log(response.data[0].content);
-        setPortfolioTokens(response.data);
+        const sortedData = convertDataForDataTable(response.data);
+        console.log(sortedData);
+        setPortfolioTokens(sortedData);
       } catch (error) {
         console.log(error);
       }
@@ -20,11 +23,66 @@ export default function Portfolio() {
     fetchData();
   }, []);
 
+  // To re-use the Datatable, we need to standardise data
+  const convertDataForDataTable = (data) => {
+    const newArray = [];
+    data.forEach((address) => {
+      JSON.parse(address['content']).forEach((originalData) => {
+        newArray.push({
+          type: address['type'],
+          address: address['address'],
+          token: originalData['token'],
+          name: originalData['name'],
+          quantity: originalData['quantity'],
+          contract_address: originalData['contract_address'],
+          USDperUnit: originalData['USDperUnit'],
+          image: originalData['image'],
+          BalanceInUSD: originalData['BalanceInUSD'],
+        });
+      });
+    });
+    return newArray;
+  };
+
+  // const [walletTypeValue, setWalletTypeValue] = useState(undefined);
+  // const [walletAddressValue, setWalletAddressValue] = useState(undefined);
+
   return (
     <div className="portfolio-page">
       <h1>My Portfolio</h1>
       <div>
-        <p>This is going to be 2x dropdowns</p>
+        <select
+          className={'dropdown'}
+          value={walletTypeValue}
+          onChange={(e) => setWalletTypeValue(e.target.value)}
+        >
+          <option className="disabled-option" disabled>
+            'Choose Wallet Type'
+          </option>
+          {['Ethereum', 'Bitcoin', 'BSC'].map((option, index) => {
+            return (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            );
+          })}
+        </select>
+        <select
+          className={'dropdown'}
+          value={walletAddressValue}
+          onChange={(e) => setWalletAddressValue(e.target.value)}
+        >
+          <option className="disabled-option" disabled>
+            'Choose Wallet Type'
+          </option>
+          {['Ethereum', 'Bitcoin', 'BSC'].map((option, index) => {
+            return (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <div className="portfolio-table">
         <DataTable
@@ -32,14 +90,14 @@ export default function Portfolio() {
             // props.headers
             'Type',
             'Address',
-            '',
+            'Icon',
             'Symbol',
             'Token Name',
             'Quantity',
             'Price',
             'Current Value',
           ]}
-          //rowData={portfolioTokens} // props.rowData
+          rowData={portfolioTokens} // props.rowData
           label="portfolio" // props.label
         />
       </div>

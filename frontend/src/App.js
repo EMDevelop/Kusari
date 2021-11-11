@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
 
@@ -27,22 +27,12 @@ function App() {
       variant: 'success',
     });
   };
-  const fail = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'error',
-    });
-  };
-  const info = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'info',
-    });
-  };
 
   const { loggedIn, setLoggedIn, setLoggedInUserName } =
     useContext(GlobalContext);
 
   useEffect(() => {
-    // authorizeTokenFromStorage();
+    authorizeTokenFromStorage();
     singleUpdatePrices();
   }, []);
 
@@ -50,29 +40,23 @@ function App() {
     await axios.get('/prices/startup-request-prices');
   };
 
-  // const authorizeTokenFromStorage = async (token) => {
-  //   // If user is logged in, check if their stored token is still valid
-  //   // This will be valid for 2 weeks by django default.
-  //   try {
-  //     const response = await axios.get('/prices/current_user/', {
-  //       headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
-  //     });
-  //     setLoggedIn(true); //???
-  //     setUsername(response.data.user.username); // previously this.setState({ username: json.username });
-  //   } catch (error) {
-  //     setLoggedIn(false);
-  //   }
-  // };
+  const authorizeTokenFromStorage = async (token) => {
+    // If user is logged in, check if their stored token is still valid
+    // This will be valid for 2 weeks by django default.
+    try {
+      const response = await axios.get('/prices/current_user/', {
+        headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
+      });
+      console.log(response);
+      setLoggedIn(true); //???
+      setLoggedInUserName(response.data.user.username);
+    } catch (error) {
+      setLoggedIn(false);
+    }
+  };
 
   const storeLoginCredentials = (token) => {
     token && localStorage.setItem('token', token);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setLoggedIn(false);
-    setLoggedInUserName('');
-    success('Logged out successfully.');
   };
 
   return (
@@ -80,8 +64,8 @@ function App() {
       <div className="app">
         <Navbar
           loggedIn={loggedIn}
-          // display_form={display_form}
-          handleLogout={handleLogout}
+          setUsername={setLoggedInUserName}
+          setLogged={setLoggedIn}
         />
         <main>
           <Routes>

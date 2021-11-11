@@ -15,11 +15,17 @@ from .serializers import UserSerializer, UserSerializerWithToken
 from helper.get_from_session_storage import *
 
 # Create your views here.
+def get_top_100_tokens(request): 
+    url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+    headers = {"Content-Type": "application/json"}
+    response = requests.request("GET", url, headers=headers)
+    tokens = json.loads(response.text)
+    return JsonResponse({'tokens': tokens})
+
+
 def get_covalent_prices(request):
     get_covalent_all_crypto_prices(request)
     return JsonResponse({'status': 'Fetched prices'})
-
-
 
 def update_wallet_balance(request):
     # This is a repeat request triggered every 30 seconds to update the `lookup wallet` screen

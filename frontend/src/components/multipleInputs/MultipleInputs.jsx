@@ -81,7 +81,6 @@ export default function MultipleInputs() {
     values[values.findIndex((x) => x.id === walletID)][e.target.name] =
       e.target.value;
     setInputFields(values);
-    console.log(inputFields);
   };
 
   const handleAdd = async () => {

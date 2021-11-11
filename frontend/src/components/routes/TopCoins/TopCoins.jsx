@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DataTable from '../../dataTable/DataTable';
 import axios from 'axios';
 
 export default function TopCoins() {
@@ -8,10 +9,8 @@ export default function TopCoins() {
   useEffect(() => {
     try {
       async function fetchData() {
-        const response = await axios.get(
-          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-        );
-        setItems(response.data);
+        const response = await axios.get(`prices/top-coins/`);
+        setItems(response.data.tokens);
         setIsLoaded(true);
       }
       fetchData();
@@ -23,23 +22,22 @@ export default function TopCoins() {
   return isLoaded ? (
     <div className="top-coins-page">
       <h1>Top Coins</h1>
-      <div> middle section</div>
       <div>
         <div className="top-coins-page">
-          <ul>
-            {items.map((item) => {
-              return (
-                <li key={item.id}>
-                  {/* <img src={item.image} alt="" /> */}
-                  <h4>
-                    Currency: {item.name} | Current Price: ${item.current_price}{' '}
-                    | Market Cap: ${item.market_cap}
-                  </h4>
-                </li>
-              );
-            })}
-            ;
-          </ul>
+          {items && (
+            <DataTable
+              headers={[
+                'Icon',
+                'symbol',
+                'token name',
+                'price',
+                'market cap',
+                '24hr % Change',
+              ]}
+              rowData={items}
+              label="topCoins"
+            />
+          )}
         </div>
       </div>
     </div>

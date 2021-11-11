@@ -9,11 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchWalletBalance() {
-  // const [address, setAddress] = useState(undefined);
-  // const [walletDetails, setWalletDetails] = useState([]);
   const [walletType, setwalletType] = useState(undefined);
   const [fetchingAddressInfo, setFetchingAddressInfo] = useState(false);
-
   const { address, setAddress, walletDetails, setWalletDetails } =
     useContext(GlobalContext);
 
@@ -125,7 +122,7 @@ export default function SearchWalletBalance() {
       </div>
       <DataTable
         headers={[
-          '',
+          'Icon',
           'Symbol',
           'Token Name',
           'Quantity',
