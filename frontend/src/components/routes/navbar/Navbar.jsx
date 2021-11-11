@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import {
@@ -29,6 +29,8 @@ function Navbar(props) {
     e.preventDefault();
     navigate(route);
   };
+
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   const storeLoginCredentials = (token) => {
     token && localStorage.setItem('token', token);
