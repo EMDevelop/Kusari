@@ -20,14 +20,6 @@ import Portfolio from './components/routes/Portfolio/Portfolio';
 import MyWallets from './components/routes/MyWallets/MyWallets';
 
 function App() {
-  const { enqueueSnackbar } = useSnackbar();
-
-  const success = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'success',
-    });
-  };
-
   const { loggedIn, setLoggedIn, setLoggedInUserName } =
     useContext(GlobalContext);
 
