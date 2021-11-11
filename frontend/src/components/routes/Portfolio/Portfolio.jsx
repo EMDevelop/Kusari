@@ -75,10 +75,6 @@ export default function Portfolio() {
     return self.indexOf(value) === index;
   }
 
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-
   const { enqueueSnackbar } = useSnackbar();
 
   const success = (message) => {
