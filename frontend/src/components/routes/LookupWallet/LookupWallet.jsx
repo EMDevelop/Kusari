@@ -47,13 +47,17 @@ export default function SearchWalletBalance() {
   // Handle button click when a user searches for their waller
   const handleButtonClick = async () => {
     try {
-      info('Fetching Wallet Balance...');
+      info(
+        'Lookup Wallet: Fetching your wallet details, this may take a minute or so!'
+      );
       setFetchingAddressInfo(true);
       await getWalletDetails(address);
       setFetchingAddressInfo(false);
       success('Fetching complete');
     } catch (error) {
-      fail('There was a problem with the request! Please try again');
+      fail(
+        'Lookup Wallet: There was a problem with the request! Please try again'
+      );
       console.log(error);
     }
   };

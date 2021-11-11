@@ -7,8 +7,8 @@ import { useSnackbar } from 'notistack';
 import LamboLoader from '../../lamboLoader/LamboLoader';
 
 export default function Portfolio() {
-  const { userID } = useContext(GlobalContext);
-  const [portfolioTokens, setPortfolioTokens] = useState(undefined);
+  const { userID, setPortfolioTokens, portfolioTokens } =
+    useContext(GlobalContext);
   const [uniqueAddressList, setUniqueAddressList] = useState(undefined);
   const [uniqueTypeList, setUniqueTypeList] = useState(undefined);
   const [selectedAddress, setSelectedAddress] = useState([]);
@@ -18,13 +18,18 @@ export default function Portfolio() {
     async function fetchData() {
       try {
         setPortfolioTokens(undefined);
-        info('Fetching your wallet details, this may take a minute or so!');
+        info(
+          'My Portfolio: Fetching your wallet details, this may take a minute or so!'
+        );
         const response = await axios.get(`multi/user-portfolio/${userID}/`);
         const sortedData = convertDataForDataTable(response.data);
         setPortfolioTokens(sortedData);
         setDropdownlists(sortedData);
-        success('Wallet details fetched successfully!');
+        success('My Portfolio: Wallet fetched successfully!');
       } catch (error) {
+        fail(
+          'My Portfolio: There was a problem with the request! Please try again'
+        );
         console.log(error);
       }
     }
