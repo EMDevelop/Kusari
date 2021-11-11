@@ -6,6 +6,8 @@ import axios from 'axios';
 export default function Portfolio() {
   const { userID } = useContext(GlobalContext);
   const [portfolioTokens, setPortfolioTokens] = useState(undefined);
+  const [walletTypeValue, setWalletTypeValue] = useState(undefined);
+  const [walletAddressValue, setWalletAddressValue] = useState(undefined);
 
   useEffect(() => {
     async function fetchData() {
@@ -42,11 +44,45 @@ export default function Portfolio() {
     return newArray;
   };
 
+  // const [walletTypeValue, setWalletTypeValue] = useState(undefined);
+  // const [walletAddressValue, setWalletAddressValue] = useState(undefined);
+
   return (
     <div className="portfolio-page">
       <h1>My Portfolio</h1>
       <div>
-        <p>This is going to be 2x dropdowns</p>
+        <select
+          className={'dropdown'}
+          value={walletTypeValue}
+          onChange={(e) => setWalletTypeValue(e.target.value)}
+        >
+          <option className="disabled-option" disabled>
+            'Choose Wallet Type'
+          </option>
+          {['Ethereum', 'Bitcoin', 'BSC'].map((option, index) => {
+            return (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            );
+          })}
+        </select>
+        <select
+          className={'dropdown'}
+          value={walletAddressValue}
+          onChange={(e) => setWalletAddressValue(e.target.value)}
+        >
+          <option className="disabled-option" disabled>
+            'Choose Wallet Type'
+          </option>
+          {['Ethereum', 'Bitcoin', 'BSC'].map((option, index) => {
+            return (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <div className="portfolio-table">
         <DataTable

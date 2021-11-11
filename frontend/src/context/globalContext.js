@@ -8,6 +8,7 @@ export const GlobalContextProvider = (props) => {
   const [loggedInUserName, setLoggedInUserName] = useState('');
   const [userID, setUserID] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [filteredData, setFilteredData] = useState(props.rowData);
 
   return (
     <GlobalContext.Provider
@@ -22,6 +23,8 @@ export const GlobalContextProvider = (props) => {
         setUserID,
         loggedIn,
         setLoggedIn,
+        filteredData,
+        setFilteredData,
       }}
     >
       {props.children}

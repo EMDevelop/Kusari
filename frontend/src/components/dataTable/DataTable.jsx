@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { GlobalContext } from '../../context/globalContext';
 
 // Credit to: https://codepen.io/nikhil8krishnan/details/WvYPvv
 
 export default function DataTable(props) {
   const [itemsToFilter, setItemsToFilter] = useState([]);
-  const [filteredData, setFilteredData] = useState(props.rowData);
   const [tickZeroBalance, setTickZeroBalance] = useState(false);
-
+  const { setFilteredData, filteredData } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   useEffect(() => {
