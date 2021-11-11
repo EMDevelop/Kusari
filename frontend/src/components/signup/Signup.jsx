@@ -55,17 +55,6 @@ function Signup(props) {
     });
   };
 
-  const fail = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'error',
-    });
-  };
-  const info = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'info',
-    });
-  };
-
   return (
     <form onSubmit={(e) => handleSignup(e)}>
       <h4>Sign Up</h4>
