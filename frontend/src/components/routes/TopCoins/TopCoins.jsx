@@ -21,7 +21,12 @@ export default function TopCoins() {
 
   return isLoaded ? (
     <div className="top-coins-page">
-      <h1>Top Coins</h1>
+      <div>
+        <h1>
+          <h1>Top Coins</h1>
+          <p className="coming-from">Data Source: CoinGecko.com</p>
+        </h1>
+      </div>
       <div>
         <div className="top-coins-page">
           {items && (

@@ -6,6 +6,13 @@
   grid-template-rows: 2fr 8fr;
 }
 
+.coming-from {
+  justify-self: center;
+  text-align: center;
+  color: $c-light-two;
+  font-size: 12px;
+}
+
 fa-home-up,
 fa-home-down {
   font-size: 2em;

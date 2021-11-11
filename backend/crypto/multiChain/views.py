@@ -106,5 +106,14 @@ def get_all_wallet_prices(request, user_id):
                 'content': get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content
             }
             list_crypto_wallets.append(crypto_wallet)
+
+        elif wallet['wallet_type'] == 'Bitcoin':
+            crypto_wallet = {
+                'address': wallet['wallet_address'],
+                'type': wallet['wallet_type'],
+                'content': get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content
+            }
+            list_crypto_wallets.append(crypto_wallet)
+
     return Response(list_crypto_wallets)
     # return render(request, 'multiChain/wallet_prices.html')
