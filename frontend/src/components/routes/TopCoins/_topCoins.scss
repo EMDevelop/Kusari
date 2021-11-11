@@ -3,5 +3,41 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1fr 6fr;
+  grid-template-rows: 2fr 8fr;
+}
+
+.coming-from {
+  justify-self: center;
+  text-align: center;
+  color: $c-light-two;
+  font-size: 12px;
+}
+
+fa-home-up,
+fa-home-down {
+  font-size: 2em;
+}
+fa-home-up,
+fa-home-down {
+  // display: table-cell;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  flex-direction: row;
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.fa-home-up {
+  color: $c-green;
+}
+
+.fa-home-down {
+  color: #f97068ff;
 }

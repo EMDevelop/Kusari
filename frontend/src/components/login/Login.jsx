@@ -1,26 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../../context/globalContext';
+import { useSnackbar } from 'notistack';
 
 function Login(props) {
-  const [username, setUsername] = useState('');
+  const { setUserID, setLoggedInUserName, setLoggedIn } =
+    useContext(GlobalContext);
+
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // axios post request to url with body as data
     try {
       const response = await axios.post('/token-auth/', {
         username: username,
         password: password,
       });
-      props.storeDetailsInApp(response.data.user.username, response.data.token);
+      props.storeDetailsInApp(response.data.token);
+      console.log(response.data);
+      setUserID(response.data.user_id);
+      setLoggedInUserName(response.data.user.username);
+      setUsername(response.data.user.username);
+      setLoggedIn(true);
       navigate('/');
+      success(`Welcome Back To Kusari ${response.data.user.username}!`);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+
+  const fail = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+  const info = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'info',
+    });
   };
 
   return (

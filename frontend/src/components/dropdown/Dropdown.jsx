@@ -1,40 +1,51 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from 'react';
 
 export default function Dropdown(props) {
   const [selectedValue, setSelectedValue] = useState(props.placeholderValue);
 
-  const onDropdownSelect = (e) => {
-    setSelectedValue(e.target.value);
-    props.handleOptionSelect && props.handleOptionSelect(e.target.value);
-    if (props.name === 'wallet-type') {
-      handleMultiDropdownSelect(e);
+  const handleInputChange = (e) => {
+    if (props.location === 'multipleInputs') {
+      handleMultipleInputs(e);
+    } else if (props.location === 'portfolio') {
+      handlePortfolioSelect(e);
+    } else {
+      onDropdownSelect(e);
     }
   };
 
-  const handleMultiDropdownSelect = (e) => {
+  const handlePortfolioSelect = (e) => {
+    setSelectedValue(e.target.value);
+    props.setSelectedValue(e.target.value);
+  };
+
+  const onDropdownSelect = (e) => {
+    setSelectedValue(e.target.value);
+    props.handleOptionSelect && props.handleOptionSelect(e.target.value);
+  };
+
+  useEffect(() => {
+    props.parentValue && setSelectedValue(props.parentValue);
+  }, []);
+
+  const handleMultipleInputs = (e) => {
     let values = [...props.parentInputFields];
-    let accumulator = 1;
-    values[props.currentIndex][props.name] = e.target.value;
-    // Set Sequence Every Time, Index unreliable
-    values.map((row) => {
-      row['seq'] = accumulator;
-      accumulator = accumulator + 1;
-    });
+    values[values.findIndex((x) => x.id === props.parentWalletID)][props.name] =
+      e.target.value;
+
     props.parentSetInputFields(values);
-    console.log(values);
+    setSelectedValue(e.target.value);
   };
 
   return (
     <select
       className={props.widthClass ? props.widthClass : 'dropdown'}
       value={selectedValue}
-      onChange={(e) => onDropdownSelect(e)}
+      onChange={(e) => handleInputChange(e)}
     >
       <option className="disabled-option" disabled>
         {props.placeholderValue}
       </option>
+      {props.location === 'portfolio' && <option>See All</option>}
       {props.dropdownOptions.map((option, index) => {
         return (
           <option key={index} value={option}>

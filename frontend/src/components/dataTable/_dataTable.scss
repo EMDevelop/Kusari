@@ -12,6 +12,14 @@ table {
   margin-top: 0px;
   border: 1px solid $frosted;
 }
+
+.tbl-content-top-coins {
+  height: 80vh;
+  overflow-x: auto;
+  margin-top: 0px;
+  border: 1px solid $frosted;
+}
+
 th {
   padding: 20px 15px;
   text-align: left;
@@ -67,4 +75,13 @@ td {
 .token-icon {
   height: 30px;
   width: auto;
+}
+
+.lamboHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }

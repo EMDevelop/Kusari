@@ -3,109 +3,156 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1fr 6fr;
+  grid-template-rows: 1fr 2fr 6fr;
+}
+.token-info-container {
+  width: 640px;
+  margin: auto;
 }
 
-@import "https://fonts.googleapis.com/css?family=Lato";
+.widget-container {
+  // background-color: pink;
+  height: 95%;
+}
+
+.coming-from {
+  justify-self: center;
+  text-align: center;
+  color: $c-light-two;
+  font-size: 12px;
+}
+
+.stock {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  float: left;
+  margin: 5px;
+  transition: box-shadow 0.2s ease;
+}
+.symbol,
+.change {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+}
+.symbol {
+  top: 10px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 300;
+  color: $c-green;
+}
+.change {
+  top: 50%;
+  font-size: 22px;
+  font-weight: 700;
+  transform: translateY(-50%);
+}
+
+@import 'https://fonts.googleapis.com/css?family=Lato';
 * {
-	font-family: 'Lato', sans-serif !important;
+  font-family: 'Lato', sans-serif !important;
 }
 a.cryptocompare-logo {
-	display: none;
+  display: none;
 }
 .tabcontent {
-	display: none !important;
-	display: none;
+  display: none !important;
+  display: none;
 }
 .cTypeTabActive {
-	background-color: rgba(216,216,216, 0.8) !important;
+  background-color: rgba(216, 216, 216, 0.8) !important;
 }
 .tabperiods {
-	font-family: 'Raleway', sans-serif;
-	border-radius: 7px;
-	padding: 2px 1px;
-	background-color: rgba(0,0,0, 0.03);
-	&:hover {
-		background-color: rgb(231, 240, 249);
-	}
+  font-family: 'Raleway', sans-serif;
+  border-radius: 7px;
+  padding: 2px 1px;
+  background-color: rgba(0, 0, 0, 0.03);
+  &:hover {
+    background-color: rgb(231, 240, 249);
+  }
 }
 .tabperiods_active {
-	background-color: rgba(10,115,167, 0.1);
+  background-color: rgba(10, 115, 167, 0.1);
 }
 .tablinks {
-	border-radius: 7px;
-	border-width: 1px;
-	padding: 5px 10px;
-	border-style: solid;
-	background-color: #ffffff;
-	border-color: rgb(255, 255, 255) !important;
-	&:hover {
-		background-color: #f2f2f2;
-		border-color: rgba(127,211,179, 0.8);
-	}
+  border-radius: 7px;
+  border-width: 1px;
+  padding: 5px 10px;
+  border-style: solid;
+  background-color: #ffffff;
+  border-color: rgb(255, 255, 255) !important;
+  &:hover {
+    background-color: #f2f2f2;
+    border-color: rgba(127, 211, 179, 0.8);
+  }
 }
 .tablinks.active {
-	border-color: rgba(255, 255, 255, 0.01) !important;
-	background-color: #e6e6e6 !important;
+  border-color: rgba(255, 255, 255, 0.01) !important;
+  background-color: #e6e6e6 !important;
 }
 .amcharts-graph-line {
-	fill: rgba(255, 255, 255, 0.9);
+  fill: rgba(255, 255, 255, 0.9);
 }
 .cccCustomRadioContainer {
-	display: none;
+  display: none;
 }
 .ccc-widget {
-	border: 0px solid;
+  border: 0px solid;
 }
 .ccc-chart-v3 {
-	border: 0px solid;
+  border: 0px solid;
 }
 tspan {
-	font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 textPath {
-	font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 rect.amcharts-cursor-div {
-	background-color: #000000;
+  background-color: #000000;
 }
 .chartTypeTabLinks {
-	&:hover {
-		background-color: #e5e5e5 !important;
-		color: rgba(0, 0, 0, 0.6) !important;
-	}
-	padding-top: 1px;
-	padding-bottom: 1px;
+  &:hover {
+    background-color: #e5e5e5 !important;
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 .amcharts-graph-fill {
-	fill: rgb(139, 146, 167);
+  fill: rgb(139, 146, 167);
 }
 .amcharts-graph-stroke {
-	fill-opacity: 0.8;
-	stroke-width: 2;
-	stroke-opacity: 0.8;
-	stroke: rgb(125, 149, 182);
+  fill-opacity: 0.8;
+  stroke-width: 2;
+  stroke-opacity: 0.8;
+  stroke: rgb(125, 149, 182);
 }
 .amcharts-category-axis {
-	fill: rgba(0,0,0, 0.8);
+  fill: rgba(0, 0, 0, 0.8);
 }
 .amcharts-cursor-fill {
-	fill: rgba(10,115,167, 0.8);
-	stroke: rgb(4, 0, 0) !important;
-	display: none !important;
+  fill: rgba(10, 115, 167, 0.8);
+  stroke: rgb(4, 0, 0) !important;
+  display: none !important;
 }
 .amcharts-plot-area {
-	fill: rgb(25, 225, 225) !important;
+  fill: rgb(25, 225, 225) !important;
 }
 .amcharts-legend-marker {
-	fill: rgba(10,115,167, 0.3) !important;
-	stroke: rgba(10,115,167, 0.6) !important;
+  fill: rgba(10, 115, 167, 0.3) !important;
+  stroke: rgba(10, 115, 167, 0.6) !important;
 }
 .amcharts-balloon-div {
-	fill: rgba(10,115,167, 0.9) !important;
-	position: absolute !important;
-	border: 1px !important;
+  fill: rgba(10, 115, 167, 0.9) !important;
+  position: absolute !important;
+  border: 1px !important;
 }
+
 #loaderccc {
-	display: none !important;
+  display: none !important;
 }

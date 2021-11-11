@@ -1,82 +1,206 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faSave } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from '../dropdown/Dropdown';
+import { GlobalContext } from '../../context/globalContext';
+import axios from 'axios';
+import LamboLoader from '../lamboLoader/LamboLoader';
+import { useCookies } from 'react-cookie';
+import { useSnackbar } from 'notistack';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+axios.defaults.xsrfCookieName = 'csrftoken';
 
 export default function MultipleInputs() {
-  const [inputFields, setInputFields] = useState([
-    { wallet_id: '', seq: 1, wallet_type: '', wallet_address: '' },
-  ]);
+  // When page loads, for current user
+  // Go get the users wallets
+  // If there are no wallets, create one
+  // If there are wallets, set the state to the wallets
 
-  const handleInputChange = (index, e) => {
-    let values = [...inputFields];
-    let accumulator = 1;
-    values[index][e.target.name] = e.target.value;
-    // Set Sequence Every Time, Index unreliable
-    values.map((row) => {
-      row['seq'] = accumulator;
-      accumulator = accumulator + 1;
+  const { userID } = useContext(GlobalContext);
+  const [inputFields, setInputFields] = useState([]);
+  const [latestID, setLatestID] = useState(0);
+  const [deleted, setDeleted] = useState(false);
+  const [updated, setUpdated] = useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
     });
+  };
+  const fail = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+  const info = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'info',
+    });
+  };
+
+  // Need to configure CSRS
+  const [cookies, setCookie] = useCookies(['name']);
+  const csrfToken = cookies.csrftoken;
+
+  // Add use Effect
+  useEffect(() => {
+    async function getWallets() {
+      try {
+        const response = await fetchAllWalletData();
+        setInputFields(response.data);
+        setDeleted(false);
+        setUpdated(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getWallets();
+  }, [, latestID, deleted, updated]);
+
+  const fetchAllWalletData = async () => {
+    return await axios.get(`multi/user-wallet-list/${userID}`, {
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+    });
+  };
+
+  const handleInputChange = (e, walletID) => {
+    let values = [...inputFields];
+    values[values.findIndex((x) => x.id === walletID)][e.target.name] =
+      e.target.value;
     setInputFields(values);
   };
 
-  const handleAdd = (index) => {
+  const handleDropdownChange = (e, walletID) => {
     let values = [...inputFields];
-    values.splice(index + 1, 0, {
-      wallet_id: '',
-      seq: index + 1,
-      wallet_type: '',
-      wallet_address: '',
-    });
+    values[values.findIndex((x) => x.id === walletID)][e.target.name] =
+      e.target.value;
     setInputFields(values);
+  };
+
+  const handleAdd = async () => {
+    try {
+      const response = await axios.post(`multi/wallet-create/`, {
+        headers: {
+          csrftoken: csrfToken,
+          Authorization: `JWT ${localStorage.getItem('token')}`,
+        },
+        body: {
+          user: userID,
+          wallet_address: '',
+          wallet_type: '',
+        },
+      });
+      success('Wallet Added Successfully');
+      if (latestID < response.data.id) setLatestID(response.data.id);
+    } catch (error) {
+      console.log(error);
+      fail('Failed, wallet was not created.');
+    }
   };
 
   // not working, working on veganswap though? client/src/components/forms/MultiFormAddIngredients.jsx
-  const handleRemove = (index) => {
-    let values = [...inputFields];
-    // console.log(values);
-    values.splice(index, 1);
-    setInputFields(values);
+  const handleRemove = async (index) => {
+    try {
+      const response = await axios.delete(`multi/wallet-delete/${index}/`, {
+        headers: {
+          csrftoken: csrfToken,
+          Authorization: `JWT ${localStorage.getItem('token')}`,
+        },
+      });
+      if (response.status === 200) setDeleted(true);
+      success('Wallet Removed Successfully');
+    } catch (error) {
+      console.log(error);
+      fail('Failed, wallet was not deleted.');
+    }
+  };
+
+  const handleSave = () => {
+    inputFields &&
+      inputFields.forEach(async (wallet) => {
+        try {
+          const response = await axios.put(
+            `multi/wallet-update/${wallet.id}/`,
+            {
+              headers: {
+                csrftoken: csrfToken,
+                Authorization: `JWT ${localStorage.getItem('token')}`,
+              },
+              body: {
+                user: userID,
+                wallet_address: wallet.wallet_address,
+                wallet_type: wallet.wallet_type,
+              },
+            }
+          );
+          console.log(response);
+          if (response.status === 200) {
+            success('Wallet Updated Successfully');
+          }
+        } catch (error) {
+          console.log(error);
+          fail('Failed, wallet was not updated.');
+        }
+      });
+    setUpdated(true);
   };
 
   return (
     <>
-      {inputFields.map((_, index) => (
-        <div key={index} className="multipleInputRow">
-          <div className="multi-dropdown">
-            <Dropdown
-              name="wallet-type"
-              placeholderValue="Select wallet type"
-              dropdownOptions={['Ethereum', 'Bitcoin']}
-              widthClass="dropdown-width-max"
-              parentSetInputFields={setInputFields}
-              parentInputFields={inputFields}
-              currentIndex={index}
-            />
-          </div>
-          <div className="multi-input">
-            <input
-              name="wallet_address"
-              type="text"
-              className="multi-input-field"
-              placeholder="e.g 0x0613Cd2076bd432C7A60a1b926b11B17BaAaFE11"
-              onChange={(e) => handleInputChange(index, e)}
-            />
-          </div>
-
-          <div className="plusMinus">
-            <FontAwesomeIcon icon={faPlus} onClick={() => handleAdd(index)} />
-            {index === 0 ? (
-              <></>
-            ) : (
-              <FontAwesomeIcon
-                icon={faMinus}
-                onClick={() => handleRemove(index)}
+      <div className="icon-save-profile" onClick={() => handleSave()}>
+        <FontAwesomeIcon icon={faSave} />
+      </div>
+      {console.log(inputFields)}
+      {inputFields || inputFields.length === 0 ? (
+        inputFields.map((wallet) => (
+          <div key={wallet['id']} className="multipleInputRow">
+            <div className="multi-dropdown">
+              <Dropdown
+                location="multipleInputs"
+                name="wallet_type"
+                placeholderValue="Select wallet type"
+                dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
+                widthClass="dropdown-width-max"
+                parentSetInputFields={setInputFields}
+                parentInputFields={inputFields}
+                parentWalletID={wallet['id']}
+                parentValue={wallet['wallet_type']}
+                // currentIndex={index}
               />
-            )}
+            </div>
+            <div className="multi-input">
+              <input
+                value={wallet['wallet_address']}
+                name="wallet_address"
+                type="text"
+                className="multi-input-field"
+                placeholder="e.g 0x0613Cd2076bd432C7A60a1b926b11B17BaAaFE11"
+                onChange={(e) => handleInputChange(e, wallet['id'])}
+              />
+            </div>
+
+            <div className="plusMinus">
+              <FontAwesomeIcon icon={faPlus} onClick={() => handleAdd()} />
+              {wallet['id'] === 0 ? (
+                <></>
+              ) : (
+                <FontAwesomeIcon
+                  icon={faMinus}
+                  onClick={() => handleRemove(wallet['id'])}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <LamboLoader />
+      )}
     </>
   );
 }

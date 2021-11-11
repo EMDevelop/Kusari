@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
-import { SnackbarProvider } from 'notistack';
-import { GlobalContextProvider } from './context/globalContext';
+
+import { GlobalContext } from './context/globalContext';
+import { useSnackbar } from 'notistack';
 
 // axios
 import axios from 'axios';
@@ -12,19 +13,26 @@ import Navbar from './components/routes/Navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
-import Profile from './components/routes/Profile/Profile';
 import LoginSignup from './components/routes/LoginSignup/LoginSignup';
 import TokenInformation from './components/routes/TokenInformation/TokenInformation';
 import TopCoins from './components/routes/TopCoins/TopCoins';
+import Portfolio from './components/routes/Portfolio/Portfolio';
+import MyWallets from './components/routes/MyWallets/MyWallets';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem('token') ? true : false
-  );
-  const [username, setUsername] = useState(undefined);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const success = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+    });
+  };
+
+  const { loggedIn, setLoggedIn, setLoggedInUserName } =
+    useContext(GlobalContext);
 
   useEffect(() => {
-    // authorizeTokenFromStorage();
+    authorizeTokenFromStorage();
     singleUpdatePrices();
   }, []);
 
@@ -32,60 +40,50 @@ function App() {
     await axios.get('/prices/startup-request-prices');
   };
 
-  // const authorizeTokenFromStorage = async (token) => {
-  //   // If user is logged in, check if their stored token is still valid
-  //   // This will be valid for 2 weeks by django default.
-  //   try {
-  //     const response = await axios.get('/prices/current_user/', {
-  //       headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
-  //     });
-  //     setLoggedIn(true); //???
-  //     setUsername(response.data.user.username); // previously this.setState({ username: json.username });
-  //   } catch (error) {
-  //     setLoggedIn(false);
-  //   }
-  // };
+  const authorizeTokenFromStorage = async (token) => {
+    // If user is logged in, check if their stored token is still valid
+    // This will be valid for 2 weeks by django default.
+    try {
+      const response = await axios.get('/prices/current_user/', {
+        headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
+      });
+      console.log(response);
+      setLoggedIn(true); //???
+      setLoggedInUserName(response.data.user.username);
+    } catch (error) {
+      setLoggedIn(false);
+    }
+  };
 
-  const storeLoginCredentials = (username, token) => {
-    setLoggedIn(true);
-    setUsername(username);
+  const storeLoginCredentials = (token) => {
     token && localStorage.setItem('token', token);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setUsername('');
-    setLoggedIn(false);
-  };
-
   return (
-    <GlobalContextProvider>
-      <Router>
-        <div className="app">
-          <Navbar
-            loggedIn={loggedIn}
-            // display_form={display_form}
-            handleLogout={handleLogout}
-          />
-          <SnackbarProvider maxSnack={4}>
-            <main>
-              <Routes>
-                <Route path="/" element={<LookupWallet />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route
-                  path="/login-signup"
-                  element={
-                    <LoginSignup storeDetailsInApp={storeLoginCredentials} />
-                  }
-                />
-                <Route path="/token/:symbol" element={<TokenInformation />} />
-                <Route path="/top-coins" element={<TopCoins />} />
-              </Routes>
-            </main>
-          </SnackbarProvider>
-        </div>
-      </Router>
-    </GlobalContextProvider>
+    <Router>
+      <div className="app">
+        <Navbar
+          loggedIn={loggedIn}
+          setUsername={setLoggedInUserName}
+          setLogged={setLoggedIn}
+        />
+        <main>
+          <Routes>
+            <Route path="/" element={<LookupWallet />} />
+            <Route path="/profile" element={<MyWallets />} />
+            <Route
+              path="/login-signup"
+              element={
+                <LoginSignup storeDetailsInApp={storeLoginCredentials} />
+              }
+            />
+            <Route path="/token/:symbol" element={<TokenInformation />} />
+            <Route path="/top-coins" element={<TopCoins />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 

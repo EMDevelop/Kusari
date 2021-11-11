@@ -1,0 +1,14 @@
+.portfolio-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 1fr 6fr;
+}
+
+.filter-dropdown-container {
+  // background-color: red;
+  height: 70px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

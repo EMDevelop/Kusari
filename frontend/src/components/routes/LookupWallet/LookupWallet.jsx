@@ -5,36 +5,21 @@ import Dropdown from '../../dropdown/Dropdown';
 import LamboLoader from '../../lamboLoader/LamboLoader';
 import { useSnackbar } from 'notistack';
 import { GlobalContext } from '../../../context/globalContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchWalletBalance() {
-  // const [address, setAddress] = useState(undefined);
-  // const [walletDetails, setWalletDetails] = useState([]);
   const [walletType, setwalletType] = useState(undefined);
   const [fetchingAddressInfo, setFetchingAddressInfo] = useState(false);
-
   const { address, setAddress, walletDetails, setWalletDetails } =
     useContext(GlobalContext);
-
-  const { enqueueSnackbar } = useSnackbar();
 
   // Every time someone types in the input, the `address` state is updated
   const handleInputChange = (e) => {
     setAddress(e);
   };
 
-  // Handle button click when a user searches for their waller
-  const handleButtonClick = async () => {
-    try {
-      info('Fetching Wallet Balance...');
-      setFetchingAddressInfo(true);
-      await getWalletDetails(address);
-      setFetchingAddressInfo(false);
-      success('Fetching complete');
-    } catch (error) {
-      fail('There was a problem with the request! Please try again');
-      console.log(error);
-    }
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const success = (message) => {
     enqueueSnackbar(message, {
@@ -53,11 +38,35 @@ export default function SearchWalletBalance() {
     });
   };
 
+  useEffect(() => {
+    info(
+      'Select the wallet type, paste your wallet address and click the search icon'
+    );
+  }, []);
+
+  // Handle button click when a user searches for their waller
+  const handleButtonClick = async () => {
+    try {
+      info(
+        'Lookup Wallet: Fetching your wallet details, this may take a minute or so!'
+      );
+      setFetchingAddressInfo(true);
+      await getWalletDetails(address);
+      setFetchingAddressInfo(false);
+      success('Fetching complete');
+    } catch (error) {
+      fail(
+        'Lookup Wallet: There was a problem with the request! Please try again'
+      );
+      console.log(error);
+    }
+  };
+
   // Axios API call to get the wallet details
   const getWalletDetails = async (address) => {
     try {
       const response = await axios.get(
-        `/${walletType.toLowerCase()}/wallet-balance/${address}/`
+        `/${walletType.toLowerCase()}/wallet-balance/${address}/single`
       );
       setWalletDetails(response.data);
     } catch (error) {
@@ -94,8 +103,9 @@ export default function SearchWalletBalance() {
       <h1>Lookup Wallet</h1>
       <div className="address-input-form">
         <Dropdown
+          location="lookupWallet"
           placeholderValue="Select wallet type"
-          dropdownOptions={['Ethereum', 'Bitcoin']}
+          dropdownOptions={['Ethereum', 'Bitcoin', 'BSC']}
           handleOptionSelect={setwalletType}
         />
         <input
@@ -108,17 +118,15 @@ export default function SearchWalletBalance() {
           {fetchingAddressInfo ? (
             <LamboLoader />
           ) : (
-            <i
-              className="fa fa-search"
-              aria-hidden="true"
-              onClick={() => handleButtonClick()}
-            ></i>
+            <div className="fa-home" onClick={() => handleButtonClick()}>
+              <FontAwesomeIcon icon={faSearch} />
+            </div>
           )}
         </div>
       </div>
       <DataTable
         headers={[
-          '',
+          'Icon',
           'Symbol',
           'Token Name',
           'Quantity',
@@ -126,6 +134,7 @@ export default function SearchWalletBalance() {
           'Current Value',
         ]}
         rowData={walletDetails}
+        label="lookupWallet"
       />
     </div>
   );
