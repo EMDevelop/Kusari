@@ -39,26 +39,32 @@ function Navbar(props) {
   };
 
   const logged_out_nav = (
-    <nav className="main-menu">
-      <ul>
+    <>
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+        <Login storeDetailsInApp={storeLoginCredentials} />
+        <Signup storeDetailsInApp={storeLoginCredentials} />
+      </Popup>
+      <nav className="main-menu">
+        <ul>
+          <li>
+            <a onClick={(e) => handleClick(e, '/')}>
+              <div className="fa-home">
+                <FontAwesomeIcon icon={faSearch} />
+              </div>
+              <span className="nav-text">Lookup Wallet</span>
+            </a>
+          </li>
+        </ul>
         <li>
-          <a onClick={(e) => handleClick(e, '/')}>
+          <a onClick={() => setButtonPopup(true)}>
             <div className="fa-home">
-              <FontAwesomeIcon icon={faSearch} />
+              <FontAwesomeIcon icon={faSignInAlt} />
             </div>
-            <span className="nav-text">Lookup Wallet</span>
+            <span className="nav-text">Login / Signup</span>
           </a>
         </li>
-      </ul>
-      <li>
-        <a onClick={(e) => handleClick(e, '/login-signup')}>
-          <div className="fa-home">
-            <FontAwesomeIcon icon={faSignInAlt} />
-          </div>
-          <span className="nav-text">Login / Signup</span>
-        </a>
-      </li>
-    </nav>
+      </nav>
+    </>
   );
 
   const loggedIn_nav = (
