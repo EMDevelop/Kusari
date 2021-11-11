@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
 
 import { GlobalContext } from './context/globalContext';
-import { useSnackbar } from 'notistack';
 
 // axios
 import axios from 'axios';
@@ -13,7 +12,7 @@ import Navbar from './components/routes/Navbar/Navbar';
 
 // Routes
 import LookupWallet from './components/routes/LookupWallet/LookupWallet';
-import LoginSignup from './components/routes/LoginSignup/LoginSignup';
+
 import TokenInformation from './components/routes/TokenInformation/TokenInformation';
 import TopCoins from './components/routes/TopCoins/TopCoins';
 import Portfolio from './components/routes/Portfolio/Portfolio';
@@ -63,12 +62,6 @@ function App() {
           <Routes>
             <Route path="/" element={<LookupWallet />} />
             <Route path="/profile" element={<MyWallets />} />
-            <Route
-              path="/login-signup"
-              element={
-                <LoginSignup storeDetailsInApp={storeLoginCredentials} />
-              }
-            />
             <Route path="/token/:symbol" element={<TokenInformation />} />
             <Route path="/top-coins" element={<TopCoins />} />
             <Route path="/portfolio" element={<Portfolio />} />
