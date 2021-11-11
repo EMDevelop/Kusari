@@ -136,3 +136,17 @@ nav.main-menu li.active > a,
   width: 190px;
   font-family: 'MyFont', sans-serif;
 }
+
+.Logo {
+  display: flex;
+}
+
+.Logo img {
+  margin-right: 10px;
+  display: block;
+  width: 75px;
+}
+
+.content h2 {
+  margin: 0;
+}

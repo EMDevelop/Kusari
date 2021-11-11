@@ -58,6 +58,14 @@ function Navbar(props) {
       <nav className="main-menu">
         <ul>
           <li>
+            <div className="Logo">
+              <img alt="Kusari Logo" src="/kusari.png" />
+              <h2>
+                <strong>Kusari</strong>
+              </h2>
+            </div>
+          </li>
+          <li>
             <a onClick={(e) => handleClick(e, '/')}>
               <div className="fa-home">
                 <FontAwesomeIcon icon={faSearch} />
