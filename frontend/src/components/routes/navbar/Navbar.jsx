@@ -12,6 +12,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
+// Imports for login/signup popup
 import Popup from '../../popup/popup';
 import Login from '../../login/Login';
 import Signup from '../../signup/Signup';
