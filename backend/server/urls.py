@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
+    path('', include('frontend.urls')),
     path('admin/', admin.site.urls),
     path('ethereum/', include('ethereum.urls')),
     path('bsc/', include('bsc.urls')),

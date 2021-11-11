@@ -17,7 +17,6 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 #Added this line to PATH, this is my extra directory
 sys.path.insert(0, os.path.join(BASE_DIR, 'crypto'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'traditional'))
@@ -33,7 +32,7 @@ SECRET_KEY = 'django-insecure-e*q3+^b*yiy26u%qj2@supe^!lomv!fgxiy#*w)l^5ujym7cse
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kusari.eba-xt96qt3d.us-west-2.elasticbeanstalk.com', '127.0.0.1', 'http://kusari.eba-xt96qt3d.us-west-2.elasticbeanstalk.com/']
 
 # Application definition
 
@@ -49,6 +48,7 @@ INSTALLED_APPS = [
     'helper',
     'prices.apps.PricesConfig',
     'multiChain.apps.MultichainConfig',
+    'frontend'
 ]
 
 MIDDLEWARE = [
