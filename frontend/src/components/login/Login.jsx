@@ -41,17 +41,6 @@ function Login(props) {
     });
   };
 
-  const fail = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'error',
-    });
-  };
-  const info = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'info',
-    });
-  };
-
   return (
     <form onSubmit={(e) => handleLogin(e)}>
       <h4>Log In</h4>
