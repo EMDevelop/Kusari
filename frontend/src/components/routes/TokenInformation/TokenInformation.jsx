@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import ScriptTag from 'react-script-tag';
 
 import axios from 'axios';
-import LamboLoader from '../../lamboLoader/LamboLoader';
 
 export default function TokenInformation(props) {
   const { symbol } = useParams();
