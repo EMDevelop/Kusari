@@ -3,6 +3,21 @@ import React, { useState, useEffect } from 'react';
 export default function Dropdown(props) {
   const [selectedValue, setSelectedValue] = useState(props.placeholderValue);
 
+  const handleInputChange = (e) => {
+    if (props.location === 'multipleInputs') {
+      handleMultipleInputs(e);
+    } else if (props.location === 'portfolio') {
+      handlePortfolioSelect(e);
+    } else {
+      onDropdownSelect(e);
+    }
+  };
+
+  const handlePortfolioSelect = (e) => {
+    setSelectedValue(e.target.value);
+    props.setSelectedValue(e.target.value);
+  };
+
   const onDropdownSelect = (e) => {
     setSelectedValue(e.target.value);
     props.handleOptionSelect && props.handleOptionSelect(e.target.value);
@@ -25,11 +40,7 @@ export default function Dropdown(props) {
     <select
       className={props.widthClass ? props.widthClass : 'dropdown'}
       value={selectedValue}
-      onChange={
-        props.location === 'multipleInputs'
-          ? (e) => handleMultipleInputs(e)
-          : (e) => onDropdownSelect(e)
-      }
+      onChange={(e) => handleInputChange(e)}
     >
       <option className="disabled-option" disabled>
         {props.placeholderValue}
