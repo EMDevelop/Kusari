@@ -16,9 +16,10 @@
   padding: 32px;
   width: 100%;
   max-width: 640px;
-  background-color: rgb(43, 41, 41);
-  border: 1px solid rgb(105, 90, 90);
+  background-color: #0b0a0a;
+  border: 1px solid #32ecb1;
   .close-button {
+    cursor: pointer;
     position: absolute;
     top: 16px;
     right: 16px;
