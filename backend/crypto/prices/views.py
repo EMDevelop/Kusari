@@ -22,6 +22,14 @@ def get_top_100_tokens(request):
     tokens = json.loads(response.text)
     return JsonResponse({'tokens': tokens})
 
+@api_view(['GET'])
+def get_coin_info(request, symbol): 
+    url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + symbol + "&tsyms=USD"
+    headers = {"Content-Type": "application/json"}
+    response = requests.request("GET", url, headers=headers)
+    tokens = json.loads(response.text)
+    return JsonResponse({'tokens': tokens})
+
 
 def get_covalent_prices(request):
     get_covalent_all_crypto_prices(request)
