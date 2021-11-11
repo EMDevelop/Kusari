@@ -36,11 +36,6 @@ export default function MultipleInputs() {
       variant: 'error',
     });
   };
-  const info = (message) => {
-    enqueueSnackbar(message, {
-      variant: 'info',
-    });
-  };
 
   // Need to configure CSRS
   const [cookies, setCookie] = useCookies(['name']);
