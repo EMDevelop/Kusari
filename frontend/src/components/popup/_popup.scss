@@ -8,6 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  backdrop-filter: saturate(180%) blur(20px);
 }
 .popup-inner {
   position: relative;
