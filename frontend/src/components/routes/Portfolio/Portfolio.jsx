@@ -3,8 +3,8 @@ import DataTable from '../../dataTable/DataTable';
 import { GlobalContext } from '../../../context/globalContext';
 import axios from 'axios';
 import Dropdown from '../../dropdown/Dropdown';
-import LamboLoader from '../../lamboLoader/LamboLoader';
 import { useSnackbar } from 'notistack';
+import LamboLoader from '../../lamboLoader/LamboLoader';
 
 export default function Portfolio() {
   const { userID } = useContext(GlobalContext);
@@ -96,7 +96,8 @@ export default function Portfolio() {
   return (
     <div className="portfolio-page">
       <h1>My Portfolio</h1>
-      <div>
+      <div className="filter-dropdown-container">
+        {!portfolioTokens && <LamboLoader />}
         {uniqueTypeList && (
           <Dropdown
             placeholderValue="Filter: Wallet Type"
@@ -116,8 +117,8 @@ export default function Portfolio() {
       </div>
       <div className="portfolio-table">
         <DataTable
-          // typeFiler={}
-          // addressFilter={}
+          typeFiler={selectedType}
+          addressFilter={selectedAddress}
           headers={[
             // props.headers
             'Type',

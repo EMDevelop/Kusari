@@ -45,6 +45,7 @@ export default function Dropdown(props) {
       <option className="disabled-option" disabled>
         {props.placeholderValue}
       </option>
+      {props.location === 'portfolio' && <option>See All</option>}
       {props.dropdownOptions.map((option, index) => {
         return (
           <option key={index} value={option}>
