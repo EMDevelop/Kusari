@@ -30,6 +30,10 @@ function Navbar(props) {
     navigate(route);
   };
 
+  const storeLoginCredentials = (token) => {
+    token && localStorage.setItem('token', token);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     props.setLogged(false);
