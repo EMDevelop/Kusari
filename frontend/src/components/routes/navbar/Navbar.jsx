@@ -12,6 +12,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
+import Popup from '../../popup/popup';
+import Login from '../../login/Login';
+import Signup from '../../signup/Signup';
+
 // Credit to: https://codepen.io/JFarrow/pen/fFrpg for the navbar
 
 function Navbar(props) {
