@@ -29,3 +29,4 @@ urlpatterns = [
     path('token-auth/', obtain_jwt_token),
     path('multi/', include('multiChain.urls')),
 ]
+
