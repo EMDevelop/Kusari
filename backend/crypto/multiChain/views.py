@@ -87,33 +87,44 @@ def get_all_wallet_prices(request, user_id):
     # Get prices as usual from storage
     # Return the token info  and the prices to the client.
     wallets = Wallet.objects.filter(user=user_id)
+    print('wallets')
+    print(wallets)
     serializer = WalletSerializer(wallets, many=True)
+    print('serializer')
+    print(serializer)
     user_wallets = serializer.data
+    print('user_wallets')
+    print(serializer)
     list_crypto_wallets =[]
     for wallet in user_wallets:
-        if wallet['wallet_type'] == 'Ethereum':
-            crypto_wallet = {
-                'address': wallet['wallet_address'],
-                'type': wallet['wallet_type'],
-                'content': get_ethereum_and_erc20_wallet_balance(request, wallet['wallet_address'], "multi").content
-            }
-            list_crypto_wallets.append(crypto_wallet)
+        if not wallet['wallet_type'] == '':
+          if wallet['wallet_type'] == 'Ethereum':
+              print(wallet['wallet_type'])
+              print('----> /I am in the Ethereum If')
+              crypto_wallet = {
+                  'address': wallet['wallet_address'],
+                  'type': wallet['wallet_type'],
+                  'content': get_ethereum_and_erc20_wallet_balance(request, wallet['wallet_address'], "multi").content
+              }
+              list_crypto_wallets.append(crypto_wallet)
 
-        elif wallet['wallet_type'] == 'BSC':
-            crypto_wallet = {
-                'address': wallet['wallet_address'],
-                'type': wallet['wallet_type'],
-                'content': get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content
-            }
-            list_crypto_wallets.append(crypto_wallet)
+          else:
+              print(wallet['wallet_type'])
+              print('----> /I am in the BSC if')
+              crypto_wallet = {
+                  'address': wallet['wallet_address'],
+                  'type': wallet['wallet_type'],
+                  'content': get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content
+              }
+              list_crypto_wallets.append(crypto_wallet)
 
-        elif wallet['wallet_type'] == 'Bitcoin':
-            crypto_wallet = {
-                'address': wallet['wallet_address'],
-                'type': wallet['wallet_type'],
-                'content': get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content
-            }
-            list_crypto_wallets.append(crypto_wallet)
+        # elif wallet['wallet_type'] == 'Bitcoin':
+        #     crypto_wallet = {
+        #         'address': wallet['wallet_address'],
+        #         'type': wallet['wallet_type'],
+        #         'content': get_bep20_wallet_balance(request, wallet['wallet_address'], "multi").content
+        #     }
+        #     list_crypto_wallets.append(crypto_wallet)
 
     return Response(list_crypto_wallets)
     # return render(request, 'multiChain/wallet_prices.html')

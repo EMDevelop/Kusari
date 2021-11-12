@@ -48,7 +48,7 @@ export default function DataTable(props) {
   };
 
   const handleRowClick = (event, token) => {
-    navigate(`/token/${token}`);
+    navigate(`/token/${token.toUpperCase()}`);
   };
 
   const handleTickZeroBalance = () => {
