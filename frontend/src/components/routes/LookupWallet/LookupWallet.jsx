@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import DataTable from '../../dataTable/DataTable';
 import Dropdown from '../../dropdown/Dropdown';
-import LamboLoader from '../../lamboLoader/LamboLoader';
+import LamboLoader from '../../LamboLoader/LamboLoader';
 import { useSnackbar } from 'notistack';
 import { GlobalContext } from '../../../context/globalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
