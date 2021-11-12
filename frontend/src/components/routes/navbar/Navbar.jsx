@@ -42,6 +42,7 @@ function Navbar(props) {
   };
 
   const handleLogout = () => {
+    setButtonPopup(false)
     localStorage.removeItem('token');
     props.setLogged(false);
     props.setUsername('');
