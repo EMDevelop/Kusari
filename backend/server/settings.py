@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'helper',
     'prices.apps.PricesConfig',
     'multiChain.apps.MultichainConfig',
+    'frontend'
 ]
 
 MIDDLEWARE = [

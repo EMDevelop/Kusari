@@ -10,8 +10,6 @@ In the space of 2 weeks, our team picked up a number of completely new framework
 
 [![Kusari Demo](https://img.youtube.com/vi/pigj0cxPyOQ/0.jpg)](https://www.youtube.com/embed/pigj0cxPyOQ?start=1)
 
-<iframe width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## The Team
 
 A special thanks to the Team:
@@ -51,12 +49,12 @@ We're in the process of hosting on AWS using Docker:
 
 - Also reference: "Requirements" section
 
-* Enter the repository: `cd Kusari`
-* Navigate into the frontend directory and install packages:`cd frontend && npm install`
-* Navigate to the backend: `cd .. && cd backend`
-* Start your virtual environment and install pip variables: `pipenv install`
-* Migrate DB with `python3 manage.py migrate`
-* Open 2 terminal windows:
+- Enter the repository: `cd Kusari`
+- Navigate into the frontend directory and install packages:`cd frontend && npm install`
+- Navigate to the backend: `cd .. && cd backend`
+- Start your virtual environment and install pip variables: `pipenv install`
+- Migrate DB with `python3 manage.py migrate`
+- Open 2 terminal windows:
   - 1st terminal, start react: `npm run client`
   - 2nd terminal, start django: `npm run server`
 
