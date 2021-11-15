@@ -4,7 +4,7 @@ import { faPlus, faMinus, faSave } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from '../dropdown/Dropdown';
 import { GlobalContext } from '../../context/globalContext';
 import axios from 'axios';
-import LamboLoader from '../lamboLoader/LamboLoader';
+import LamboLoader from '../LamboLoader/LamboLoader';
 import { useCookies } from 'react-cookie';
 import { useSnackbar } from 'notistack';
 

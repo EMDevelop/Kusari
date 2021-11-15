@@ -1,57 +1,87 @@
-# Investment Tracker
+# Kusari
+
+www.Kusari.app
+
+Named after the Japanese word for 'chain', this project sets out to consolidate investors Cryptocurrency investments into one application. Users can see their live balance from multiple chains including Ethereum, Binance Chain, and Bitcoin. We've structured the application to allow us to scale the number of chains we're consuming data from, as well as swap out API providers where needed.
+
+In the space of 2 weeks, our team picked up a number of completely new frameworks, including a language we didn't have experience in before (Python). The team put in the hours, and we're excited to showcase the final result of the project in the below demo.
+
+## Kusari Demo
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pigj0cxPyOQ?start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## The Team
+
+A special thanks to the Team:
+
+[![Mabon](https://img.icons8.com/nolan/25/github.png)](https://github.com/Maby0) Mabon |
+[![David](https://img.icons8.com/nolan/25/github.png)](https://github.com/mandyvuong) David |
+[![Gianluca](https://img.icons8.com/nolan/25/github.png)](https://github.com/GianlucaAnsaldi) Gianluca |
+[![Paul](https://img.icons8.com/nolan/25/github.png)](https://github.com/Paul72187) Paul |
+[![Tom](https://img.icons8.com/nolan/25/github.png)](https://github.com/tomal02) Tom |
+[![Ed](https://img.icons8.com/nolan/25/github.png)](https://github.com/EMDevelop) Ed |
+
+We held daily Standups and Retros, as well as adapting to remote working using a 24-7 discord dropin room.
+
+## Technology
+
+#### Frontend
+
+We build the front end in React, using Javascript, and styled using SCSS and various codepens, which were fairly attributed in our code.
+
+#### Backend
+
+We chose the Django framework to handle our 3rd party API requsts, using Python to consume various API's mentioned below.
+
+#### Database
+
+We used Postgres to store User credentials, as well as to store and associate cryptocurrency wallets to users.
+
+#### Hosting
+
+We're in the process of hosting on AWS using Docker:
 
 ## To Run
 
 - Clone the Repo: `Git Clone https://github.com/EMDevelop/investment-tracker.git`
-- Globally install pipenv `sudo -H pip3 install -U pipenv`
-- Install Dependencies: `pipenv install django djangorestframework django-cors-headers requests django-dotenv pytest`
-- Start Virtual Environment: `pipenv shell`
-- Navigate into the frontend directory and install packages`cd frontend && npm install`
-- Navigate back into the route directory `cd ..`
-- `pip install psycopg2`
-- Migrate DB with `python manage.py migrate`
-- Open 2 terminal windows:
+
+#### Start App
+
+- Also reference: "Requirements" section
+
+* Enter the repository: `cd Kusari`
+* Navigate into the frontend directory and install packages:`cd frontend && npm install`
+* Navigate to the backend: `cd .. && cd backend`
+* Start your virtual environment and install pip variables: `pipenv install`
+* Migrate DB with `python3 manage.py migrate`
+* Open 2 terminal windows:
   - 1st terminal, start react: `npm run client`
   - 2nd terminal, start django: `npm run server`
 
-## Creating A Django API App
+#### Requirements
 
-I think we should have 1 app per Blockchain or Centralised Exchange (as we add them), and also one for general price fetching.
+- A version of Node and NPM
+- A version of Python and Django (preferably 3.7 or higher)
+- Setup your environment:
+  - Add a `.env` file at the followig path: `Kusari/backend/.env`
+  - Within the `.env` file, add the following dependencies
 
-- prices (general)
-- Bitcoin (Blockchain)
-- Ethereum (Blockchain)
-- Cardano (Blockchain)
-- Polkadot (Blockchain)
-- Binance (Centralised Exchange)
-- Coinbase (Centralised Exchange)
-- Kraken (Centralised Exchange)
+* Note, you will need to create your own API keys, they are all free, most have API call limits.
 
-#### Creating A New App
+```
+MORALIS_API_KEY=
+MORALIS_NODE_KEY=
+CRYPTOCOMPARE_API_KEY=
+COVALENT_API_KEY=
+PG_USER=postgres
+PG_PASSWORD=
+PG_PORT=5432
+TEMP_DIR=/tmp
+```
 
-You will need to:
-
-- open the terminal
-- navigate to the relevant folder where your app lives, e.g. `cd backend/crypto`
-- create a new App using: `python3 manage.py startapp prices`
-  - `prices` is the name of the app
-
-#### Front End instructions
-
-- When we add abilities for a new chain, we need to update a prop in the 2 places the dropdown is usedwith the backend route:
-  - frontend/src/components/multipleInputs/MultipleInputs.jsx
-  - frontend/src/components/routes/LookupWallet/LookupWallet.jsx
-
-#### File Structure
-
-- Server
-  - Where we will configure new routes for our front end to interact with
-  - see backend/server/urls.py
-- Crypto
-  - This is where we will store our API's for crypto
-  - 1 App per chain
-- Traditional - This is where we will store our APIs for traditional services
-  - Unsure on how to structure this - David?
+- Once you've entered your virtual environment:
+  - Manually Install Dependencies: `pipenv install django djangorestframework django-cors-headers requests django-dotenv pytest`
+  - Sometimes you'll need to install psycopg2 manually: `pip install psycopg2`
 
 #### Testing
 

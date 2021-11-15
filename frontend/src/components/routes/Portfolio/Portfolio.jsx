@@ -4,7 +4,7 @@ import { GlobalContext } from '../../../context/globalContext';
 import axios from 'axios';
 import Dropdown from '../../dropdown/Dropdown';
 import { useSnackbar } from 'notistack';
-import LamboLoader from '../../lamboLoader/LamboLoader';
+import LamboLoader from '../../LamboLoader/LamboLoader';
 
 export default function Portfolio() {
   const { userID, setPortfolioTokens, portfolioTokens } =
