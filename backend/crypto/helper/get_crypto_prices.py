@@ -66,7 +66,6 @@ def get_covalent_all_crypto_prices(request):
     print('Fetching top 10,000 crypto tokens')
 
     page_size = 10000
-    # page_size = 10
     tokenDictionary = {
         "last_updated": "",
         "tokens": { 
@@ -75,7 +74,6 @@ def get_covalent_all_crypto_prices(request):
     }
 
     url = f"https://api.covalenthq.com/v1/pricing/tickers/?page-size={page_size}&key={os.environ['COVALENT_API_KEY']}"
-    # url = f"https://api.covalenthq.com/v1/pricing/tickers/?page-size={page_size}&key=ckey_b1edf0879e4d4ad5877c1f262db"
 
     headers = {"Content-Type": "application/json"}
 
@@ -86,7 +84,6 @@ def get_covalent_all_crypto_prices(request):
             "name": token['contract_name'],
             "symbol": token['contract_ticker_symbol'],
             "current_price": token['quote_rate'],
-            # "market_cap": token['market_cap'],
             "image": token['logo_url']
         }
     print("---------------------------------------")

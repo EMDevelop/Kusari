@@ -32,7 +32,10 @@ def get_coin_info(request, symbol):
 
 
 def get_covalent_prices(request):
-    get_covalent_all_crypto_prices(request)
+    if not 'price_list' in request.session or check_if_longer_than_30_seconds(request):
+        get_covalent_all_crypto_prices(request)
+    else :
+        print('Using pre-cached data')
     return JsonResponse({'status': 'Fetched prices'})
 
 def update_wallet_balance(request):
