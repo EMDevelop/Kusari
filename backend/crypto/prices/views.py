@@ -41,7 +41,10 @@ def get_covalent_prices(request):
 def update_wallet_balance(request):
     # This is a repeat request triggered every 30 seconds to update the `lookup wallet` screen
     # We fetch the most up to date prices froms storage and return them to the screen. 
-    get_covalent_all_crypto_prices(request)
+    if not 'price_list' in request.session or check_if_longer_than_30_seconds(request):
+        get_covalent_all_crypto_prices(request)
+    else :
+        print('Using pre-cached data')
     current_wallet = json.loads(request.GET['tokens'])
 
     for token in current_wallet:
