@@ -31,16 +31,13 @@ function App() {
     await axios.get('/prices/startup-request-prices');
   };
 
-  const authorizeTokenFromStorage = async (token) => {
-    // If user is logged in, check if their stored token is still valid
-    // This will be valid for 2 weeks by django default.
+  const authorizeTokenFromStorage = async () => {
     try {
       const response = await axios.get('/prices/current_user/', {
         headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
       });
-      console.log(response);
-      setLoggedIn(true); //???
-      setLoggedInUserName(response.data.user.username);
+      setLoggedIn(true);
+      setLoggedInUserName(response.data.username);
     } catch (error) {
       setLoggedIn(false);
     }
