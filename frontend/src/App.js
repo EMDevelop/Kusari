@@ -19,7 +19,7 @@ import Portfolio from './components/routes/Portfolio/Portfolio';
 import MyWallets from './components/routes/MyWallets/MyWallets';
 
 function App() {
-  const { loggedIn, setLoggedIn, setLoggedInUserName } =
+  const { loggedIn, setLoggedIn, setLoggedInUserName, setUserID } =
     useContext(GlobalContext);
 
   useEffect(() => {
@@ -31,23 +31,18 @@ function App() {
     await axios.get('/prices/startup-request-prices');
   };
 
-  const authorizeTokenFromStorage = async (token) => {
-    // If user is logged in, check if their stored token is still valid
-    // This will be valid for 2 weeks by django default.
+  const authorizeTokenFromStorage = async () => {
     try {
       const response = await axios.get('/prices/current_user/', {
         headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
       });
       console.log(response);
-      setLoggedIn(true); //???
+      setLoggedIn(true);
       setLoggedInUserName(response.data.user.username);
+      setUserID(response.data.user_id);
     } catch (error) {
       setLoggedIn(false);
     }
-  };
-
-  const storeLoginCredentials = (token) => {
-    token && localStorage.setItem('token', token);
   };
 
   return (

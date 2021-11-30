@@ -60,6 +60,7 @@ export default function DataTable(props) {
 
   const abbreviateAddress = (address) => {
     return (
+      address &&
       address.substring(0, 4) + ' ... ' + address.substring(address.length - 4)
     );
   };

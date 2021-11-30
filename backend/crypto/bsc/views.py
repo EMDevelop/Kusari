@@ -1,5 +1,4 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render
 import requests
 import json
 import os
@@ -31,11 +30,11 @@ def get_bep20_wallet_balance(request, address, request_type):
     # What does this method do?
 
     # Check if storage is empty OR if data is older than 30 seconds
-	if not 'price_list' in request.session or check_if_longer_than_30_seconds(request):
-		get_covalent_all_crypto_prices(request)
-
-	token_symbol_name_quantity = get_covalent_bep20(address)
-	token_symbol_name_quantity_price_image = append_price_and_image(request, token_symbol_name_quantity)
-	token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price_image)
-	return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
+	  if not 'price_list' in request.session or check_if_longer_than_30_seconds(request):
+	  	get_covalent_all_crypto_prices(request)
+  
+	  token_symbol_name_quantity = get_covalent_bep20(address)
+	  token_symbol_name_quantity_price_image = append_price_and_image(request, token_symbol_name_quantity)
+	  token_symbol_name_quantity_price_balance = get_token_current_value_in_USD(token_symbol_name_quantity_price_image)
+	  return JsonResponse(token_symbol_name_quantity_price_balance, safe=False)
 	

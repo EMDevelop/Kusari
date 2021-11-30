@@ -1,12 +1,8 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render
 from django.http import JsonResponse
 import requests
 import json
-import os
 from helper.get_crypto_prices import *
-from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -68,7 +64,9 @@ def current_user(request):
     Determine the current user by their token, and return their data
     """
     serializer = UserSerializer(request.user)
-    return Response(serializer.data)
+    response = {'user': serializer.data, 'user_id': request.user.id}
+    
+    return Response(response)
 
 
 class UserList(APIView):
