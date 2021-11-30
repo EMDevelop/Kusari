@@ -33,7 +33,7 @@ function App() {
 
   const authorizeTokenFromStorage = async () => {
     try {
-      const response = await axios.get('/prices/current_user/', {
+      const response = await axios.get('/auth/current_user/', {
         headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
       });
       console.log(response);

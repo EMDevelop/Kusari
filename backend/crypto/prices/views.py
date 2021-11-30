@@ -3,11 +3,7 @@ from django.http import JsonResponse
 import requests
 import json
 from helper.get_crypto_prices import *
-from rest_framework import permissions, status
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .serializers import UserSerializer, UserSerializerWithToken
 from helper.get_from_session_storage import *
 
 # Create your views here.
@@ -56,30 +52,3 @@ def update_wallet_balance(request):
                 token['BalanceInUSD'] = "N/A"
     
     return JsonResponse({'updated_tokens': current_wallet})
-
-# Hope to refactor this into a Users app. 
-@api_view(['GET'])
-def current_user(request):
-    """
-    Determine the current user by their token, and return their data
-    """
-    serializer = UserSerializer(request.user)
-    response = {'user': serializer.data, 'user_id': request.user.id}
-    
-    return Response(response)
-
-
-class UserList(APIView):
-    """
-    Create a new user. It's called 'UserList' because normally we'd have a get
-    method here too, for retrieving a list of all User objects.
-    """
-
-    permission_classes = (permissions.AllowAny,)
-
-    def post(self, request, format=None):
-        serializer = UserSerializerWithToken(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
