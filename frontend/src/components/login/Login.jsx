@@ -16,12 +16,11 @@ function Login(props) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/token-auth/', {
+      const response = await axios.post('auth/token-auth/', {
         username: username,
         password: password,
       });
       props.storeDetailsInApp(response.data.token);
-      console.log(response.data);
       setUserID(response.data.user_id);
       setLoggedInUserName(response.data.user.username);
       setUsername(response.data.user.username);

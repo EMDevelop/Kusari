@@ -25,7 +25,7 @@ urlpatterns = [
     path('bsc/', include('bsc.urls')),
     path('bitcoin/', include('btc.urls')),
     path('prices/', include('prices.urls')),
-    # path('/token/prices/', include('prices.urls')),    # ?? this is the same as above
-    path('token-auth/', obtain_jwt_token),
+    path('auth/', include('auth.urls')),
+
     path('multi/', include('multiChain.urls')),
 ]
