@@ -172,6 +172,8 @@ JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': True,
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
     'JWT_AUTH_COOKIE': None,
+        'JWT_PAYLOAD_GET_USER_ID_HANDLER':
+    'rest_framework_jwst.utils.jwt_get_user_id_from_payload_handler',
 }
 
 # Link to resource: https://docs.djangoproject.com/en/3.2/topics/cache/#filesystem-caching

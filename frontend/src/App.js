@@ -19,7 +19,7 @@ import Portfolio from './components/routes/Portfolio/Portfolio';
 import MyWallets from './components/routes/MyWallets/MyWallets';
 
 function App() {
-  const { loggedIn, setLoggedIn, setLoggedInUserName } =
+  const { loggedIn, setLoggedIn, setLoggedInUserName, setUserID } =
     useContext(GlobalContext);
 
   useEffect(() => {
@@ -36,15 +36,13 @@ function App() {
       const response = await axios.get('/prices/current_user/', {
         headers: { Authorization: `JWT ${localStorage.getItem('token')}` },
       });
+      console.log(response);
       setLoggedIn(true);
-      setLoggedInUserName(response.data.username);
+      setLoggedInUserName(response.data.user.username);
+      setUserID(response.data.user_id);
     } catch (error) {
       setLoggedIn(false);
     }
-  };
-
-  const storeLoginCredentials = (token) => {
-    token && localStorage.setItem('token', token);
   };
 
   return (
