@@ -16,7 +16,6 @@ Including another URLconf
 # from django.conf.urls import include  # VS code suggested I import include. 
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('', include('frontend.urls')),
@@ -25,7 +24,7 @@ urlpatterns = [
     path('bsc/', include('bsc.urls')),
     path('bitcoin/', include('btc.urls')),
     path('prices/', include('prices.urls')),
-    # path('/token/prices/', include('prices.urls')),    # ?? this is the same as above
-    path('token-auth/', obtain_jwt_token),
+    path('auth/', include('auth.urls')),
+
     path('multi/', include('multiChain.urls')),
 ]

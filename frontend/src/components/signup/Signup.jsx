@@ -16,7 +16,7 @@ function Signup(props) {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/prices/users/', {
+      const response = await axios.post('auth/users/', {
         username: username,
         password: password,
       });
@@ -32,7 +32,7 @@ function Signup(props) {
     e.preventDefault();
     // axios post request to url with body as data
     try {
-      const response = await axios.post('/token-auth/', {
+      const response = await axios.post('auth/token-auth/', {
         username: username,
         password: password,
       });
