@@ -1,9 +1,9 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import path, include
 from . import views
 from .views import UserList
 from .views import current_user
 from rest_framework_jwt.views import obtain_jwt_token
-
 
 urlpatterns = [
     path('current_user/', views.current_user),
