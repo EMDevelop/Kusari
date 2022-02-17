@@ -61,7 +61,7 @@ We're in the process of hosting on AWS using Docker:
 - A version of Node and NPM
 - A version of Python and Django (preferably 3.7 or higher)
 - Setup your environment:
-  - Add a `.env` file at the followig path: `Kusari/backend/.env`
+  - Add a `.env` file at the following path: `Kusari/backend/.env`
   - Within the `.env` file, add the following dependencies
 
 * Note, you will need to create your own API keys, they are all free, most have API call limits.
